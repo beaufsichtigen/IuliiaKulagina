@@ -13,7 +13,7 @@ public class HelloWebDriver {
         WebDriver chromeDriver  = new ChromeDriver();
         chromeDriver.get("http://ya.ru");
         WebElement searchYa = chromeDriver.findElement(By.id("text"));
-        searchYa.sendKeys("Кто такой котик Степанида");
+        searchYa.sendKeys("Кто такой котик Степа");
         WebElement searchBtn = chromeDriver.findElement(By.xpath("//*[@type=\"submit\"]"));
         searchBtn.click();
         Thread.sleep(10000);
