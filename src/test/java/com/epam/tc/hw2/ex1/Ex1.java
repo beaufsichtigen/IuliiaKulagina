@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.time.Duration;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class Ex1 {
@@ -76,19 +77,83 @@ void teardown() {
        WebElement contactFormButton = driver.findElement(By.cssSelector("a[href='contacts.html']"));
        softly.assertThat(contactFormButton.getText()).as("Incorrect Contacts button name").isEqualTo("CONTACT FORM");
 
-       //WebElement serviceButton = driver.findElement(By.cssSelector("a[href='contacts.html']"));
-       //softly.assertThat(serviceButton.getText()).as("Incorrect Home button name").isEqualTo("SERVICE");
+       WebElement serviceButton = driver.findElement(By.cssSelector("a.dropdown-toggle"));
+       softly.assertThat(serviceButton.getText()).as("Incorrect Service button name").isEqualTo("SERVICE");
 
        WebElement metalsColorsButton = driver.findElement(By.cssSelector("a[href='metals-colors.html']"));
        softly.assertThat(metalsColorsButton.getText()).as("Incorrect METALS & COLORS button name").isEqualTo("METALS & COLORS");
 
-
        //6. Assert that there are 4 images on the Index Page and they are displayed
+       List<WebElement> icons = driver.findElements(By.cssSelector(".benefit-icon"));
+       softly.assertThat(icons.size()).as("Number of images are "+ icons.size() + " not 4").isEqualTo(4);
+       softly.assertThat(icons).as("One or more image not displayed").isNotEmpty();
+       //other way: assertTrue(isImageDisplayed);
+
        //7. Assert that there are 4 texts on the Index Page under icons and they have proper text
+       List<WebElement> iconTexts = driver.findElements(By.cssSelector(".benefit-txt"));
+       softly.assertThat(iconTexts.size()).as("Number of texts are "+ iconTexts.size() + " not 4").isEqualTo(4);
+       softly.assertThat(iconTexts.get(0).getText()).as("To include good...text differs").isEqualTo("To include good practices\nand ideas from successful\nEPAM project");
+       softly.assertThat(iconTexts.get(1).getText()).as("To be flexible...text differs").isEqualTo("To be flexible and\ncustomizable");
+       softly.assertThat(iconTexts.get(2).getText()).as("To be multiplatform").isEqualTo("To be multiplatform");
+       softly.assertThat(iconTexts.get(3).getText()).as("Already have good base...text differs").isEqualTo("Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…");
+
        //8. Assert that there is the iframe with “Frame Button” exist
+       int size = driver.findElements(By.tagName("iframe")).size();
+       System.out.println(size);
+       int total = 0;
+       for(int i=0; i<size; i++){
+
+           //9. Switch to the iframe and check that there is “Frame Button” in the iframe
+           driver.switchTo().frame(i);
+           total=driver.findElements(By.cssSelector("input#frame-button")).size(); //count buttons “Frame Button” in current frame
+           int totalSum = 0; //counter of frames with button “Frame Button”
+           if (total > 0) {
+               totalSum = 0+total;
+               WebElement frameButton = driver.findElement(By.cssSelector("input#frame-button"));
+               softly.assertThat(frameButton.getAttribute("value")).as("Frame Button text differs").isEqualTo("Frame Button");
+           }
+           softly.assertThat(totalSum).as("Button not found").isNotZero();
+
+               //9. Switch to the iframe and check that there is “Frame Button” in the iframe
+               //driver.switchTo().frame("a077aa5e");
+
+
+
+
+
+           System.out.println(total);
+           //softly.assertThat(total).as("No button “Frame Button”").isNotZero();
+           driver.switchTo().defaultContent();}
+
+
+
+
+
+
+
+//       int i = 0;
+//       int framesWithButtonSize = 0;
+//       while (i < size) {
+//
+//           System.out.println(i);
+//           driver.switchTo().frame(i);
+//           i++;
+//           List<WebElement> framesList = driver.findElements(By.cssSelector("input#frame-button"));
+//       }
+       //driver.switchTo().frame(driver.findElements(By.cssSelector("input#frame-button")));
+
+
+
+
        //9. Switch to the iframe and check that there is “Frame Button” in the iframe
+       //driver.switchTo().frame("a077aa5e");
+      // driver.findElement(By.xpath("html/body/a/img")).click();
+
        //10. Switch to original window back
+       //driver.switchTo().parentFrame();
+
        //11. Assert that there are 5 items in the Left Section are displayed and they have proper text
+
        //12. Close Browser
 
 
