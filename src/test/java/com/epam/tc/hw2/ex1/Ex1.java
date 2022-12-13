@@ -37,14 +37,14 @@ public class Ex1 {
 
     @Test
     //1. Open test site by URL
-    public void openSite() throws InterruptedException {
+    public void ex1() {
 
         driver.manage().window().maximize();
         driver.navigate().to("https://jdi-testing.github.io/jdi-light/index.html");
         new WebDriverWait(driver, Duration.ofSeconds(10)).
                 until(ExpectedConditions.presenceOfElementLocated(By.id("jdi-frame-site")));
         SoftAssertions softly = new SoftAssertions();
-        softly.assertThat("https://jdi-testing.github.io/jdi-light/index.html");
+        assertThat(driver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
 
         //2. Assert Browser title
         String browserTitle = driver.getTitle();
@@ -131,8 +131,6 @@ public class Ex1 {
 
         //12. Close Browser
         driver.quit();
-
-
 
     }
 }
