@@ -12,6 +12,7 @@ import org.testng.annotations.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -118,11 +119,53 @@ public class Ex2 {
 
             }
 //• for radio button there is a log row and value is corresponded to the status of radio button
-        List<WebElement> radiobuttons = driver.findElements(By.cssSelector("input[type='checkbox']"));
+        List<WebElement> radiobuttons = driver.findElements(By.cssSelector("input[type='radio']"));
+        List<String> radiobuttonName = new ArrayList();
+        radiobuttonName.add(0,"Gold");
+        radiobuttonName.add(1,"Silver");
+        radiobuttonName.add(2, "Bronze");
+        radiobuttonName.add(3, "Selen");
 
+        //Не смогла получить не пустой объект для подстановки в конкатенацию, поэтому захардкодила.
+        //Пыталась получить так: String radiobuttonName = radiobuttons.get(i).getText().replace("\n", "");
+
+        int radiobuttonsNumber = radiobuttons.size();
+        for (int i = 0; i < radiobuttonsNumber; i++) {
+            radiobuttons.get(i).click();
+
+            System.out.println(radiobuttonName);
+            WebElement log = driver.findElement(By.cssSelector(".logs :first-child"));
+            System.out.println(log.getText());
+            softly.assertThat(log.getText()).as("Incorrect log text").endsWith("metal: value changed to "+ radiobuttonName.get(i));
+            }
 
 //• for dropdown there is a log row and value is corresponded to the selected value.
-        Thread.sleep(1000);
+
+        List<WebElement> dropDown = driver.findElements(By.cssSelector(".colors>select>option"));
+//        List<String> dropDownName = new ArrayList();
+//        radiobuttonName.add(0,"Gold");
+//        radiobuttonName.add(1,"Silver");
+//        radiobuttonName.add(2, "Bronze");
+//        radiobuttonName.add(3, "Selen");
+
+        //Не смогла получить не пустой объект для подстановки в конкатенацию, поэтому захардкодила.
+        //Пыталась получить так: String radiobuttonName = radiobuttons.get(i).getText().replace("\n", "");
+
+        int dropDownNumber = dropDown.size();
+        for (int i = 1; i < dropDownNumber; i++) {
+            dropDown.get(i).click();
+            String dropDownName = dropDown.get(i).getText();
+            WebElement log = driver.findElement(By.cssSelector(".logs :first-child"));
+            System.out.println(log.getText());
+            softly.assertThat(log.getText()).as("Incorrect log text").endsWith("Colors: value changed to "+ dropDownName);
+        }
+
+        dropDown.get(0).click();
+        String dropDownName = dropDown.get(0).getText();
+        WebElement log = driver.findElement(By.cssSelector(".logs :first-child"));
+        System.out.println(log.getText());
+        softly.assertThat(log.getText()).as("Incorrect log text").endsWith("Colors: value changed to "+ dropDownName);
+
         softly.assertAll();
 
         //10. Close Browser
