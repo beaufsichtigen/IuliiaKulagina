@@ -1,7 +1,6 @@
 package com.epam.tc.hw2.ex2;
 
 import org.assertj.core.api.SoftAssertions;
-import org.assertj.core.api.UrlAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +11,6 @@ import org.testng.annotations.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -39,8 +37,7 @@ public class Ex2 {
 
         driver.manage().window().maximize();
         driver.navigate().to("https://jdi-testing.github.io/jdi-light/index.html");
-        new WebDriverWait(driver, Duration.ofSeconds(10)).
-                until(ExpectedConditions.presenceOfElementLocated(By.id("jdi-frame-site")));
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(By.id("jdi-frame-site")));
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat("https://jdi-testing.github.io/jdi-light/index.html");
 
@@ -110,46 +107,30 @@ public class Ex2 {
             String checkboxName = checkboxes.get(i).getText();
             WebElement log = driver.findElement(By.cssSelector(".logs :first-child"));
             System.out.println(log.getText());
-            softly.assertThat(log.getText()).as("Incorrect log text").endsWith(checkboxName +": condition changed to " + checkboxes.get(i).isSelected());
+            softly.assertThat(log.getText()).as("Incorrect log text").endsWith(checkboxName + ": condition changed to " + checkboxes.get(i).isSelected());
 
             checkboxes.get(i).click();
             WebElement log2 = driver.findElement(By.cssSelector(".logs :first-child"));
             System.out.println(log2.getText());
-            softly.assertThat(log2.getText()).as("Incorrect log text").endsWith(checkboxName +": condition changed to " + checkboxes.get(i).isSelected());
+            softly.assertThat(log2.getText()).as("Incorrect log text").endsWith(checkboxName + ": condition changed to " + checkboxes.get(i).isSelected());
 
-            }
+        }
 //• for radio button there is a log row and value is corresponded to the status of radio button
-        List<WebElement> radiobuttons = driver.findElements(By.cssSelector("input[type='radio']"));
-        List<String> radiobuttonName = new ArrayList();
-        radiobuttonName.add(0,"Gold");
-        radiobuttonName.add(1,"Silver");
-        radiobuttonName.add(2, "Bronze");
-        radiobuttonName.add(3, "Selen");
-
-        //Не смогла получить не пустой объект для подстановки в конкатенацию, поэтому захардкодила.
-        //Пыталась получить так: String radiobuttonName = radiobuttons.get(i).getText().replace("\n", "");
+        List<WebElement> radiobuttons = driver.findElements(By.className("label-radio"));
 
         int radiobuttonsNumber = radiobuttons.size();
         for (int i = 0; i < radiobuttonsNumber; i++) {
             radiobuttons.get(i).click();
 
-            System.out.println(radiobuttonName);
+            String radiobuttonName = radiobuttons.get(i).getText();
             WebElement log = driver.findElement(By.cssSelector(".logs :first-child"));
             System.out.println(log.getText());
-            softly.assertThat(log.getText()).as("Incorrect log text").endsWith("metal: value changed to "+ radiobuttonName.get(i));
-            }
+            softly.assertThat(log.getText()).as("Incorrect log text").endsWith("metal: value changed to " + radiobuttonName);
+        }
 
 //• for dropdown there is a log row and value is corresponded to the selected value.
 
         List<WebElement> dropDown = driver.findElements(By.cssSelector(".colors>select>option"));
-//        List<String> dropDownName = new ArrayList();
-//        radiobuttonName.add(0,"Gold");
-//        radiobuttonName.add(1,"Silver");
-//        radiobuttonName.add(2, "Bronze");
-//        radiobuttonName.add(3, "Selen");
-
-        //Не смогла получить не пустой объект для подстановки в конкатенацию, поэтому захардкодила.
-        //Пыталась получить так: String radiobuttonName = radiobuttons.get(i).getText().replace("\n", "");
 
         int dropDownNumber = dropDown.size();
         for (int i = 1; i < dropDownNumber; i++) {
@@ -157,21 +138,18 @@ public class Ex2 {
             String dropDownName = dropDown.get(i).getText();
             WebElement log = driver.findElement(By.cssSelector(".logs :first-child"));
             System.out.println(log.getText());
-            softly.assertThat(log.getText()).as("Incorrect log text").endsWith("Colors: value changed to "+ dropDownName);
+            softly.assertThat(log.getText()).as("Incorrect log text").endsWith("Colors: value changed to " + dropDownName);
         }
 
         dropDown.get(0).click();
         String dropDownName = dropDown.get(0).getText();
         WebElement log = driver.findElement(By.cssSelector(".logs :first-child"));
         System.out.println(log.getText());
-        softly.assertThat(log.getText()).as("Incorrect log text").endsWith("Colors: value changed to "+ dropDownName);
+        softly.assertThat(log.getText()).as("Incorrect log text").endsWith("Colors: value changed to " + dropDownName);
 
         softly.assertAll();
 
         //10. Close Browser
         driver.quit();
-
-
-
     }
 }
