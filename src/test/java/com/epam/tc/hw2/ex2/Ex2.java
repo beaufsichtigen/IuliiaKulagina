@@ -1,5 +1,10 @@
 package com.epam.tc.hw2.ex2;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import java.time.Duration;
+import java.util.List;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,13 +12,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
-import java.time.Duration;
-import java.util.List;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Ex2 {
 
@@ -37,7 +39,8 @@ public class Ex2 {
 
         driver.manage().window().maximize();
         driver.navigate().to("https://jdi-testing.github.io/jdi-light/index.html");
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(By.id("jdi-frame-site")));
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("jdi-frame-site")));
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat("https://jdi-testing.github.io/jdi-light/index.html");
 
@@ -99,23 +102,27 @@ public class Ex2 {
 
         //9. Assert that
         driver.navigate().refresh(); //clean all elements state
-//• for each checkbox there is an individual log row and value is corresponded to the status of checkbox
+        //• for each checkbox there is an individual log row and value is corresponded to the status of checkbox
         List<WebElement> checkboxes = driver.findElements(By.cssSelector("input[type='checkbox']"));
         int checkboxesNumber = checkboxes.size();
         for (int i = 0; i < checkboxesNumber; i++) {
             checkboxes.get(i).click();
             String checkboxName = checkboxes.get(i).getText();
-            WebElement log = driver.findElement(By.cssSelector(".logs :first-child"));
+            WebElement log = driver
+                    .findElement(By.cssSelector(".logs :first-child"));
             System.out.println(log.getText());
-            softly.assertThat(log.getText()).as("Incorrect log text").endsWith(checkboxName + ": condition changed to " + checkboxes.get(i).isSelected());
+            softly.assertThat(log.getText())
+                    .as("Incorrect log text")
+                    .endsWith(checkboxName + ": condition changed to " + checkboxes.get(i).isSelected());
 
             checkboxes.get(i).click();
             WebElement log2 = driver.findElement(By.cssSelector(".logs :first-child"));
             System.out.println(log2.getText());
-            softly.assertThat(log2.getText()).as("Incorrect log text").endsWith(checkboxName + ": condition changed to " + checkboxes.get(i).isSelected());
-
+            softly.assertThat(log2.getText())
+                    .as("Incorrect log text")
+                    .endsWith(checkboxName + ": condition changed to " + checkboxes.get(i).isSelected());
         }
-//• for radio button there is a log row and value is corresponded to the status of radio button
+        //• for radio button there is a log row and value is corresponded to the status of radio button
         List<WebElement> radiobuttons = driver.findElements(By.className("label-radio"));
 
         int radiobuttonsNumber = radiobuttons.size();
@@ -125,12 +132,14 @@ public class Ex2 {
             String radiobuttonName = radiobuttons.get(i).getText();
             WebElement log = driver.findElement(By.cssSelector(".logs :first-child"));
             System.out.println(log.getText());
-            softly.assertThat(log.getText()).as("Incorrect log text").endsWith("metal: value changed to " + radiobuttonName);
+            softly.assertThat(log.getText())
+                    .as("Incorrect log text").endsWith("metal: value changed to " + radiobuttonName);
         }
 
-//• for dropdown there is a log row and value is corresponded to the selected value.
+        //• for dropdown there is a log row and value is corresponded to the selected value.
 
-        List<WebElement> dropDown = driver.findElements(By.cssSelector(".colors>select>option"));
+        List<WebElement> dropDown = driver
+                .findElements(By.cssSelector(".colors>select>option"));
 
         int dropDownNumber = dropDown.size();
         for (int i = 1; i < dropDownNumber; i++) {
@@ -138,14 +147,18 @@ public class Ex2 {
             String dropDownName = dropDown.get(i).getText();
             WebElement log = driver.findElement(By.cssSelector(".logs :first-child"));
             System.out.println(log.getText());
-            softly.assertThat(log.getText()).as("Incorrect log text").endsWith("Colors: value changed to " + dropDownName);
+            softly.assertThat(log.getText())
+                    .as("Incorrect log text")
+                    .endsWith("Colors: value changed to " + dropDownName);
         }
 
         dropDown.get(0).click();
         String dropDownName = dropDown.get(0).getText();
         WebElement log = driver.findElement(By.cssSelector(".logs :first-child"));
         System.out.println(log.getText());
-        softly.assertThat(log.getText()).as("Incorrect log text").endsWith("Colors: value changed to " + dropDownName);
+        softly.assertThat(log.getText())
+                .as("Incorrect log text")
+                .endsWith("Colors: value changed to " + dropDownName);
 
         softly.assertAll();
 
