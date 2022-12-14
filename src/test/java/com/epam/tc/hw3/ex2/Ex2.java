@@ -1,9 +1,8 @@
-package com.epam.tc.hw2.ex2;
+package com.epam.tc.hw3.ex2;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import java.time.Duration;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;

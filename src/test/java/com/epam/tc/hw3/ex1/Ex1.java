@@ -1,9 +1,9 @@
-package com.epam.tc.hw2.ex1;
+package com.epam.tc.hw3.ex1;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import com.epam.tc.hw3.driverutils.DriverManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import java.time.Duration;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
@@ -12,27 +12,31 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
-
+import org.testng.annotations.*;
 
 
 public class Ex1 {
 
 
-    WebDriver driver;
+    static WebDriver driver;
 
-    @BeforeSuite
-    static void setupAll() {
-        WebDriverManager.chromedriver().setup();
+    private String baseURL = "https://jdi-testing.github.io/jdi-light/index.html";
+
+
+    @BeforeClass
+    public static void prepareToTest() {
+        driver = new DriverManager().setupDriver();
 
     }
 
     @BeforeTest
-    void setup() {
-        driver = new ChromeDriver();
+    public void initTest() {driver.get(baseURL);}
+
+    @AfterTest
+    public static void tearDownDriver() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
 
@@ -40,9 +44,7 @@ public class Ex1 {
     //1. Open test site by URL
     public void ex1() {
 
-        driver.manage()
-                .window()
-                .maximize();
+
         driver.navigate()
                 .to("https://jdi-testing.github.io/jdi-light/index.html");
         new WebDriverWait(driver, 10)
