@@ -1,26 +1,39 @@
 package com.epam.tc.hw3.pages;
 
+import com.epam.tc.hw3.driverutils.WaitActions;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
 
-    String userNameData = "Roman";
-    String passwordData = "Jdi1234";
+    WaitActions waitActions;
+    WebDriver webDriver;
+
+    String userName = "Roman";
+    String password = "Jdi1234";
 
     @FindBy(id = "user-icon")
     private WebElement userIcon;
     @FindBy(id = "name")
-    private WebElement username;
+    private WebElement usernameField;
     @FindBy(id = "password")
-    private WebElement password;
+    private WebElement passwordField;
     @FindBy(id = "login-button")
     private WebElement loginButton;
 
+    public HomePage(WebDriver webDriver) {
+        PageFactory.initElements(webDriver, this);
+        waitActions = new WaitActions(webDriver);
+    }
+
     public void login(String userNameData, String passwordData) {
+        userNameData = userName;
+        passwordData = password;
         userIcon.click();
-        username.sendKeys(userNameData);
-        password.sendKeys(passwordData);
+        usernameField.sendKeys(userNameData);
+        passwordField.sendKeys(passwordData);
         loginButton.click();
 
 
