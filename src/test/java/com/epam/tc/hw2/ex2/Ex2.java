@@ -33,7 +33,7 @@ public class Ex2 {
 
     @Test
     //1. Open test site by URL
-    public void ex2() throws InterruptedException {
+    public void ex2() {
 
         driver.manage().window().maximize();
         driver.navigate().to("https://jdi-testing.github.io/jdi-light/index.html");
