@@ -1,8 +1,9 @@
 package com.epam.tc.hw1;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class DivTest extends AbstractTest {
     @Test(dataProvider = "divDataLong", dataProviderClass = DataProviders.class)
