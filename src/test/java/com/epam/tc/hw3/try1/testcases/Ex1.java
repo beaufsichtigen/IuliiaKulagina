@@ -1,89 +1,36 @@
-package com.epam.tc.hw3.ex1;
+package com.epam.tc.hw3.try1.testcases;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.epam.tc.hw3.driverutils.DriverManager;
-import com.epam.tc.hw3.pages.HomePage;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import java.util.List;
+import com.epam.tc.hw3.try1.library.pages.HomePage;
 import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 
 public class Ex1 extends BaseTest {
 
 
-
-
-//    WebDriver driver;
-//
-//    @BeforeSuite
-//    static void setupAll() {
-//        WebDriverManager.chromedriver().setup();
-//
-//    }
-//
-//    @BeforeTest
-//    void setup() {
-//        driver = new ChromeDriver();
-//    }
-//
-//
-//    @Test
-//    //1. Open test site by URL
-//    public void ex1() {
-//
-//        driver.manage()
-//                .window()
-//                .maximize();
-//        driver.navigate()
-//                .to("https://jdi-testing.github.io/jdi-light/index.html");
-//        new WebDriverWait(driver, 10)
-//                .until(ExpectedConditions.presenceOfElementLocated(By.id("jdi-frame-site")));
-//        SoftAssertions softly = new SoftAssertions();
-//        assertThat(driver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
-
     String userName = "Roman";
     String password = "Jdi1234";
 
     @Test
-    //1. Open test site by URL
+
     public void ex1() {
-        HomePage homePage = new HomePage(webDriver);
+        //SoftAssertions softly = new SoftAssertions();
+
+        //1. Open test site by URL
+        HomePage homePage = new HomePage(testDriver);
+
+        //2. Assert Browser title
+        String browserTitle = testDriver.getTitle();
+       // softly.assertThat(browserTitle).as("Incorrect browser title").isEqualTo("Home Page");
+
+        //3. Perform login
         homePage.login(userName, password);
+        //assertThat(testDriver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
 
+        //4. Assert Username is loggined
 
-
-//
-//
-//        driver.navigate()
-//                .to("https://jdi-testing.github.io/jdi-light/index.html");
-//        new WebDriverWait(driver, 10)
-//                .until(ExpectedConditions.presenceOfElementLocated(By.id("jdi-frame-site")));
-//        SoftAssertions softly = new SoftAssertions();
-//        assertThat(driver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
-//
-//        //2. Assert Browser title
-//        String browserTitle = driver.getTitle();
-//        softly.assertThat(browserTitle).as("Incorrect browser title").isEqualTo("Home Page");
-//
-//        //3. Perform login
-//        WebElement userIcon = driver.findElement(By.id("user-icon"));
-//        userIcon.click();
-//        WebElement login = driver.findElement(By.id("name"));
-//        login.sendKeys("Roman");
-//        WebElement password = driver.findElement(By.id("password"));
-//        password.sendKeys("Jdi1234");
-//        WebElement enterButton = driver.findElement(By.id("login-button"));
-//        enterButton.click();
-//
-//        //4. Assert Username is loggined
 //        WebElement userName = driver.findElement(By.id("user-name"));
 //        System.out.println(userName.getText());
 //        softly.assertThat(userName.getText()).as("Incorrect user name").isEqualTo("ROMAN IOVLEV");
@@ -175,6 +122,8 @@ public class Ex1 extends BaseTest {
 //
 //        //12. Close Browser
 //        driver.quit();
+//
+//    }
 
     }
 

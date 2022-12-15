@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.pages;
+package com.epam.tc.hw3.try1.library.pages;
 
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;

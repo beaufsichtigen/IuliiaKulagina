@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.ex2;
+package com.epam.tc.hw3.try1.testcases;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
