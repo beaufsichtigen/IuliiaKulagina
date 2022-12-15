@@ -130,7 +130,6 @@ public class Ex1 {
             }
 
             System.out.println(buttonInCurrentFrame);
-            //softly.assertThat(buttonInCurrentFrame).as("No button “Frame Button”").isNotZero();
 
             //10. Switch to original window back
             driver.switchTo().defaultContent();
