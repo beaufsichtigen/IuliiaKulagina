@@ -4,6 +4,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.epam.tc.hw3.try1.library.pages.HomePage;
 import org.assertj.core.api.SoftAssertions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 
 
@@ -13,90 +15,113 @@ public class Ex1 extends BaseTest {
     String userName = "Roman";
     String password = "Jdi1234";
 
+
+
     @Test
 
-    public void ex1() {
-        //SoftAssertions softly = new SoftAssertions();
+    public void login() {
+
+        SoftAssertions softly = new SoftAssertions();
 
         //1. Open test site by URL
         HomePage homePage = new HomePage(testDriver);
 
         //2. Assert Browser title
         String browserTitle = testDriver.getTitle();
-       // softly.assertThat(browserTitle).as("Incorrect browser title").isEqualTo("Home Page");
+        softly.assertThat(browserTitle).as("Incorrect browser title").isEqualTo("Home Page");
 
         //3. Perform login
         homePage.login(userName, password);
-        //assertThat(testDriver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
+        assertThat(testDriver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
 
         //4. Assert Username is loggined
+        softly.assertThat(homePage.getUserNameText()).as("Incorrect user name").isEqualTo("ROMAN IOVLEV");
 
-//        WebElement userName = driver.findElement(By.id("user-name"));
-//        System.out.println(userName.getText());
-//        softly.assertThat(userName.getText()).as("Incorrect user name").isEqualTo("ROMAN IOVLEV");
+
+        //5. Assert that there are 4 items on the header section are displayed and they have proper texts
+
+        softly.assertThat(homePage.getHomeButtonText()).as("Incorrect Home button name").isEqualTo("HOME");
+        softly.assertThat(homePage.getContactFormButtonText())
+                .as("Incorrect Contacts button name")
+                .isEqualTo("CONTACT FORM");
+
+        softly.assertThat(homePage.getServiceButtonText()).as("Incorrect Service button name").isEqualTo("SERVICE");
+
+        softly.assertThat(homePage.getMetalsColorsButtonText())
+                .as("Incorrect METALS & COLORS button name").isEqualTo("METALS & COLORS");
+
+        //6. Assert that there are 4 images on the Index Page and they are displayed
+        softly.assertThat(homePage.numberOfBenefitImages()).as("Number of images are " + homePage.numberOfBenefitImages() + " not 4").isEqualTo(4);
+        softly.assertThat(homePage.getBenefitImages()).as("One or more image not displayed").isNotEmpty();
+
+
+        //7. Assert that there are 4 texts on the Index Page under icons and they have proper text
+
+        softly.assertThat(homePage.numberOfBenefitImagesText())
+                .as("Number of texts are " + homePage.numberOfBenefitImagesText() + " not 4").isEqualTo(4);
+        softly.assertThat(homePage.getBenefitImagesText().get(0).getText())
+                .as("To include good...text differs")
+                .isEqualTo("To include good practices\nand ideas from successful\nEPAM project");
+        softly.assertThat(homePage.getBenefitImagesText().get(1).getText())
+                .as("To be flexible...text differs").isEqualTo("To be flexible and\ncustomizable");
+        softly.assertThat(homePage.getBenefitImagesText().get(2).getText())
+                .as("To be multiplatform").isEqualTo("To be multiplatform");
+        softly.assertThat(homePage.getBenefitImagesText().get(3).getText())
+                .as("Already have good base...text differs")
+                .isEqualTo("Already have good base\n"
+                        + "(about 20 internal and\n"
+                        + "some external projects),\nwish to get more…");
 //
-//        //5. Assert that there are 4 items on the header section are displayed and they have proper texts
-//        WebElement homeButton = driver.findElement(By.cssSelector("a[href='index.html']"));
-//        System.out.println(homeButton.getText());
-//        assertThat(homeButton.getText()).as("Incorrect Home button name").isEqualTo("HOME");
+        //8. Assert that there is the iframe with “Frame Button” exist
+        int size = homePage.getIframes().size();
+        System.out.println(size);
+        int buttonInCurrentFrame = 0; //count buttons “Frame Button” in current frame
+        int totalButtonsInFrames = 0; //counter of frames with button “Frame Button”
+        for (int i = 0; i < size; i++) {
+
+            //9. Switch to the iframe and check that there is “Frame Button” in the iframe
+            testDriver.switchTo().frame(i);
+            buttonInCurrentFrame = testDriver.findElements(By.cssSelector("input#frame-button")).size();
+
+            if (buttonInCurrentFrame > 0) {
+                totalButtonsInFrames = 0 + buttonInCurrentFrame;
+                WebElement frameButton = testDriver
+                        .findElement(By.cssSelector("input#frame-button"));
+                softly.assertThat(frameButton.getAttribute("value"))
+                        .as("Frame Button text differs")
+                        .isEqualTo("Frame Button");
+            }
+
+            System.out.println(buttonInCurrentFrame);
+            //softly.assertThat(buttonInCurrentFrame).as("No button “Frame Button”").isNotZero();
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 //
-//        WebElement contactFormButton = driver.findElement(By.cssSelector("a[href='contacts.html']"));
-//        softly.assertThat(contactFormButton.getText())
-//                .as("Incorrect Contacts button name")
-//                .isEqualTo("CONTACT FORM");
-//
-//        WebElement serviceButton = driver.findElement(By.cssSelector("a.dropdown-toggle"));
-//        softly.assertThat(serviceButton.getText()).as("Incorrect Service button name").isEqualTo("SERVICE");
-//
-//        WebElement metalsColorsButton = driver.findElement(By.cssSelector("a[href='metals-colors.html']"));
-//        softly.assertThat(metalsColorsButton.getText())
-//                .as("Incorrect METALS & COLORS button name").isEqualTo("METALS & COLORS");
-//
-//        //6. Assert that there are 4 images on the Index Page and they are displayed
-//        List<WebElement> icons = driver.findElements(By.cssSelector(".benefit-icon"));
-//        softly.assertThat(icons.size()).as("Number of images are " + icons.size() + " not 4").isEqualTo(4);
-//        softly.assertThat(icons).as("One or more image not displayed").isNotEmpty();
-//        //other way: assertTrue(isImageDisplayed);
-//
-//        //7. Assert that there are 4 texts on the Index Page under icons and they have proper text
-//        List<WebElement> iconTexts = driver.findElements(By.cssSelector(".benefit-txt"));
-//        softly.assertThat(iconTexts.size())
-//                .as("Number of texts are " + iconTexts.size() + " not 4").isEqualTo(4);
-//        softly.assertThat(iconTexts.get(0).getText())
-//                .as("To include good...text differs")
-//                .isEqualTo("To include good practices\nand ideas from successful\nEPAM project");
-//        softly.assertThat(iconTexts.get(1).getText())
-//                .as("To be flexible...text differs").isEqualTo("To be flexible and\ncustomizable");
-//        softly.assertThat(iconTexts.get(2).getText())
-//                .as("To be multiplatform").isEqualTo("To be multiplatform");
-//        softly.assertThat(iconTexts.get(3).getText())
-//                .as("Already have good base...text differs")
-//                .isEqualTo("Already have good base\n"
-//                        + "(about 20 internal and\n"
-//                        + "some external projects),\nwish to get more…");
-//
-//        //8. Assert that there is the iframe with “Frame Button” exist
-//        int size = driver.findElements(By.tagName("iframe")).size();
-//        System.out.println(size);
-//        int buttonInCurrentFrame = 0; //count buttons “Frame Button” in current frame
-//        int totalButtonsInFrames = 0; //counter of frames with button “Frame Button”
-//        for (int i = 0; i < size; i++) {
-//
-//            //9. Switch to the iframe and check that there is “Frame Button” in the iframe
-//            driver.switchTo().frame(i);
-//            buttonInCurrentFrame = driver.findElements(By.cssSelector("input#frame-button")).size();
+//            testDriver.switchTo().frame(i);
+//            buttonInCurrentFrame = homePage.getFrameButtons().size();
 //
 //            if (buttonInCurrentFrame > 0) {
 //                totalButtonsInFrames = 0 + buttonInCurrentFrame;
-//                WebElement frameButton = driver
-//                        .findElement(By.cssSelector("input#frame-button"));
-//                softly.assertThat(frameButton.getAttribute("value"))
+//                softly.assertThat(homePage.getCurrentFrameButton().getAttribute("value"))
 //                        .as("Frame Button text differs")
 //                        .isEqualTo("Frame Button");
-//            }
+//            }}
 //
-//            System.out.println(buttonInCurrentFrame);
-//            //softly.assertThat(buttonInCurrentFrame).as("No button “Frame Button”").isNotZero();
+//            System.out.println(totalButtonsInFrames);
+//            softly.assertThat(totalButtonsInFrames).as("No button “Frame Button”").isNotZero();
 //
 //            //10. Switch to original window back
 //            driver.switchTo().defaultContent();
@@ -118,7 +143,7 @@ public class Ex1 extends BaseTest {
 //        softly.assertThat(sidebarItems.get(4)
 //                .getText()).as("Elements text packs").isEqualTo("Elements packs");
 //
-//        softly.assertAll();
+        softly.assertAll();
 //
 //        //12. Close Browser
 //        driver.quit();
