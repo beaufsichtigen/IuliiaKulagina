@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All tests suite">
+    <test name="All">
+        <classes>
+            <class name="com.epam.tc.hw1.MultTest"/>
+            <class name="com.epam.tc.hw1.DivTest"/>
+            <class name="com.epam.tc.hw1.AddTest"/>
+            <class name="com.epam.tc.hw1.SubsTest"/>
+        </classes>
+    </test>
+</suite>
