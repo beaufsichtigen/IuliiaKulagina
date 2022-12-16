@@ -1,95 +1,61 @@
 package com.epam.tc.hw3.try1.testcases;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
-import java.util.List;
+import com.epam.tc.hw3.try1.library.pages.DifElementsPage;
+import com.epam.tc.hw3.try1.library.pages.Header;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 
-public class Ex2 {
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
-    WebDriver driver;
+public class Ex2 extends BaseTest {
 
-    @BeforeSuite
-    static void setupAll() {
-        WebDriverManager.chromedriver().setup();
-
-    }
-
-    @BeforeTest
-    void setup() {
-        driver = new ChromeDriver();
-    }
 
     @Test
-    //1. Open test site by URL
+    //   1. Open test site by URL
     public void ex2() {
 
-//        driver.manage().window().maximize();
-//        driver.navigate().to("https://jdi-testing.github.io/jdi-light/index.html");
-//        new WebDriverWait(driver, 10)
-//                .until(ExpectedConditions.presenceOfElementLocated(By.id("jdi-frame-site")));
-//        SoftAssertions softly = new SoftAssertions();
-//        softly.assertThat("https://jdi-testing.github.io/jdi-light/index.html");
-//
-//        //2. Assert Browser title
-//        String browserTitle = driver.getTitle();
-//        softly.assertThat(browserTitle).as("Incorrect browser title").isEqualTo("Home Page");
-//
-//        //3. Perform login
-//        WebElement userIcon = driver.findElement(By.id("user-icon"));
-//        userIcon.click();
-//
-//        WebElement login = driver.findElement(By.id("name"));
-//        login.sendKeys("Roman");
-//
-//        WebElement password = driver.findElement(By.id("password"));
-//        password.sendKeys("Jdi1234");
-//
-//        WebElement enterButton = driver.findElement(By.id("login-button"));
-//        enterButton.click();
-//
-//        //4. Assert Username is loggined
-//        WebElement userName = driver.findElement(By.id("user-name"));
-//        System.out.println(userName.getText());
-//        softly.assertThat(userName.getText()).as("Incorrect user name").isEqualTo("ROMAN IOVLEV");
-//
-//        //5. Open through the header menu Service -> Different Elements Page
-//        WebElement serviceButton = driver.findElement(By.cssSelector("a.dropdown-toggle"));
-//        serviceButton.click();
-//        WebElement difElements = driver.findElement(By.cssSelector("a[href='different-elements.html']"));
-//        difElements.click();
-//
-//        WebDriverWait wait = new WebDriverWait(driver, 10);
-//        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("uui-main-container")));
-//
-//        assertThat(driver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/different-elements.html");
-//
-//        //6. Select checkboxes Water, Wind
-//        WebElement checkboxWater = driver.findElement(By.xpath("//*[contains(text()[normalize-space(.)],'Water')]"));
-//        checkboxWater.click();
-//        WebElement checkboxWind = driver.findElement(By.xpath("//*[contains(text()[normalize-space(.)],'Wind')]"));
-//        checkboxWind.click();
-//
-//        assertThat(checkboxWater.isEnabled()).as("Check box 'Water' was not enabled").isEqualTo(true);
-//        assertThat(checkboxWind.isEnabled()).as("Check box 'Wind' was not enabled").isEqualTo(true);
-//
-//        //7. Select radio Selen
-//        WebElement radioBtnSelen = driver.findElement(By.xpath("//*[contains(text()[normalize-space(.)],'Selen')]"));
-//        radioBtnSelen.click();
-//
-//        assertThat(radioBtnSelen.isEnabled()).as("Incorrect radio button state").isEqualTo(true);
+        SoftAssertions softly = new SoftAssertions();
+
+        //1. Open test site by URL - in parent class
+        Header header = new Header(testDriver);
+
+        //2. Assert Browser title
+        String browserTitle = testDriver.getTitle();
+        softly.assertThat(browserTitle).as("Incorrect browser title").isEqualTo("Home Page");
+
+        //3. Perform login
+        header.login();
+        assertThat(testDriver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
+
+        //4. Assert Username is loggined
+        softly.assertThat(header.getUserNameText()).as("Incorrect user name").isEqualTo("ROMAN IOVLEV");
+
+
+        //5. Open through the header menu Service -> Different Elements Page
+        header.getServiceButton().click();
+        header.getDifElements().click();
+
+        WebDriverWait wait = new WebDriverWait(testDriver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("uui-main-container")));
+        assertThat(testDriver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/different-elements.html");
+
+      //6. Select checkboxes Water, Wind
+        DifElementsPage difElementsPage = new DifElementsPage(testDriver);
+        difElementsPage.clickWater();
+        difElementsPage.clickWind();
+
+        assertThat(difElementsPage.getCheckboxWater().isEnabled()).as("Check box 'Water' was not enabled").isEqualTo(false);
+        assertThat(difElementsPage.getCheckboxWater().isEnabled()).as("Check box 'Wind' was not enabled").isEqualTo(false);
+
+        //7. Select radio Selen
+        difElementsPage.clickSelen();
+        assertThat(difElementsPage.getRadioBtnSelen().isEnabled()).as("Incorrect radio button state").isEqualTo(false);
 //
 //        //8. Select in dropdown Yellow
 //        WebElement dropDownColors = driver.findElement(By.className("colors"));
@@ -159,9 +125,9 @@ public class Ex2 {
 //                .as("Incorrect log text")
 //                .endsWith("Colors: value changed to " + dropDownName);
 //
-//        softly.assertAll();
-//
-//        //10. Close Browser
-//        driver.quit();
+        softly.assertAll();
+
+        //10. Close Browser
+
     }
 }

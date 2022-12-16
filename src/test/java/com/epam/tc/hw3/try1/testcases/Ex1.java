@@ -2,7 +2,9 @@ package com.epam.tc.hw3.try1.testcases;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import com.epam.tc.hw3.try1.library.pages.Header;
 import com.epam.tc.hw3.try1.library.pages.HomePage;
+import com.epam.tc.hw3.try1.library.pages.SideBar;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -12,45 +14,41 @@ import org.testng.annotations.*;
 public class Ex1 extends BaseTest {
 
 
-    String userName = "Roman";
-    String password = "Jdi1234";
-
-
-
     @Test
 
-    public void login() {
+    public void Ex1() {
 
         SoftAssertions softly = new SoftAssertions();
 
-        //1. Open test site by URL
-        HomePage homePage = new HomePage(testDriver);
+        //1. Open test site by URL - in parent class
+        Header header = new Header(testDriver);
 
         //2. Assert Browser title
         String browserTitle = testDriver.getTitle();
         softly.assertThat(browserTitle).as("Incorrect browser title").isEqualTo("Home Page");
 
         //3. Perform login
-        homePage.login(userName, password);
+        header.login();
         assertThat(testDriver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
 
         //4. Assert Username is loggined
-        softly.assertThat(homePage.getUserNameText()).as("Incorrect user name").isEqualTo("ROMAN IOVLEV");
+        softly.assertThat(header.getUserNameText()).as("Incorrect user name").isEqualTo("ROMAN IOVLEV");
 
 
         //5. Assert that there are 4 items on the header section are displayed and they have proper texts
 
-        softly.assertThat(homePage.getHomeButtonText()).as("Incorrect Home button name").isEqualTo("HOME");
-        softly.assertThat(homePage.getContactFormButtonText())
+        softly.assertThat(header.getHomeButtonText()).as("Incorrect Home button name").isEqualTo("HOME");
+        softly.assertThat(header.getContactFormButtonText())
                 .as("Incorrect Contacts button name")
                 .isEqualTo("CONTACT FORM");
 
-        softly.assertThat(homePage.getServiceButtonText()).as("Incorrect Service button name").isEqualTo("SERVICE");
+        softly.assertThat(header.getServiceButtonText()).as("Incorrect Service button name").isEqualTo("SERVICE");
 
-        softly.assertThat(homePage.getMetalsColorsButtonText())
+        softly.assertThat(header.getMetalsColorsButtonText())
                 .as("Incorrect METALS & COLORS button name").isEqualTo("METALS & COLORS");
 
         //6. Assert that there are 4 images on the Index Page and they are displayed
+        HomePage homePage = new HomePage(testDriver);
         softly.assertThat(homePage.numberOfBenefitImages()).as("Number of images are " + homePage.numberOfBenefitImages() + " not 4").isEqualTo(4);
         softly.assertThat(homePage.getBenefitImages()).as("One or more image not displayed").isNotEmpty();
 
@@ -81,74 +79,42 @@ public class Ex1 extends BaseTest {
 
             //9. Switch to the iframe and check that there is “Frame Button” in the iframe
             testDriver.switchTo().frame(i);
-            buttonInCurrentFrame = testDriver.findElements(By.cssSelector("input#frame-button")).size();
+            buttonInCurrentFrame = homePage.getFrameButtons().size();
 
             if (buttonInCurrentFrame > 0) {
                 totalButtonsInFrames = 0 + buttonInCurrentFrame;
-                WebElement frameButton = testDriver
-                        .findElement(By.cssSelector("input#frame-button"));
-                softly.assertThat(frameButton.getAttribute("value"))
+                softly.assertThat(homePage.getCurrentFrameButton().getAttribute("value"))
                         .as("Frame Button text differs")
                         .isEqualTo("Frame Button");
             }
 
             System.out.println(buttonInCurrentFrame);
-            //softly.assertThat(buttonInCurrentFrame).as("No button “Frame Button”").isNotZero();
 
+            //10. Switch to original window back
+            testDriver.switchTo().defaultContent();
         }
+        softly.assertThat(totalButtonsInFrames).as("Button not found").isNotZero();
 
 
+        //11. Assert that there are 5 items in the Left Section are displayed and they have proper text
+        SideBar sideBar = new SideBar(testDriver);
+        softly.assertThat(sideBar.getSidebarItems().size())
+                .as("Number of menu items " + sideBar.getSidebarItems().size() + " not 5").isEqualTo(5);
+        softly.assertThat(sideBar.getSidebarItems().get(0)
+                .getText()).as("Home menu text differs").isEqualTo("Home");
+        softly.assertThat(sideBar.getSidebarItems().get(1)
+                .getText()).as("Contact form text differs").isEqualTo("Contact form");
+        softly.assertThat(sideBar.getSidebarItems().get(2)
+                .getText()).as("Service text differs").isEqualTo("Service");
+        softly.assertThat(sideBar.getSidebarItems().get(3)
+                .getText()).as("Metals & Colors text differs").isEqualTo("Metals & Colors");
+        softly.assertThat(sideBar.getSidebarItems().get(4)
+                .getText()).as("Elements text packs").isEqualTo("Elements packs");
 
-
-
-
-
-
-
-
-
-
-
-//
-//            testDriver.switchTo().frame(i);
-//            buttonInCurrentFrame = homePage.getFrameButtons().size();
-//
-//            if (buttonInCurrentFrame > 0) {
-//                totalButtonsInFrames = 0 + buttonInCurrentFrame;
-//                softly.assertThat(homePage.getCurrentFrameButton().getAttribute("value"))
-//                        .as("Frame Button text differs")
-//                        .isEqualTo("Frame Button");
-//            }}
-//
-//            System.out.println(totalButtonsInFrames);
-//            softly.assertThat(totalButtonsInFrames).as("No button “Frame Button”").isNotZero();
-//
-//            //10. Switch to original window back
-//            driver.switchTo().defaultContent();
-//        }
-//        softly.assertThat(totalButtonsInFrames).as("Button not found").isNotZero();
-//
-//        //11. Assert that there are 5 items in the Left Section are displayed and they have proper text
-//        List<WebElement> sidebarItems = driver.findElements(By.cssSelector(".sidebar-menu > li"));
-//        softly.assertThat(sidebarItems.size())
-//                .as("Number of menu items " + sidebarItems.size() + " not 5").isEqualTo(5);
-//        softly.assertThat(sidebarItems.get(0)
-//                .getText()).as("Home menu text differs").isEqualTo("Home");
-//        softly.assertThat(sidebarItems.get(1)
-//                .getText()).as("Contact form text differs").isEqualTo("Contact form");
-//        softly.assertThat(sidebarItems.get(2)
-//                .getText()).as("Service text differs").isEqualTo("Service");
-//        softly.assertThat(sidebarItems.get(3)
-//                .getText()).as("Metals & Colors text differs").isEqualTo("Metals & Colors");
-//        softly.assertThat(sidebarItems.get(4)
-//                .getText()).as("Elements text packs").isEqualTo("Elements packs");
-//
         softly.assertAll();
-//
-//        //12. Close Browser
-//        driver.quit();
-//
-//    }
+
+//        //12. Close Browser (in Parent class)
+
 
     }
 
