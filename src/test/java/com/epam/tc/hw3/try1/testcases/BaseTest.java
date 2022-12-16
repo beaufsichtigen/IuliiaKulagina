@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 
 public class BaseTest {
@@ -13,7 +14,7 @@ public class BaseTest {
         return baseURL;
     }
 
-    private static String baseURL = "https://jdi-testing.github.io/jdi-light/index.html";
+    private static final String baseURL = "https://jdi-testing.github.io/jdi-light/index.html";
 
     @BeforeClass
     static void setupAll() {
@@ -26,8 +27,7 @@ public class BaseTest {
 
 
     @AfterClass
-    public static void tearDownDriver() throws InterruptedException {
-        Thread.sleep(3000);
+    public static void tearDownDriver()  {
         if (testDriver != null) {
             testDriver.quit();
         }

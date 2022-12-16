@@ -5,14 +5,14 @@ import java.io.IOException;
 import java.util.Properties;
 
 
-
 public class GetProperties {
 
 
     private String username;
     private String password;
 
-    public GetProperties() {}
+    public GetProperties() {
+    }
 
     private void getPropertyFromFile() {
 
@@ -27,15 +27,15 @@ public class GetProperties {
             password = property.getProperty("passwordProp");
 
 
-//            System.out.println("HOST: " + host
-//                    + ", LOGIN: " + login);
+            //            System.out.println("HOST: " + host
+            //                    + ", LOGIN: " + login);
 
         } catch (IOException e) {
             System.err.println("ОШИБКА: Файл свойств отсуствует!");
         }
 
 
-        }
+    }
 
     public String getUsernameProp() {
         getPropertyFromFile();
@@ -49,20 +49,6 @@ public class GetProperties {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //

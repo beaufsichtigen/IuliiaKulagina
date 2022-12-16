@@ -1,7 +1,6 @@
 package com.epam.tc.hw3.try1.library.pages;
 
 import com.epam.tc.hw3.try1.library.utils.GetProperties;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,11 +35,9 @@ public class Header {
     private WebElement metalsColorsButton;
 
 
-
     //Items in Service drop down:
     @FindBy(css = "a[href='different-elements.html']")
     private WebElement difElements;
-
 
 
     public Header(WebDriver webDriver1) {
@@ -107,11 +104,6 @@ public class Header {
     public WebElement getDifElements() {
         return difElements;
     }
-
-
-
-
-
 
 
 }

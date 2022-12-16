@@ -1,43 +1,73 @@
 package com.epam.tc.hw3.try1.library.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
 
 
 public class DifElementsPage {
 
+    //Checkboxes
+    @FindBy(css = "input[type='checkbox']")
+    private List<WebElement> checkboxes;
 
-        @FindBy(xpath = "//*[contains(text()[normalize-space(.)],'Water')]")
-        private WebElement checkboxWater;
 
+    @FindBy(xpath = "//*[contains(text()[normalize-space(.)],'Water')]")
+    private WebElement checkboxWater;
 
 
     @FindBy(xpath = "//*[contains(text()[normalize-space(.)],'Wind')]")
     private WebElement checkboxWind;
 
 
+    //RadioButtons
+    @FindBy(className = "label-radio")
+    private List<WebElement> radiobuttons;
 
     @FindBy(xpath = "//*[contains(text()[normalize-space(.)],'Selen')]")
     private WebElement radioBtnSelen;
 
 
-
-//    @FindBy(css = "//*[contains(text()[normalize-space(.)],'Water')]")
-//    private List<WebElement> checkboxWater;
-
-
+    //DropDowns
+    @FindBy(css = ".colors>select>option")
+    private List<WebElement> dropDown;
 
 
+    @FindBy(className = "colors")
+    private WebElement dropDownColors;
 
-        public DifElementsPage(WebDriver webDriver1) {
-            PageFactory.initElements(webDriver1, this);
-            //waitActions = new WaitActions(webDriver1);
-        }
+    @FindBy(xpath = "//option[text()='Yellow']")
+    private WebElement dropDownYellow;
+
+
+    //Log
+    @FindBy(css = ".logs :first-child")
+    private WebElement lastLog;
+
+
+    public DifElementsPage(WebDriver webDriver1) {
+        PageFactory.initElements(webDriver1, this);
+        //waitActions = new WaitActions(webDriver1);
+    }
+
+
+    //Checkboxes
+
+    public List<WebElement> getAllCheckboxes() {
+        return checkboxes;
+    }
+
+    public List<WebElement> clickAllCheckboxes() {
+
+
+        return checkboxes;
+    }
+
 
     public WebElement getCheckboxWind() {
         return checkboxWind;
@@ -45,10 +75,7 @@ public class DifElementsPage {
 
     public void clickWind() {
         checkboxWind.click();
-}
-
-
-    //fluent page object:
+    }
 
 
     public WebElement getCheckboxWater() {
@@ -59,7 +86,10 @@ public class DifElementsPage {
         checkboxWater.click();
     }
 
-
+    //RadioButtons
+    public List<WebElement> getAllradiobuttons() {
+        return radiobuttons;
+    }
     public WebElement getRadioBtnSelen() {
         return radioBtnSelen;
     }
@@ -68,5 +98,28 @@ public class DifElementsPage {
         radioBtnSelen.click();
     }
 
+    public WebElement getDropDownColors() {
+        return dropDownColors;
     }
+
+    public WebElement getDropDownYellow() {
+        return dropDownYellow;
+    }
+
+    //DropDowns
+    public List<WebElement> getAlldropDown() {
+        return dropDown;
+    }
+
+    public void chooseYellow() {
+        dropDownColors.click();
+        dropDownYellow.click();
+    }
+
+    public WebElement getLastLog() {
+        return lastLog;
+    }
+
+}
+
 

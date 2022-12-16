@@ -7,8 +7,8 @@ public class TestExample extends BaseTest {
     @Test
     public void testGoogleSearch() {
 
-//        pages.SearchPage searchPage = new pages.SearchPage(webDriver);
-//        searchPage.searchText("yandex.ru");
+    //        pages.SearchPage searchPage = new pages.SearchPage(webDriver);
+    //        searchPage.searchText("yandex.ru");
         //searchPage.verifyFirstSuggestion("yandex.ru");
 
     }
