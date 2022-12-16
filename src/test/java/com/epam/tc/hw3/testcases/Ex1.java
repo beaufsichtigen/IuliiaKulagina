@@ -11,18 +11,21 @@ public class Ex1 extends BaseTest {
 
 
 
-    @Test
+    //1. Open test site by URL - in parent class
 
-    public void ex1() {
-
-        SoftAssertions softly = new SoftAssertions();
-
-        //1. Open test site by URL - in parent class
-        Header header = new Header(testDriver);
-
+    @Test(priority = 0)
+    public void titleAssert() {
         //2. Assert Browser title
+        SoftAssertions softly = new SoftAssertions();
         String browserTitle = testDriver.getTitle();
         softly.assertThat(browserTitle).as("Incorrect browser title").isEqualTo("Home Page");
+        softly.assertAll();
+    }
+
+    @Test(priority = 1)
+    public void loginAssert() {
+        SoftAssertions softly = new SoftAssertions();
+        Header header = new Header(testDriver);
 
         //3. Perform login
         header.login();
@@ -35,6 +38,13 @@ public class Ex1 extends BaseTest {
                 .as("Incorrect user name")
                 .isEqualTo("ROMAN IOVLEV");
 
+        softly.assertAll();
+    }
+
+    @Test(priority = 2)
+    public void headerAssert() {
+        SoftAssertions softly = new SoftAssertions();
+        Header header = new Header(testDriver);
 
         //5. Assert that there are 4 items on the header section are displayed and they have proper texts
 
@@ -51,6 +61,13 @@ public class Ex1 extends BaseTest {
         softly.assertThat(header.getMetalsColorsButtonText())
                 .as("Incorrect METALS & COLORS button name").isEqualTo("METALS & COLORS");
 
+        softly.assertAll();
+    }
+
+    @Test(priority = 2)
+    public void iconsAssert() {
+        SoftAssertions softly = new SoftAssertions();
+
         //6. Assert that there are 4 images on the Index Page and they are displayed
         HomePage homePage = new HomePage(testDriver);
         softly.assertThat(homePage.numberOfBenefitImages())
@@ -59,6 +76,13 @@ public class Ex1 extends BaseTest {
         softly.assertThat(homePage.getBenefitImages())
                 .as("One or more image not displayed").isNotEmpty();
 
+        softly.assertAll();
+    }
+
+    @Test(priority = 2)
+    public void iconsTextAssert() {
+        SoftAssertions softly = new SoftAssertions();
+        HomePage homePage = new HomePage(testDriver);
 
         //7. Assert that there are 4 texts on the Index Page under icons and they have proper text
         softly.assertThat(homePage.numberOfBenefitImagesText())
@@ -78,6 +102,14 @@ public class Ex1 extends BaseTest {
                 .isEqualTo("Already have good base\n"
                         + "(about 20 internal and\n"
                         + "some external projects),\nwish to get more…");
+
+        softly.assertAll();
+    }
+
+    @Test(priority = 2)
+    public void framesAssert() {
+        SoftAssertions softly = new SoftAssertions();
+        HomePage homePage = new HomePage(testDriver);
 
         //8. Assert that there is the iframe with “Frame Button” exist
         int size = homePage.getIframes().size();
@@ -104,6 +136,12 @@ public class Ex1 extends BaseTest {
         }
         softly.assertThat(totalButtonsInFrames).as("Button not found").isNotZero();
 
+        softly.assertAll();
+    }
+
+    @Test(priority = 2)
+    public void leftMenuAssert() {
+        SoftAssertions softly = new SoftAssertions();
 
         //11. Assert that there are 5 items in the Left Section are displayed and they have proper text
         SideBar sideBar = new SideBar(testDriver);
@@ -111,31 +149,30 @@ public class Ex1 extends BaseTest {
                 .as("Number of menu items " + sideBar.getSidebarItems().size() + " not 5")
                 .isEqualTo(5);
         softly.assertThat(sideBar.getSidebarItems().get(0)
-                .getText())
+                        .getText())
                 .as("Home menu text differs")
                 .isEqualTo("Home");
         softly.assertThat(sideBar.getSidebarItems().get(1)
-                .getText())
+                        .getText())
                 .as("Contact form text differs")
                 .isEqualTo("Contact form");
         softly.assertThat(sideBar.getSidebarItems().get(2)
-                .getText())
+                        .getText())
                 .as("Service text differs")
                 .isEqualTo("Service");
         softly.assertThat(sideBar.getSidebarItems().get(3)
-                .getText())
+                        .getText())
                 .as("Metals & Colors text differs")
                 .isEqualTo("Metals & Colors");
         softly.assertThat(sideBar.getSidebarItems().get(4)
-                .getText())
+                        .getText())
                 .as("Elements text packs")
                 .isEqualTo("Elements packs");
 
         softly.assertAll();
-
-        //12. Close Browser (in Parent class)
-
     }
+
+    //12. Close Browser (in Parent class)
 
 }
 

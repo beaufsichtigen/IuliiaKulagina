@@ -36,7 +36,7 @@ public class Ex2Parametrize extends BaseTest {
     }
 
     @Test(dataProvider = "DiffElementsCheckboxesTrue", dataProviderClass = DataProviders.class)
-    public void checkboxesTrue(int parameter, String checkboxName, boolean isSelected) throws InterruptedException {
+    public void checkboxesTrue(int parameter, String checkboxName, boolean isSelected) {
         SoftAssertions softly = new SoftAssertions();
         DifElementsPage difElementsPage = new DifElementsPage(testDriver);
 
@@ -117,7 +117,7 @@ public class Ex2Parametrize extends BaseTest {
     //9. Assert that
     //• for dropdown there is a log row and value is corresponded to the selected value.
     @Test(dataProvider = "DiffElementsDropdown", dataProviderClass = DataProviders.class)
-    public void dropdown(int parameter, String dropdownName) throws InterruptedException {
+    public void dropdown(int parameter, String dropdownName) {
         SoftAssertions softly = new SoftAssertions();
         Header header = new Header(testDriver);
 
