@@ -16,12 +16,12 @@
 
     <profiles>
         <profile>
-            <id>All</id>
+            <id>hw3</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.xml.file>allTests.xml</suite.xml.file>
+                <suite.xml.file>hw3.xml</suite.xml.file>
             </properties>
         </profile>
     </profiles>
