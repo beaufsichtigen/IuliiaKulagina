@@ -1,13 +1,14 @@
-package com.epam.tc.hw3.try1.testcases;
+package com.epam.tc.hw3.testcases;
 
-import com.epam.tc.hw3.try1.library.pages.Header;
-import com.epam.tc.hw3.try1.library.pages.HomePage;
-import com.epam.tc.hw3.try1.library.pages.SideBar;
+import com.epam.tc.hw3.library.pages.Header;
+import com.epam.tc.hw3.library.pages.HomePage;
+import com.epam.tc.hw3.library.pages.SideBar;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 
 public class Ex1 extends BaseTest {
+
 
 
     @Test
@@ -60,7 +61,6 @@ public class Ex1 extends BaseTest {
 
 
         //7. Assert that there are 4 texts on the Index Page under icons and they have proper text
-
         softly.assertThat(homePage.numberOfBenefitImagesText())
                 .as("Number of texts are " + homePage.numberOfBenefitImagesText() + " not 4")
                 .isEqualTo(4);
@@ -134,7 +134,6 @@ public class Ex1 extends BaseTest {
         softly.assertAll();
 
         //12. Close Browser (in Parent class)
-
 
     }
 

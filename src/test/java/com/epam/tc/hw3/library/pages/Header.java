@@ -1,16 +1,13 @@
-package com.epam.tc.hw3.try1.library.pages;
+package com.epam.tc.hw3.library.pages;
 
-import com.epam.tc.hw3.try1.library.utils.GetProperties;
+import com.epam.tc.hw3.library.utils.GetProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class Header {
-    //WaitActions waitActions;
-    WebDriver webDriver;
 
-    //Properties testProperties = new Properties();
 
     @FindBy(id = "user-icon")
     private WebElement userIcon;
@@ -42,7 +39,6 @@ public class Header {
 
     public Header(WebDriver webDriver1) {
         PageFactory.initElements(webDriver1, this);
-        //waitActions = new WaitActions(webDriver1);
     }
 
     public void login() {

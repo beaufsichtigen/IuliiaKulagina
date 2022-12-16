@@ -1,20 +1,17 @@
-package com.epam.tc.hw3.try1.testcases;
+package com.epam.tc.hw3.testcases;
 
-import com.epam.tc.hw3.try1.library.data.DataProviders;
-import com.epam.tc.hw3.try1.library.pages.DifElementsPage;
-import com.epam.tc.hw3.try1.library.pages.Header;
+import com.epam.tc.hw3.library.data.DataProviders;
+import com.epam.tc.hw3.library.pages.DifElementsPage;
+import com.epam.tc.hw3.library.pages.Header;
+import java.time.Duration;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
-
-public class Ex2Paramet extends BaseTest {
+public class Ex2Parametrize extends BaseTest {
 
 
     @BeforeClass
@@ -38,18 +35,15 @@ public class Ex2Paramet extends BaseTest {
 
     }
 
-
     @Test(dataProvider = "DiffElementsCheckboxesTrue", dataProviderClass = DataProviders.class)
     public void checkboxesTrue(int parameter, String checkboxName, boolean isSelected) throws InterruptedException {
         SoftAssertions softly = new SoftAssertions();
         DifElementsPage difElementsPage = new DifElementsPage(testDriver);
 
-
         //Checking page is correct
         softly.assertThat(testDriver.getCurrentUrl())
                 .as("Incorrect page opened")
                 .isEqualTo("https://jdi-testing.github.io/jdi-light/different-elements.html");
-
 
         //9. Assert that
         //• for each checkbox there is an individual log row and value is corresponded to the status of checkbox
@@ -94,7 +88,6 @@ public class Ex2Paramet extends BaseTest {
 
     //9. Assert that
     //• for radio button there is a log row and value is corresponded to the status of radio button
-
 
     @Test(dataProvider = "DiffElementsRadiobutton", dataProviderClass = DataProviders.class)
     public void radiobuttons(int parameter, String radiobuttonName) {

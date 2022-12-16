@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.try1.testcases;
+package com.epam.tc.hw3.testcases;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -25,8 +25,6 @@ public class BaseTest {
         testDriver.get(baseURL);
 
     }
-
-
 
 
     @AfterClass

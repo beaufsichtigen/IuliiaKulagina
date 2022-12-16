@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.try1.library.utils;
+package com.epam.tc.hw3.library.utils;
 
 import java.time.Duration;
 import java.util.function.Function;

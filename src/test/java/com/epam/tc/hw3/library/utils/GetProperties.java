@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.try1.library.utils;
+package com.epam.tc.hw3.library.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -27,9 +27,6 @@ public class GetProperties {
             password = property.getProperty("passwordProp");
 
 
-            //            System.out.println("HOST: " + host
-            //                    + ", LOGIN: " + login);
-
         } catch (IOException e) {
             System.err.println("ОШИБКА: Файл свойств отсуствует!");
         }
@@ -47,37 +44,5 @@ public class GetProperties {
         return password;
     }
 
-
 }
 
-
-//
-//    public String  userName;
-//    public String  password;
-//    Properties properties = new Properties();
-//    File file = new File("user.properties");
-//
-//    public GetProperties() {    }
-//
-//
-//
-//    public String getUserNameProp() {
-//        String userName = (String) properties.get("usernameProp");
-//
-//        return userName;
-//    }
-//
-////    public static String getPasswordProp() {
-////        String password = getProperty("passwordProp");
-////
-////        return password;
-////    }
-//
-//    public static void main(String[] args) {
-//
-//        GetProperties properties = new GetProperties();
-//        System.out.println(properties.getUserNameProp());
-//        //System.out.println(getPasswordProp());
-//    }
-//
-//}

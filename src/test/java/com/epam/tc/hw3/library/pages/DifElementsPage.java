@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.try1.library.pages;
+package com.epam.tc.hw3.library.pages;
 
 import java.util.List;
 import org.openqa.selenium.WebDriver;
@@ -50,7 +50,6 @@ public class DifElementsPage {
 
     public DifElementsPage(WebDriver webDriver1) {
         PageFactory.initElements(webDriver1, this);
-        //waitActions = new WaitActions(webDriver1);
     }
 
 
