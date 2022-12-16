@@ -75,7 +75,7 @@ public class Ex2 {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("uui-main-container")));
 
-        assertThat(driver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/different-elements.html");
+        softly.assertThat(driver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/different-elements.html");
 
         //6. Select checkboxes Water, Wind
         WebElement checkboxWater = driver.findElement(By.xpath("//*[contains(text()[normalize-space(.)],'Water')]"));
@@ -83,14 +83,14 @@ public class Ex2 {
         WebElement checkboxWind = driver.findElement(By.xpath("//*[contains(text()[normalize-space(.)],'Wind')]"));
         checkboxWind.click();
 
-        assertThat(checkboxWater.isEnabled()).as("Check box 'Water' was not enabled").isEqualTo(true);
-        assertThat(checkboxWind.isEnabled()).as("Check box 'Wind' was not enabled").isEqualTo(true);
+        softly.assertThat(checkboxWater.isEnabled()).as("Check box 'Water' was not enabled").isEqualTo(true);
+        softly.assertThat(checkboxWind.isEnabled()).as("Check box 'Wind' was not enabled").isEqualTo(true);
 
         //7. Select radio Selen
         WebElement radioBtnSelen = driver.findElement(By.xpath("//*[contains(text()[normalize-space(.)],'Selen')]"));
         radioBtnSelen.click();
 
-        assertThat(radioBtnSelen.isEnabled()).as("Incorrect radio button state").isEqualTo(true);
+        softly.assertThat(radioBtnSelen.isEnabled()).as("Incorrect radio button state").isEqualTo(true);
 
         //8. Select in dropdown Yellow
         WebElement dropDownColors = driver.findElement(By.className("colors"));
@@ -98,7 +98,7 @@ public class Ex2 {
         WebElement dropDownYellow = driver.findElement(By.xpath("//option[text()='Yellow']"));
         dropDownYellow.click();
 
-        assertThat(dropDownYellow.isSelected()).as("Incorrect drop down state").isEqualTo(true);
+        softly.assertThat(dropDownYellow.isSelected()).as("Incorrect drop down state").isEqualTo(true);
 
         //9. Assert that
         driver.navigate().refresh(); //clean all elements state

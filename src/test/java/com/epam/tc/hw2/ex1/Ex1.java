@@ -48,7 +48,7 @@ public class Ex1 {
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("jdi-frame-site")));
         SoftAssertions softly = new SoftAssertions();
-        assertThat(driver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
+        softly.assertThat(driver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
 
         //2. Assert Browser title
         String browserTitle = driver.getTitle();
@@ -72,7 +72,7 @@ public class Ex1 {
         //5. Assert that there are 4 items on the header section are displayed and they have proper texts
         WebElement homeButton = driver.findElement(By.cssSelector("a[href='index.html']"));
         System.out.println(homeButton.getText());
-        assertThat(homeButton.getText()).as("Incorrect Home button name").isEqualTo("HOME");
+        softly.assertThat(homeButton.getText()).as("Incorrect Home button name").isEqualTo("HOME");
 
         WebElement contactFormButton = driver.findElement(By.cssSelector("a[href='contacts.html']"));
         softly.assertThat(contactFormButton.getText())
