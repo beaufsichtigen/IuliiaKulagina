@@ -76,21 +76,21 @@ public class Ex2 extends BaseTest {
                 .isEqualTo(true);
 
         //9. Assert that
-        testDriver.navigate().refresh(); //clean all elements state
+        //testDriver.navigate().refresh(); //clean all elements state
         //• for each checkbox there is an individual log row and value is corresponded to the status of checkbox
-        int checkboxesNumber = difElementsPage.getAllCheckboxes().size();
-        for (int i = 0; i < checkboxesNumber; i++) {
-            difElementsPage.getAllCheckboxes().get(i).click();
-            String checkboxName = difElementsPage.getAllCheckboxes().get(i).getText();
-            softly.assertThat(difElementsPage.getLastLog().getText())
-                    .as("Incorrect log text")
-                    .endsWith(checkboxName + ": condition changed to " + difElementsPage.getAllCheckboxes().get(i).isSelected());
-
-            difElementsPage.getAllCheckboxes().get(i).click();
-            softly.assertThat(difElementsPage.getLastLog().getText())
-                    .as("Incorrect log text")
-                    .endsWith(checkboxName + ": condition changed to " + difElementsPage.getAllCheckboxes().get(i).isSelected());
-        }
+//        int checkboxesNumber = difElementsPage.getAllCheckboxes().size();
+//        for (int i = 0; i < checkboxesNumber; i++) {
+//            difElementsPage.getAllCheckboxes().get(i).click();
+//            String checkboxName = difElementsPage.getAllCheckboxes().get(i).getText();
+//            softly.assertThat(difElementsPage.getLastLog().getText())
+//                    .as("Incorrect log text")
+//                    .endsWith(checkboxName + ": condition changed to " + difElementsPage.getAllCheckboxes().get(i).isSelected());
+//
+//            difElementsPage.getAllCheckboxes().get(i).click();
+//            softly.assertThat(difElementsPage.getLastLog().getText())
+//                    .as("Incorrect log text")
+//                    .endsWith(checkboxName + ": condition changed to " + difElementsPage.getAllCheckboxes().get(i).isSelected());
+//        }
         //• for radio button there is a log row and value is corresponded to the status of radio button
 
 
@@ -120,6 +120,7 @@ public class Ex2 extends BaseTest {
                 .as("Incorrect log text")
                 .endsWith("Colors: value changed to " + dropDownName);
 
+
         softly.assertAll();
 
         //10. Close Browser in parent class
@@ -128,57 +129,4 @@ public class Ex2 extends BaseTest {
 
     }
 
-
-
-
-    //ПОПЫТКА ПАРАМЕТРИЗАЦИИ (неудачная)
-    // Test broken to methods to use its parameterized form
-
-
-    //@Test(dataProvider = "DiffElementsCheckboxes", dataProviderClass = DataProviders.class)
-    //public void checkboxes(int parameter, String checkboxName, boolean isSelected) throws InterruptedException {
-        //SoftAssertions softly = new SoftAssertions();
-
-        //1. Open test site by URL - in parent class
-        //Header header = new Header(testDriver);
-        //
-        //WebDriverWait wait = new WebDriverWait(testDriver, Duration.ofSeconds(10));
-        //wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("uui-main-container")));
-                //3. Perform login
-                //header.login();
-                //softly.assertThat(testDriver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
-
-        //4. Assert Username is loggined
-                //softly.assertThat(header.getUserNameText()).as("Incorrect user name").isEqualTo("ROMAN IOVLEV");
-
-
-        //5. Open through the header menu Service -> Different Elements Page
-               // header.getServiceButton().click();
-              //  header.getDifElements().click();
-
-
-              //  wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("uui-main-container")));
-              //  softly.assertThat(testDriver.getCurrentUrl())
-                //        .as("Incorrect page opened")
-                 //       .isEqualTo("https://jdi-testing.github.io/jdi-light/different-elements.html");
-
-        //DifElementsPage difElementsPage = new DifElementsPage(testDriver);
-
-        //9. Assert that
-       // testDriver.navigate().refresh(); //clean all elements state
-
-        //• for each checkbox there is an individual log row and value is corresponded to the status of checkbox
-        //difElementsPage.getAllCheckboxes().get(parameter).click();
-        //softly.assertThat(difElementsPage.getLastLog().getText())
-         //       .as("Incorrect log text")
-          //      .endsWith(checkboxName + ": condition changed to " + isSelected);
-
-        //Thread.sleep(3000);
-        //softly.assertAll();
-
-
-
-
-        //10. Close Browser
-
-    }
+}

@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 
 public class BaseTest {
     static WebDriver testDriver;
@@ -24,6 +25,8 @@ public class BaseTest {
         testDriver.get(baseURL);
 
     }
+
+
 
 
     @AfterClass

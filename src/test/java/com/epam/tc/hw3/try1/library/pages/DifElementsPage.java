@@ -1,8 +1,6 @@
 package com.epam.tc.hw3.try1.library.pages;
 
 import java.util.List;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -90,6 +88,7 @@ public class DifElementsPage {
     public List<WebElement> getAllradiobuttons() {
         return radiobuttons;
     }
+
     public WebElement getRadioBtnSelen() {
         return radioBtnSelen;
     }
