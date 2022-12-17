@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -22,16 +22,20 @@ public class Ex2 {
 
     WebDriver driver;
 
-    @BeforeSuite
-    static void setupAll() {
-        WebDriverManager.chromedriver().setup();
-
-    }
 
     @BeforeTest
     void setup() {
         driver = new ChromeDriver();
     }
+
+    //10. Close Browser
+    @AfterTest
+    public void tearDownDriver() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+
 
     @Test
     //1. Open test site by URL
@@ -42,7 +46,7 @@ public class Ex2 {
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("jdi-frame-site")));
         SoftAssertions softly = new SoftAssertions();
-        softly.assertThat("https://jdi-testing.github.io/jdi-light/index.html");
+        softly.assertThat(driver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
 
         //2. Assert Browser title
         String browserTitle = driver.getTitle();
@@ -162,7 +166,5 @@ public class Ex2 {
 
         softly.assertAll();
 
-        //10. Close Browser
-        driver.quit();
     }
 }
