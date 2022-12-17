@@ -4,6 +4,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
@@ -20,13 +21,14 @@ import org.testng.annotations.Test;
 
 
 
-public class Ex1 {
+public class Exercise1 {
 
 
     WebDriver driver;
 
     @BeforeTest
     void setup() {
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
     }
 
@@ -41,7 +43,7 @@ public class Ex1 {
 
     @Test
     //1. Open test site by URL
-    public void ex1() {
+    public void checkHomePage() {
 
         driver.manage().window().maximize();
         driver.navigate()
@@ -93,12 +95,11 @@ public class Ex1 {
         softly.assertThat(icons.size()).as("Number of images are " + icons.size() + " not 4").isEqualTo(4);
         Iterator<WebElement> iconsIterator = icons.iterator();
         while (iconsIterator.hasNext()) {
-        assertThat(iconsIterator.next().isDisplayed()).as("One or more image not displayed").isEqualTo(true);}
+            assertThat(iconsIterator.next().isDisplayed()).as("One or more image not displayed").isTrue();
+        }
 
         //7. Assert that there are 4 texts on the Index Page under icons and they have proper text
         List<WebElement> iconTexts = driver.findElements(By.cssSelector(".benefit-txt"));
-        softly.assertThat(iconTexts.size())
-                .as("Number of texts are " + iconTexts.size() + " not 4").isEqualTo(4);
         softly.assertThat(iconTexts.get(0).getText())
                 .as("To include good...text differs")
                 .isEqualTo("To include good practices\nand ideas from successful\nEPAM project");
@@ -122,9 +123,8 @@ public class Ex1 {
             //9. Switch to the iframe and check that there is “Frame Button” in the iframe
             driver.switchTo().frame(i);
             buttonInCurrentFrame = driver.findElements(By.cssSelector("input#frame-button")).size();
-
             if (buttonInCurrentFrame > 0) {
-                totalButtonsInFrames = 0 + buttonInCurrentFrame;
+                totalButtonsInFrames = totalButtonsInFrames + buttonInCurrentFrame;
                 WebElement frameButton = driver
                         .findElement(By.cssSelector("input#frame-button"));
                 softly.assertThat(frameButton.getAttribute("value"))
@@ -132,11 +132,12 @@ public class Ex1 {
                         .isEqualTo("Frame Button");
             }
 
-            System.out.println(buttonInCurrentFrame);
+            System.out.println("frame " + i + ". Number of buttons = " + buttonInCurrentFrame);
 
             //10. Switch to original window back
             driver.switchTo().defaultContent();
         }
+        System.out.println("totalButtonsInFrames = " + totalButtonsInFrames);
         softly.assertThat(totalButtonsInFrames).as("Button not found").isNotZero();
 
         //11. Assert that there are 5 items in the Left Section are displayed and they have proper text
@@ -162,16 +163,4 @@ public class Ex1 {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

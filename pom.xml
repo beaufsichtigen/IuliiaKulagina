@@ -29,12 +29,19 @@
         </profile>
 
         <profile>
-            <id>All</id>
+            <id>Homework1</id>
+            <properties>
+                <suite.xml.file>Homework1All.xml</suite.xml.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>Homework2</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.xml.file>allTests.xml</suite.xml.file>
+                <suite.xml.file>Homework2All.xml</suite.xml.file>
             </properties>
         </profile>
     </profiles>
