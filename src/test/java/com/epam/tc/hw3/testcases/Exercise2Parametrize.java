@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Ex2Parametrize extends BaseTest {
+public class Exercise2Parametrize extends BaseTest {
 
 
     @BeforeClass
@@ -36,7 +36,7 @@ public class Ex2Parametrize extends BaseTest {
     }
 
     @Test(dataProvider = "DiffElementsCheckboxesTrue", dataProviderClass = DataProviders.class)
-    public void checkboxesTrue(int parameter, String checkboxName, boolean isSelected) {
+    public void assertCheckboxesTrue(int parameter, String checkboxName, boolean isSelected) {
         SoftAssertions softly = new SoftAssertions();
         DifElementsPage difElementsPage = new DifElementsPage(testDriver);
 
@@ -60,7 +60,7 @@ public class Ex2Parametrize extends BaseTest {
     }
 
     @Test(dataProvider = "DiffElementsCheckboxesFalse", dataProviderClass = DataProviders.class)
-    public void checkboxesFalse(int parameter, String checkboxName, boolean isSelected) {
+    public void assertCheckboxesFalse(int parameter, String checkboxName, boolean isSelected) {
         SoftAssertions softly = new SoftAssertions();
         DifElementsPage difElementsPage = new DifElementsPage(testDriver);
 
@@ -90,7 +90,7 @@ public class Ex2Parametrize extends BaseTest {
     //• for radio button there is a log row and value is corresponded to the status of radio button
 
     @Test(dataProvider = "DiffElementsRadiobutton", dataProviderClass = DataProviders.class)
-    public void radiobuttons(int parameter, String radiobuttonName) {
+    public void assertRadiobuttons(int parameter, String radiobuttonName) {
         SoftAssertions softly = new SoftAssertions();
         DifElementsPage difElementsPage = new DifElementsPage(testDriver);
 
@@ -117,7 +117,7 @@ public class Ex2Parametrize extends BaseTest {
     //9. Assert that
     //• for dropdown there is a log row and value is corresponded to the selected value.
     @Test(dataProvider = "DiffElementsDropdown", dataProviderClass = DataProviders.class)
-    public void dropdown(int parameter, String dropdownName) {
+    public void assertDropdown(int parameter, String dropdownName) {
         SoftAssertions softly = new SoftAssertions();
         Header header = new Header(testDriver);
 

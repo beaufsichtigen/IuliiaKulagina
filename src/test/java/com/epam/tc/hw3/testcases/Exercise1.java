@@ -4,17 +4,20 @@ import com.epam.tc.hw3.library.pages.Header;
 import com.epam.tc.hw3.library.pages.HomePage;
 import com.epam.tc.hw3.library.pages.SideBar;
 import org.assertj.core.api.SoftAssertions;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
+import java.util.Iterator;
 
-public class Ex1 extends BaseTest {
+
+public class Exercise1 extends BaseTest {
 
 
 
     //1. Open test site by URL - in parent class
 
     @Test(priority = 0)
-    public void titleAssert() {
+    public void assertTitle() {
         //2. Assert Browser title
         SoftAssertions softly = new SoftAssertions();
         String browserTitle = testDriver.getTitle();
@@ -23,7 +26,7 @@ public class Ex1 extends BaseTest {
     }
 
     @Test(priority = 1)
-    public void loginAssert() {
+    public void assertLogin() {
         SoftAssertions softly = new SoftAssertions();
         Header header = new Header(testDriver);
 
@@ -42,7 +45,7 @@ public class Ex1 extends BaseTest {
     }
 
     @Test(priority = 2)
-    public void headerAssert() {
+    public void assertHeader() {
         SoftAssertions softly = new SoftAssertions();
         Header header = new Header(testDriver);
 
@@ -65,7 +68,7 @@ public class Ex1 extends BaseTest {
     }
 
     @Test(priority = 2)
-    public void iconsAssert() {
+    public void assertIcons() {
         SoftAssertions softly = new SoftAssertions();
 
         //6. Assert that there are 4 images on the Index Page and they are displayed
@@ -73,14 +76,16 @@ public class Ex1 extends BaseTest {
         softly.assertThat(homePage.numberOfBenefitImages())
                 .as("Number of images are " + homePage.numberOfBenefitImages() + " not 4")
                 .isEqualTo(4);
-        softly.assertThat(homePage.getBenefitImages())
-                .as("One or more image not displayed").isNotEmpty();
+        Iterator<WebElement> iconsIterator = homePage.getBenefitImages().iterator();
+        while (iconsIterator.hasNext()) {
+            softly.assertThat(iconsIterator.next().isDisplayed()).as("One or more image not displayed").isTrue();
+        }
 
         softly.assertAll();
     }
 
     @Test(priority = 2)
-    public void iconsTextAssert() {
+    public void assertIconsText() {
         SoftAssertions softly = new SoftAssertions();
         HomePage homePage = new HomePage(testDriver);
 
@@ -107,7 +112,7 @@ public class Ex1 extends BaseTest {
     }
 
     @Test(priority = 2)
-    public void framesAssert() {
+    public void assertFrames() {
         SoftAssertions softly = new SoftAssertions();
         HomePage homePage = new HomePage(testDriver);
 
@@ -123,7 +128,7 @@ public class Ex1 extends BaseTest {
             buttonInCurrentFrame = homePage.getFrameButtons().size();
 
             if (buttonInCurrentFrame > 0) {
-                totalButtonsInFrames = buttonInCurrentFrame;
+                totalButtonsInFrames = totalButtonsInFrames + buttonInCurrentFrame;
                 softly.assertThat(homePage.getCurrentFrameButton().getAttribute("value"))
                         .as("Frame Button text differs")
                         .isEqualTo("Frame Button");
@@ -140,7 +145,7 @@ public class Ex1 extends BaseTest {
     }
 
     @Test(priority = 2)
-    public void leftMenuAssert() {
+    public void assertLeftMenu() {
         SoftAssertions softly = new SoftAssertions();
 
         //11. Assert that there are 5 items in the Left Section are displayed and they have proper text
@@ -175,16 +180,4 @@ public class Ex1 extends BaseTest {
     //12. Close Browser (in Parent class)
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

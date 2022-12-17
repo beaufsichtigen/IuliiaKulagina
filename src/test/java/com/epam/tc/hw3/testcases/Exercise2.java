@@ -10,13 +10,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 
-public class Ex2 extends BaseTest {
+public class Exercise2 extends BaseTest {
 
 
     //1. Open test site by URL - in parent class
 
     @Test(priority = 0)
-    public void titleAssert() {
+    public void assertTitle() {
         //2. Assert Browser title
         SoftAssertions softly = new SoftAssertions();
         String browserTitle = testDriver.getTitle();
@@ -25,7 +25,7 @@ public class Ex2 extends BaseTest {
     }
 
     @Test(priority = 1)
-    public void loginAssert() {
+    public void assertLogin() {
         SoftAssertions softly = new SoftAssertions();
         Header header = new Header(testDriver);
 
@@ -44,7 +44,7 @@ public class Ex2 extends BaseTest {
     }
 
     @Test(priority = 2)
-    public void openDiffElementsAssert() {
+    public void assertOpenDiffElements() {
 
         Header header = new Header(testDriver);
         //5. Open through the header menu Service -> Different Elements Page
@@ -62,7 +62,7 @@ public class Ex2 extends BaseTest {
     }
 
     @Test(priority = 3)
-    public void checkboxSelectAssert() {
+    public void assertCheckboxSelect() {
 
         //6. Select checkboxes Water, Wind
         DifElementsPage difElementsPage = new DifElementsPage(testDriver);
@@ -71,17 +71,17 @@ public class Ex2 extends BaseTest {
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(difElementsPage.getCheckboxWater()
                 .isEnabled()).as("Check box 'Water' was not enabled")
-                .isEqualTo(true);
+                .isTrue();
         softly.assertThat(difElementsPage.getCheckboxWater()
                 .isEnabled()).as("Check box 'Wind' was not enabled")
-                .isEqualTo(true);
+                .isTrue();
 
         softly.assertAll();
     }
 
 
     @Test(priority = 3)
-    public void radioSelenAssert() {
+    public void assertRadioSelen() {
         SoftAssertions softly = new SoftAssertions();
         DifElementsPage difElementsPage = new DifElementsPage(testDriver);
 
@@ -89,14 +89,14 @@ public class Ex2 extends BaseTest {
         difElementsPage.clickSelen();
         softly.assertThat(difElementsPage.getRadioBtnSelen()
                 .isEnabled()).as("Incorrect radio button state")
-                .isEqualTo(true);
+                .isTrue();
 
         softly.assertAll();
     }
 
 
     @Test(priority = 3)
-    public void yellowDropDownAssert() {
+    public void assertYellowDropDown() {
 
         DifElementsPage difElementsPage = new DifElementsPage(testDriver);
         //8. Select in dropdown Yellow
@@ -105,7 +105,7 @@ public class Ex2 extends BaseTest {
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(difElementsPage.getDropDownYellow()
                 .isSelected()).as("Incorrect drop down state")
-                .isEqualTo(true);
+                .isTrue();
 
         softly.assertAll();
     }
