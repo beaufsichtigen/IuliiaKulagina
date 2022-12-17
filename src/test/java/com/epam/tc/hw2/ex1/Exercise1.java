@@ -4,7 +4,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
@@ -32,7 +31,7 @@ public class Exercise1 {
         driver = new ChromeDriver();
     }
 
-    //10. Close Browser
+    //12. Close Browser
     @AfterTest
     public void tearDownDriver() {
         if (driver != null) {
@@ -156,9 +155,6 @@ public class Exercise1 {
                 .getText()).as("Elements text packs").isEqualTo("Elements packs");
 
         softly.assertAll();
-
-        //12. Close Browser
-        driver.quit();
 
     }
 
