@@ -94,7 +94,7 @@ public class Exercise1 {
         softly.assertThat(icons.size()).as("Number of images are " + icons.size() + " not 4").isEqualTo(4);
         Iterator<WebElement> iconsIterator = icons.iterator();
         while (iconsIterator.hasNext()) {
-            assertThat(iconsIterator.next().isDisplayed()).as("One or more image not displayed").isTrue();
+            softly.assertThat(iconsIterator.next().isDisplayed()).as("One or more image not displayed").isTrue();
         }
 
         //7. Assert that there are 4 texts on the Index Page under icons and they have proper text
