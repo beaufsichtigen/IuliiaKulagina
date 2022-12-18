@@ -3,15 +3,15 @@ package com.epam.tc.hw3.testcases;
 import com.epam.tc.hw3.library.pages.Header;
 import com.epam.tc.hw3.library.pages.HomePage;
 import com.epam.tc.hw3.library.pages.SideBar;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import java.util.Iterator;
-
-
 public class Exercise1 extends BaseTest {
-
 
 
     //1. Open test site by URL - in parent class
@@ -50,6 +50,9 @@ public class Exercise1 extends BaseTest {
         Header header = new Header(testDriver);
 
         //5. Assert that there are 4 items on the header section are displayed and they have proper texts
+
+
+
 
         softly.assertThat(header.getHomeButtonText())
                 .as("Incorrect Home button name")
@@ -93,21 +96,19 @@ public class Exercise1 extends BaseTest {
         softly.assertThat(homePage.numberOfBenefitImagesText())
                 .as("Number of texts are " + homePage.numberOfBenefitImagesText() + " not 4")
                 .isEqualTo(4);
-        softly.assertThat(homePage.getBenefitImagesText().get(0).getText())
-                .as("To include good...text differs")
-                .isEqualTo("To include good practices\nand ideas from successful\nEPAM project");
-        softly.assertThat(homePage.getBenefitImagesText().get(1).getText())
-                .as("To be flexible...text differs")
-                .isEqualTo("To be flexible and\ncustomizable");
-        softly.assertThat(homePage.getBenefitImagesText().get(2).getText())
-                .as("To be multiplatform")
-                .isEqualTo("To be multiplatform");
-        softly.assertThat(homePage.getBenefitImagesText().get(3).getText())
-                .as("Already have good base...text differs")
-                .isEqualTo("Already have good base\n"
-                        + "(about 20 internal and\n"
-                        + "some external projects),\nwish to get more…");
 
+        List<String> textUnderImagesExpected = Arrays.asList(
+                "To include good practices\nand ideas from successful\nEPAM project",
+                "To be flexible and\ncustomizable",
+                "To be multiplatform",
+                "Already have good base\n"
+                        + "(about 20 internal and\n"
+                        + "some external projects),\nwish to get more…"
+        );
+
+        List<String> textUnderImagesActual = new ArrayList<>();
+        homePage.getBenefitImagesText().stream().map(WebElement::getText).forEach(textUnderImagesActual::add);
+        softly.assertThat(textUnderImagesActual).as("Text under icon differs").isEqualTo(textUnderImagesExpected);
         softly.assertAll();
     }
 
@@ -153,26 +154,18 @@ public class Exercise1 extends BaseTest {
         softly.assertThat(sideBar.getSidebarItems().size())
                 .as("Number of menu items " + sideBar.getSidebarItems().size() + " not 5")
                 .isEqualTo(5);
-        softly.assertThat(sideBar.getSidebarItems().get(0)
-                        .getText())
-                .as("Home menu text differs")
-                .isEqualTo("Home");
-        softly.assertThat(sideBar.getSidebarItems().get(1)
-                        .getText())
-                .as("Contact form text differs")
-                .isEqualTo("Contact form");
-        softly.assertThat(sideBar.getSidebarItems().get(2)
-                        .getText())
-                .as("Service text differs")
-                .isEqualTo("Service");
-        softly.assertThat(sideBar.getSidebarItems().get(3)
-                        .getText())
-                .as("Metals & Colors text differs")
-                .isEqualTo("Metals & Colors");
-        softly.assertThat(sideBar.getSidebarItems().get(4)
-                        .getText())
-                .as("Elements text packs")
-                .isEqualTo("Elements packs");
+
+        List<String> sidebarItemsTextExpected = Arrays.asList(
+                "Home",
+                "Contact form",
+                "Service",
+                "Metals & Colors",
+                "Elements packs"
+        );
+
+        List<String> sidebarItemsTextActual = new ArrayList<>();
+        sideBar.getSidebarItems().stream().map(WebElement::getText).forEach(sidebarItemsTextActual::add);
+        softly.assertThat(sidebarItemsTextActual).as("Sidebar items text differs").isEqualTo(sidebarItemsTextExpected);
 
         softly.assertAll();
     }
