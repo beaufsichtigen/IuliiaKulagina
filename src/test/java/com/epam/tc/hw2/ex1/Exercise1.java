@@ -4,6 +4,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
@@ -91,6 +93,7 @@ public class Exercise1 {
         //6. Assert that there are 4 images on the Index Page and they are displayed
         List<WebElement> icons = driver.findElements(By.cssSelector(".benefit-icon"));
 
+
         softly.assertThat(icons.size()).as("Number of images are " + icons.size() + " not 4").isEqualTo(4);
         Iterator<WebElement> iconsIterator = icons.iterator();
         while (iconsIterator.hasNext()) {
@@ -98,19 +101,21 @@ public class Exercise1 {
         }
 
         //7. Assert that there are 4 texts on the Index Page under icons and they have proper text
+
         List<WebElement> iconTexts = driver.findElements(By.cssSelector(".benefit-txt"));
-        softly.assertThat(iconTexts.get(0).getText())
-                .as("To include good...text differs")
-                .isEqualTo("To include good practices\nand ideas from successful\nEPAM project");
-        softly.assertThat(iconTexts.get(1).getText())
-                .as("To be flexible...text differs").isEqualTo("To be flexible and\ncustomizable");
-        softly.assertThat(iconTexts.get(2).getText())
-                .as("To be multiplatform").isEqualTo("To be multiplatform");
-        softly.assertThat(iconTexts.get(3).getText())
-                .as("Already have good base...text differs")
-                .isEqualTo("Already have good base\n"
+        softly.assertThat(iconTexts.size()).as("Number of images are " + iconTexts.size() + " not 4").isEqualTo(4);
+        List<String> textUnderImagesExpected = Arrays.asList(
+                "To include good practices\nand ideas from successful\nEPAM project",
+                "To be flexible and\ncustomizable",
+                "To be multiplatform",
+                "Already have good base\n"
                         + "(about 20 internal and\n"
-                        + "some external projects),\nwish to get more…");
+                        + "some external projects),\nwish to get more…"
+        );
+
+        List<String> textUnderImagesActual = new ArrayList<>();
+        iconTexts.stream().map(WebElement::getText).forEach(textUnderImagesActual::add);
+        softly.assertThat(textUnderImagesActual).as("Text under icon differs").isEqualTo(textUnderImagesExpected);
 
         //8. Assert that there is the iframe with “Frame Button” exist
         int size = driver.findElements(By.tagName("iframe")).size();
@@ -143,16 +148,18 @@ public class Exercise1 {
         List<WebElement> sidebarItems = driver.findElements(By.cssSelector(".sidebar-menu > li"));
         softly.assertThat(sidebarItems.size())
                 .as("Number of menu items " + sidebarItems.size() + " not 5").isEqualTo(5);
-        softly.assertThat(sidebarItems.get(0)
-                .getText()).as("Home menu text differs").isEqualTo("Home");
-        softly.assertThat(sidebarItems.get(1)
-                .getText()).as("Contact form text differs").isEqualTo("Contact form");
-        softly.assertThat(sidebarItems.get(2)
-                .getText()).as("Service text differs").isEqualTo("Service");
-        softly.assertThat(sidebarItems.get(3)
-                .getText()).as("Metals & Colors text differs").isEqualTo("Metals & Colors");
-        softly.assertThat(sidebarItems.get(4)
-                .getText()).as("Elements text packs").isEqualTo("Elements packs");
+        List<String> sidebarItemsTextExpected = Arrays.asList(
+                "Home",
+                "Contact form",
+                "Service",
+                "Metals & Colors",
+                "Elements packs"
+        );
+
+        List<String> sidebarItemsTextActual = new ArrayList<>();
+        sidebarItems.stream().map(WebElement::getText).forEach(sidebarItemsTextActual::add);
+        softly.assertThat(sidebarItemsTextActual).as("Sidebar items text differs").isEqualTo(sidebarItemsTextExpected);
+        
 
         softly.assertAll();
 
