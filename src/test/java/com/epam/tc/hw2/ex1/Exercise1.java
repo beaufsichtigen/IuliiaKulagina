@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 
 
 
-public class Ex1 {
+public class Exercise1 {
 
 
     WebDriver driver;
