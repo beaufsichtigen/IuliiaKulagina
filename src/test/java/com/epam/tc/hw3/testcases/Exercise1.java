@@ -1,12 +1,12 @@
 package com.epam.tc.hw3.testcases;
 
+import com.epam.tc.hw3.library.pages.Header;
+import com.epam.tc.hw3.library.pages.HomePage;
+import com.epam.tc.hw3.library.pages.SideBar;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import library.pages.Header;
-import library.pages.HomePage;
-import library.pages.SideBar;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;

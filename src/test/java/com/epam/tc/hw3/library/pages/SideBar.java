@@ -1,4 +1,4 @@
-package library.pages;
+package com.epam.tc.hw3.library.pages;
 
 import java.util.List;
 import org.openqa.selenium.WebDriver;
