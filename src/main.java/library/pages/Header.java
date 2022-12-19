@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.library.pages;
+package library.pages;
 
 import com.epam.tc.hw3.library.utils.GetProperties;
 import org.openqa.selenium.WebDriver;

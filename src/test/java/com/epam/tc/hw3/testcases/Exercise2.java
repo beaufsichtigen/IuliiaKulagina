@@ -1,8 +1,8 @@
 package com.epam.tc.hw3.testcases;
 
-import com.epam.tc.hw3.library.pages.DifElementsPage;
-import com.epam.tc.hw3.library.pages.Header;
 import java.time.Duration;
+import library.pages.DifElementsPage;
+import library.pages.Header;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
