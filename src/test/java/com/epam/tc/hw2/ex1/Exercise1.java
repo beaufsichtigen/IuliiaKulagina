@@ -85,6 +85,7 @@ public class Exercise1 extends BaseTest {
 
         List<String> textUnderImagesActual = iconTexts.stream()
                 .map(WebElement::getText).collect(Collectors.toList());
+        //или iconTexts.stream().map(WebElement::getText).forEach(textUnderImagesActual::add);
         softly.assertThat(textUnderImagesActual).as("Text under icon differs").isEqualTo(textUnderImagesExpected);
 
 
@@ -127,9 +128,15 @@ public class Exercise1 extends BaseTest {
                 "Elements packs"
         );
 
-        List<String> sidebarItemsTextActual = new ArrayList<>();
-        sidebarItems.stream().map(WebElement::getText).forEach(sidebarItemsTextActual::add);
-        softly.assertThat(sidebarItemsTextActual).as("Sidebar items text differs").isEqualTo(sidebarItemsTextExpected);
+
+        List<String> sidebarItemsTextActual = sidebarItems
+                .stream().map(WebElement::getText).collect(Collectors.toList());
+
+        //List<String> sidebarItemsTextActual = new ArrayList<>();
+        //sidebarItems.stream().map(WebElement::getText).forEach(sidebarItemsTextActual::add);
+
+        softly.assertThat(sidebarItemsTextActual)
+                .as("Sidebar items text differs").isEqualTo(sidebarItemsTextExpected);
         
 
         softly.assertAll();
