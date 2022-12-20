@@ -19,10 +19,6 @@ public class Exercise2 extends BaseTest {
     //1. Open test site by URL
     public void checkDiffElementsPage() {
 
-        driver.manage().window().maximize();
-        driver.navigate().to("https://jdi-testing.github.io/jdi-light/index.html");
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.id("jdi-frame-site")));
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(driver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
 
