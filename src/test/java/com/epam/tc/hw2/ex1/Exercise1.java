@@ -83,9 +83,10 @@ public class Exercise1 extends BaseTest {
                         + "some external projects),\nwish to get more…"
         );
 
-        List<String> textUnderImagesActual = new ArrayList<>(
-                iconTexts.stream().map(WebElement::getText).collect(Collectors.toList()));
+        List<String> textUnderImagesActual = iconTexts.stream()
+                .map(WebElement::getText).collect(Collectors.toList());
         softly.assertThat(textUnderImagesActual).as("Text under icon differs").isEqualTo(textUnderImagesExpected);
+
 
         //8. Assert that there is the iframe with “Frame Button” exist
         int size = driver.findElements(By.tagName("iframe")).size();
