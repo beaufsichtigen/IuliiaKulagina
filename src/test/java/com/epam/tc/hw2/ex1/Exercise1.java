@@ -1,45 +1,23 @@
 package com.epam.tc.hw2.ex1;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.epam.tc.hw2.BaseTest;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 
 
 
-public class Exercise1 {
+public class Exercise1 extends BaseTest {
 
-
-    WebDriver driver;
-
-    @BeforeTest
-    void setup() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-    }
-
-    //12. Close Browser
-    @AfterTest
-    public void tearDownDriver() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
 
 
     @Test
@@ -95,9 +73,8 @@ public class Exercise1 {
 
 
         softly.assertThat(icons.size()).as("Number of images are " + icons.size() + " not 4").isEqualTo(4);
-        Iterator<WebElement> iconsIterator = icons.iterator();
-        while (iconsIterator.hasNext()) {
-            softly.assertThat(iconsIterator.next().isDisplayed()).as("One or more image not displayed").isTrue();
+        for (WebElement icon : icons) {
+            softly.assertThat(icon.isDisplayed()).as("One or more image not displayed").isTrue();
         }
 
         //7. Assert that there are 4 texts on the Index Page under icons and they have proper text

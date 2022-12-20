@@ -16,5 +16,6 @@ buildNumber.properties
 src/test/java/MaPack/
 *.iml
 iuliia_kulagina.iml
+.allure/
 
 
