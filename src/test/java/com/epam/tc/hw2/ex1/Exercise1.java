@@ -2,7 +2,6 @@ package com.epam.tc.hw2.ex1;
 
 
 import com.epam.tc.hw2.BaseTest;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
