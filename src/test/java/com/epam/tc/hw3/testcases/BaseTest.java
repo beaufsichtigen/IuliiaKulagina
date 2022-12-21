@@ -33,7 +33,7 @@ public class BaseTest {
 
 
     @AfterClass
-    public static void tearDownDriver()  {
+    public static void tearDownDriver() {
         if (testDriver != null) {
             testDriver.quit();
         }
