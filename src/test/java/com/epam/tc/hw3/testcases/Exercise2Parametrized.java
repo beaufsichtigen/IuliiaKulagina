@@ -1,6 +1,6 @@
 package com.epam.tc.hw3.testcases;
 
-import com.epam.tc.hw3.library.data.DataProviders;
+import com.epam.tc.hw3.library.data.data.DataProviders;
 import com.epam.tc.hw3.library.pages.DifElementsPage;
 import com.epam.tc.hw3.library.pages.Header;
 import java.time.Duration;
