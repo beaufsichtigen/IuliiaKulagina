@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 
 
 public class BaseTest {
@@ -20,9 +21,13 @@ public class BaseTest {
 
     private static final String baseURL = "https://jdi-testing.github.io/jdi-light/index.html";
 
+    @BeforeSuite
+    public static void setupWebDriverManager() {
+        WebDriverManager.chromedriver().setup();
+    }
+
     @BeforeClass
     public static void setupAll() {
-        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(baseURL);
