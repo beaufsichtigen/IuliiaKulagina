@@ -13,16 +13,12 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <profiles>
         <profile>
             <id>AddSubs</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <suite.xml.file>addSubs.xml</suite.xml.file>
-            </properties>
+                <properties>
+                    <suite.xml.file>addSubs.xml</suite.xml.file>
+                </properties>
         </profile>
 
         <profile>
@@ -33,9 +29,19 @@
         </profile>
 
         <profile>
-            <id>All</id>
+            <id>Homework1</id>
             <properties>
-                <suite.xml.file>allTests.xml</suite.xml.file>
+                <suite.xml.file>Homework1All.xml</suite.xml.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>Homework2</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.xml.file>Homework2All.xml</suite.xml.file>
             </properties>
         </profile>
     </profiles>
@@ -80,51 +86,61 @@
             <version>3.23.1</version>
             <scope>test</scope>
         </dependency>
-    </dependencies>
 
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.6.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.3.0</version>
+        </dependency>
+
+    </dependencies>
 
 
     <build>
         <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M7</version>
-                    <configuration>
-                        <suiteXmlFiles>${project.basedir}/src/test/resources/${suite.xml.file}</suiteXmlFiles>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>3.2.0</version>
-                    <configuration>
-                        <configLocation>
-                            https://raw.githubusercontent.com/DmitryKhodakovsky/epam-training-center-code-checkers-configurations/main/checkstyle/checkstyle.xml
-                        </configLocation>
-                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                        <consoleOutput>true</consoleOutput>
-                        <failsOnError>true</failsOnError>
-                        <linkXRef>false</linkXRef>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>validate</id>
-                            <phase>validate</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </build>
-
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M7</version>
+                <configuration>
+                    <suiteXmlFiles>${project.basedir}/src/test/resources/${suite.xml.file}</suiteXmlFiles>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <configLocation>
+                        https://raw.githubusercontent.com/DmitryKhodakovsky/epam-training-center-code-checkers-configurations/main/checkstyle/checkstyle.xml
+                    </configLocation>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                    <linkXRef>false</linkXRef>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
