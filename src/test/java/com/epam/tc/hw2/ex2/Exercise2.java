@@ -1,52 +1,24 @@
 package com.epam.tc.hw2.ex2;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.epam.tc.hw2.BaseTest;
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 
-public class Exercise2 {
-
-
-    WebDriver driver;
-
-
-    @BeforeTest
-    void setup() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-    }
-
-    //10. Close Browser
-    @AfterTest
-    public void tearDownDriver() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+public class Exercise2 extends BaseTest {
 
 
     @Test
     //1. Open test site by URL
     public void checkDiffElementsPage() {
 
-        driver.manage().window().maximize();
-        driver.navigate().to("https://jdi-testing.github.io/jdi-light/index.html");
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.id("jdi-frame-site")));
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(driver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
 
@@ -111,8 +83,7 @@ public class Exercise2 {
         //• for each checkbox there is an individual log row and value is corresponded to the status of checkbox
         List<WebElement> checkboxes = driver.findElements(By.cssSelector("input[type='checkbox']"));
         Iterator<WebElement> checkboxesIterator = checkboxes.iterator();
-        while (checkboxesIterator.hasNext()) {
-            WebElement checkbox = checkboxesIterator.next();
+        for (WebElement checkbox : checkboxes) {
             checkbox.click();
             String checkboxName = checkbox.getText();
             WebElement log = driver
@@ -134,8 +105,7 @@ public class Exercise2 {
         //• for radio button there is a log row and value is corresponded to the status of radio button
         List<WebElement> radiobuttons = driver.findElements(By.className("label-radio"));
         Iterator<WebElement> radiobuttonsIterator = radiobuttons.iterator();
-        while (radiobuttonsIterator.hasNext()) {
-            WebElement radiobutton = radiobuttonsIterator.next();
+        for (WebElement radiobutton : radiobuttons) {
             radiobutton.click();
             WebElement log = driver.findElement(By.cssSelector(".logs :first-child"));
             System.out.println(log.getText());
@@ -150,8 +120,7 @@ public class Exercise2 {
                 .findElements(By.cssSelector(".colors>select>option"));
         dropDown.get(2).click(); //otherwise the first click doesn't work
         Iterator<WebElement> dropDownIterator = dropDown.iterator();
-        while (dropDownIterator.hasNext()) {
-            WebElement dropDownElement = dropDownIterator.next();
+        for (WebElement dropDownElement : dropDown) {
             dropDownElement.click();
             WebElement log = driver.findElement(By.cssSelector(".logs :first-child"));
             System.out.println(log.getText());
