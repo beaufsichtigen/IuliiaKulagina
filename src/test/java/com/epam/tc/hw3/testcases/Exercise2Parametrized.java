@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Exercise2Parametrize extends BaseTest {
+public class Exercise2Parametrized extends BaseTest {
 
 
     @BeforeClass
