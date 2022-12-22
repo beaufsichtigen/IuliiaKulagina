@@ -1,15 +1,19 @@
-package com.epam.tc.hw3.testcases;
+package com.epam.tc.hw2;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import java.time.Duration;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
 
 public class BaseTest {
-    static WebDriver testDriver;
+    public static WebDriver driver;
 
     public static String getBaseURL() {
         return baseURL;
@@ -17,25 +21,26 @@ public class BaseTest {
 
     private static final String baseURL = "https://jdi-testing.github.io/jdi-light/index.html";
 
-
     @BeforeSuite
     public static void setupWebDriverManager() {
         WebDriverManager.chromedriver().setup();
     }
 
     @BeforeClass
-    static void setupAll() {
-        testDriver = new ChromeDriver();
-        testDriver.manage().window().maximize();
-        testDriver.get(baseURL);
+    public static void setupAll() {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get(baseURL);
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("jdi-frame-site")));
 
     }
 
 
     @AfterClass
-    public static void tearDownDriver() {
-        if (testDriver != null) {
-            testDriver.quit();
+    public static void tearDownDriver()  {
+        if (driver != null) {
+            driver.quit();
         }
     }
 }

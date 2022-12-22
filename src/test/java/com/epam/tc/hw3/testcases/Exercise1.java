@@ -3,10 +3,9 @@ package com.epam.tc.hw3.testcases;
 import com.epam.tc.hw3.library.pages.Header;
 import com.epam.tc.hw3.library.pages.HomePage;
 import com.epam.tc.hw3.library.pages.SideBar;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -51,9 +50,6 @@ public class Exercise1 extends BaseTest {
 
         //5. Assert that there are 4 items on the header section are displayed and they have proper texts
 
-
-
-
         softly.assertThat(header.getHomeButtonText())
                 .as("Incorrect Home button name")
                 .isEqualTo("HOME");
@@ -79,11 +75,9 @@ public class Exercise1 extends BaseTest {
         softly.assertThat(homePage.numberOfBenefitImages())
                 .as("Number of images are " + homePage.numberOfBenefitImages() + " not 4")
                 .isEqualTo(4);
-        Iterator<WebElement> iconsIterator = homePage.getBenefitImages().iterator();
-        while (iconsIterator.hasNext()) {
-            softly.assertThat(iconsIterator.next().isDisplayed()).as("One or more image not displayed").isTrue();
+        for (WebElement icon : homePage.getBenefitImages()) {
+            softly.assertThat(icon.isDisplayed()).as("One or more image not displayed").isTrue();
         }
-
         softly.assertAll();
     }
 
@@ -106,8 +100,8 @@ public class Exercise1 extends BaseTest {
                         + "some external projects),\nwish to get more…"
         );
 
-        List<String> textUnderImagesActual = new ArrayList<>();
-        homePage.getBenefitImagesText().stream().map(WebElement::getText).forEach(textUnderImagesActual::add);
+        List<String> textUnderImagesActual = homePage.getBenefitImagesText().stream().map(WebElement::getText)
+                .collect(Collectors.toList());
         softly.assertThat(textUnderImagesActual).as("Text under icon differs").isEqualTo(textUnderImagesExpected);
         softly.assertAll();
     }
@@ -163,8 +157,8 @@ public class Exercise1 extends BaseTest {
                 "Elements packs"
         );
 
-        List<String> sidebarItemsTextActual = new ArrayList<>();
-        sideBar.getSidebarItems().stream().map(WebElement::getText).forEach(sidebarItemsTextActual::add);
+        List<String> sidebarItemsTextActual = sideBar.getSidebarItems().stream().map(WebElement::getText)
+                .collect(Collectors.toList());
         softly.assertThat(sidebarItemsTextActual).as("Sidebar items text differs").isEqualTo(sidebarItemsTextExpected);
 
         softly.assertAll();

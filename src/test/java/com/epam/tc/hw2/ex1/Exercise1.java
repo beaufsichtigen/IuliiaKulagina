@@ -1,56 +1,26 @@
 package com.epam.tc.hw2.ex1;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import java.time.Duration;
-import java.util.ArrayList;
+import com.epam.tc.hw2.BaseTest;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 
 
 
-public class Exercise1 {
+public class Exercise1 extends BaseTest {
 
-
-    WebDriver driver;
-
-    @BeforeTest
-    void setup() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-    }
-
-    //12. Close Browser
-    @AfterTest
-    public void tearDownDriver() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
 
 
     @Test
     //1. Open test site by URL
     public void checkHomePage() {
 
-        driver.manage().window().maximize();
-        driver.navigate()
-                .to("https://jdi-testing.github.io/jdi-light/index.html");
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.id("jdi-frame-site")));
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(driver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
 
@@ -95,9 +65,8 @@ public class Exercise1 {
 
 
         softly.assertThat(icons.size()).as("Number of images are " + icons.size() + " not 4").isEqualTo(4);
-        Iterator<WebElement> iconsIterator = icons.iterator();
-        while (iconsIterator.hasNext()) {
-            softly.assertThat(iconsIterator.next().isDisplayed()).as("One or more image not displayed").isTrue();
+        for (WebElement icon : icons) {
+            softly.assertThat(icon.isDisplayed()).as("One or more image not displayed").isTrue();
         }
 
         //7. Assert that there are 4 texts on the Index Page under icons and they have proper text
@@ -113,9 +82,10 @@ public class Exercise1 {
                         + "some external projects),\nwish to get more…"
         );
 
-        List<String> textUnderImagesActual = new ArrayList<>();
-        iconTexts.stream().map(WebElement::getText).forEach(textUnderImagesActual::add);
+        List<String> textUnderImagesActual = iconTexts.stream()
+                .map(WebElement::getText).collect(Collectors.toList());
         softly.assertThat(textUnderImagesActual).as("Text under icon differs").isEqualTo(textUnderImagesExpected);
+
 
         //8. Assert that there is the iframe with “Frame Button” exist
         int size = driver.findElements(By.tagName("iframe")).size();
@@ -156,9 +126,12 @@ public class Exercise1 {
                 "Elements packs"
         );
 
-        List<String> sidebarItemsTextActual = new ArrayList<>();
-        sidebarItems.stream().map(WebElement::getText).forEach(sidebarItemsTextActual::add);
-        softly.assertThat(sidebarItemsTextActual).as("Sidebar items text differs").isEqualTo(sidebarItemsTextExpected);
+
+        List<String> sidebarItemsTextActual = sidebarItems
+                .stream().map(WebElement::getText).collect(Collectors.toList());
+
+        softly.assertThat(sidebarItemsTextActual)
+                .as("Sidebar items text differs").isEqualTo(sidebarItemsTextExpected);
         
 
         softly.assertAll();

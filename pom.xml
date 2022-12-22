@@ -12,15 +12,21 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-            <testng>7.6.1</testng>
-            <calc>1.0</calc>
-            <assertj-core>3.23.1</assertj-core>
-            <maven-compiler-plugin>3.10.1</maven-compiler-plugin>
-            <maven-surefire-plugin>3.0.0-M7</maven-surefire-plugin>
-            <aspectj.version>1.9.5</aspectj.version>
-        </properties>
+        <testng>7.6.1</testng>
+        <calc>1.0</calc>
+        <assertj-core>3.23.1</assertj-core>
+        <maven-compiler-plugin>3.10.1</maven-compiler-plugin>
+        <maven-surefire-plugin>3.0.0-M7</maven-surefire-plugin>
+        <aspectj.version>1.9.5</aspectj.version>
+    </properties>
+    <profiles>
+        <profile>
+            <id>AddSubs</id>
+            <properties>
+                <suite.xml.file>addSubs.xml</suite.xml.file>
+            </properties>
+        </profile>
 
-        <profiles>
 
         <profile>
             <id>MultDiv</id>
@@ -56,56 +62,19 @@
                 <suite.xml.file>Homework4All.xml</suite.xml.file>
             </properties>
         </profile>
-            <profile>
-                <id>Homework4Jenkins</id>
-                <activation>
-                    <activeByDefault>true</activeByDefault>
-                </activation>
-                <properties>
-                    <suite.xml.file>Homework4Jenkins.xml</suite.xml.file>
-                </properties>
-            </profile>
+
+        <profile>
+            <id>Homework4Jenkins</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.xml.file>Homework4Jenkins.xml</suite.xml.file>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencies>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${testng}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.epam.tat.module4</groupId>
-            <artifactId>calculator</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/calculator-1.0.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj-core}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-testng</artifactId>
-            <version>2.20.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>5.3.1</version>
-        </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -122,7 +91,51 @@
             <version>2.0.5</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>com.epam.tat.module4</groupId>
+            <artifactId>calculator</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/calculator-1.0.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.20.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.6.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.3.0</version>
+        </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -139,7 +152,9 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>${project.basedir}/src/test/resources/${suite.xml.file}</suiteXmlFile>
                     </suiteXmlFiles>
-                    <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argLine>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -179,6 +194,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>

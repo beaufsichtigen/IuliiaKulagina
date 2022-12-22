@@ -70,10 +70,10 @@ public class Exercise2 extends BaseTest {
         difElementsPage.clickWind();
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(difElementsPage.getCheckboxWater()
-                .isEnabled()).as("Check box 'Water' was not enabled")
+                        .isEnabled()).as("Check box 'Water' was not enabled")
                 .isTrue();
         softly.assertThat(difElementsPage.getCheckboxWater()
-                .isEnabled()).as("Check box 'Wind' was not enabled")
+                        .isEnabled()).as("Check box 'Wind' was not enabled")
                 .isTrue();
 
         softly.assertAll();
@@ -88,7 +88,7 @@ public class Exercise2 extends BaseTest {
         //7. Select radio Selen
         difElementsPage.clickSelen();
         softly.assertThat(difElementsPage.getRadioBtnSelen()
-                .isEnabled()).as("Incorrect radio button state")
+                        .isEnabled()).as("Incorrect radio button state")
                 .isTrue();
 
         softly.assertAll();
@@ -104,7 +104,7 @@ public class Exercise2 extends BaseTest {
         difElementsPage.chooseYellow();
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(difElementsPage.getDropDownYellow()
-                .isSelected()).as("Incorrect drop down state")
+                        .isSelected()).as("Incorrect drop down state")
                 .isTrue();
 
         softly.assertAll();
