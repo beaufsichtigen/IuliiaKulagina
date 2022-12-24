@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
 public class BaseTest {
-    static WebDriver testDriver;
+    WebDriver testDriver;
 
     public static String getBaseURL() {
         return baseURL;
@@ -22,14 +22,14 @@ public class BaseTest {
     }
 
     @BeforeClass
-    static void setupAll() {
+    void setupAll() {
         testDriver = new ChromeDriver();
         testDriver.manage().window().maximize();
         testDriver.get(baseURL);
     }
 
     @AfterClass
-    public static void tearDownDriver() {
+    public void tearDownDriver() {
         if (testDriver != null) {
             testDriver.quit();
         }

@@ -53,16 +53,12 @@ public class DifElementsPage {
         return checkboxWind;
     }
 
-    public void clickWind() {
-        checkboxWind.click();
-    }
-
     public WebElement getCheckboxWater() {
         return checkboxWater;
     }
 
-    public void clickWater() {
-        checkboxWater.click();
+    public void clickWebElement(WebElement element) {
+        element.click();
     }
 
     //RadioButtons
@@ -74,14 +70,6 @@ public class DifElementsPage {
         return radioBtnSelen;
     }
 
-    public void clickSelen() {
-        radioBtnSelen.click();
-    }
-
-    public WebElement getDropDownColors() {
-        return dropDownColors;
-    }
-
     public WebElement getDropDownYellow() {
         return dropDownYellow;
     }
@@ -91,9 +79,9 @@ public class DifElementsPage {
         return dropDown;
     }
 
-    public void chooseYellow() {
+    public void chooseFromClosedDropdown(WebElement dropDownElement) {
         dropDownColors.click();
-        dropDownYellow.click();
+        dropDownElement.click();
     }
 
     public WebElement getLastLog() {
