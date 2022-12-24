@@ -45,7 +45,6 @@ public class Header {
     }
 
     public void login(String username, String password) {
-
         userIcon.click();
         usernameField.sendKeys(username);
         passwordField.sendKeys(password);

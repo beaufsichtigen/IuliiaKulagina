@@ -72,14 +72,14 @@ public class Exercise2 extends BaseTest {
         for (WebElement checkbox : difElementsPage.getAllCheckboxes()) {
             checkbox.click();
             String checkboxName = checkbox.getText();
-            System.out.println(difElementsPage.getLastLog().getText());
-            softly.assertThat(difElementsPage.getLastLog().getText())
+            System.out.println(difElementsPage.getLastLogText());
+            softly.assertThat(difElementsPage.getLastLogText())
                     .as("Incorrect log text")
                     .endsWith(checkboxName + ": condition changed to " + checkbox.isSelected());
 
             checkbox.click();
-            System.out.println(difElementsPage.getLastLog().getText());
-            softly.assertThat(difElementsPage.getLastLog().getText())
+            System.out.println(difElementsPage.getLastLogText());
+            softly.assertThat(difElementsPage.getLastLogText())
                     .as("Incorrect log text")
                     .endsWith(checkboxName + ": condition changed to " + checkbox.isSelected());
         }
@@ -87,8 +87,8 @@ public class Exercise2 extends BaseTest {
         //• for radio button there is a log row and value is corresponded to the status of radio button
         for (WebElement radiobutton : difElementsPage.getAllradiobuttons()) {
             radiobutton.click();
-            System.out.println(difElementsPage.getLastLog().getText());
-            softly.assertThat(difElementsPage.getLastLog().getText())
+            System.out.println(difElementsPage.getLastLogText());
+            softly.assertThat(difElementsPage.getLastLogText())
                     .as("Incorrect log text").endsWith("metal: value changed to " + radiobutton.getText());
         }
 
@@ -96,9 +96,8 @@ public class Exercise2 extends BaseTest {
         difElementsPage.chooseFromClosedDropdown(difElementsPage.getDropDownYellow());
         for (WebElement dropDownElement : difElementsPage.getAlldropDown()) {
             dropDownElement.click();
-            System.out.println(difElementsPage.getLastLog()
-                    .getText());
-            softly.assertThat(difElementsPage.getLastLog().getText())
+            System.out.println(difElementsPage.getLastLogText());
+            softly.assertThat(difElementsPage.getLastLogText())
                     .as("Incorrect log text")
                     .endsWith("Colors: value changed to " + dropDownElement.getText());
         }

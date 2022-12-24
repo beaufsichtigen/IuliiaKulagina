@@ -38,6 +38,5 @@ public class GetProperties {
         getPropertyFromFile();
         return usernameText;
     }
-
 }
 

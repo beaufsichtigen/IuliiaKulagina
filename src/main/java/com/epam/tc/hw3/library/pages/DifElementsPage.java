@@ -87,6 +87,8 @@ public class DifElementsPage {
     public WebElement getLastLog() {
         return lastLog;
     }
+
+    public String getLastLogText() {
+        return lastLog.getText();
+    }
 }
-
-
