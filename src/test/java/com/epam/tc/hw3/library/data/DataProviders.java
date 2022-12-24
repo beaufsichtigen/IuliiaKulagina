@@ -13,7 +13,6 @@ public class DataProviders {
                 {1, "Earth", true},
                 {2, "Wind", true},
                 {3, "Fire", true}
-
         };
     }
 
@@ -26,7 +25,6 @@ public class DataProviders {
                 {1, "Earth", false},
                 {2, "Wind", false},
                 {3, "Fire", false}
-
         };
     }
 
@@ -39,7 +37,6 @@ public class DataProviders {
                 {1, "Silver"},
                 {2, "Bronze"},
                 {3, "Selen"}
-
         };
     }
 
@@ -52,10 +49,7 @@ public class DataProviders {
                 {2, "Blue"},
                 {3, "Yellow"},
                 {0, "Red"}
-
         };
     }
-
-
 }
 

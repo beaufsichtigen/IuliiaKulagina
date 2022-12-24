@@ -7,7 +7,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
-
 public class BaseTest {
     static WebDriver testDriver;
 
@@ -16,7 +15,6 @@ public class BaseTest {
     }
 
     private static final String baseURL = "https://jdi-testing.github.io/jdi-light/index.html";
-
 
     @BeforeSuite
     public static void setupWebDriverManager() {
@@ -28,9 +26,7 @@ public class BaseTest {
         testDriver = new ChromeDriver();
         testDriver.manage().window().maximize();
         testDriver.get(baseURL);
-
     }
-
 
     @AfterClass
     public static void tearDownDriver() {

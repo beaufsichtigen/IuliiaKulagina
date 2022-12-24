@@ -1,5 +1,6 @@
 package com.epam.tc.hw3.library.pages;
 
+import com.beust.jcommander.Parameter;
 import com.epam.tc.hw3.library.utils.GetProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,66 +9,63 @@ import org.openqa.selenium.support.PageFactory;
 
 public class Header {
 
-
     @FindBy(id = "user-icon")
     private WebElement userIcon;
+
     @FindBy(id = "name")
     private WebElement usernameField;
+
     @FindBy(id = "password")
     private WebElement passwordField;
+
     @FindBy(id = "login-button")
     private WebElement loginButton;
-
 
     @FindBy(id = "user-name")
     private WebElement userNameElement;
 
     @FindBy(css = "a[href='index.html']")
     private WebElement homeButton;
+
     @FindBy(css = "a[href='contacts.html']")
     private WebElement contactFormButton;
+
     @FindBy(css = "a.dropdown-toggle")
     private WebElement serviceButton;
+
     @FindBy(css = "a[href='metals-colors.html']")
     private WebElement metalsColorsButton;
-
 
     //Items in Service drop down:
     @FindBy(css = "a[href='different-elements.html']")
     private WebElement difElements;
 
-
     public Header(WebDriver webDriver1) {
         PageFactory.initElements(webDriver1, this);
     }
 
-    public void login() {
+    public void login(String username, String password) {
 
-        GetProperties getProperties = new GetProperties();
         userIcon.click();
-        usernameField.sendKeys(getProperties.getUsernameProp());
-        passwordField.sendKeys(getProperties.getPasswordProp());
+        usernameField.sendKeys(username);
+        passwordField.sendKeys(password);
         loginButton.click();
-
     }
 
     public String getUserNameText() {
-        String userNameText = userNameElement.getText();
-        return userNameText;
+        return userNameElement.getText();
     }
 
     public WebElement getUsernameElement() {
         return userNameElement;
     }
 
-
     public WebElement getHomeButton() {
         return homeButton;
     }
 
     public String getHomeButtonText() {
-        String homeButtonText = homeButton.getText();
-        return homeButtonText;
+        return homeButton.getText();
     }
 
     public WebElement getContactFormButton() {
@@ -75,8 +73,7 @@ public class Header {
     }
 
     public String getContactFormButtonText() {
-        String homeContactFormButton = contactFormButton.getText();
-        return homeContactFormButton;
+        return contactFormButton.getText();
     }
 
     public WebElement getServiceButton() {
@@ -84,8 +81,7 @@ public class Header {
     }
 
     public String getServiceButtonText() {
-        String homeServiceButton = serviceButton.getText();
-        return homeServiceButton;
+        return serviceButton.getText();
     }
 
     public WebElement getMetalsColorsButton() {
@@ -93,14 +89,11 @@ public class Header {
     }
 
     public String getMetalsColorsButtonText() {
-        String homeMetalsColorsButton = metalsColorsButton.getText();
-        return homeMetalsColorsButton;
+        return metalsColorsButton.getText();
     }
 
     public WebElement getDifElements() {
         return difElements;
     }
-
-
 }
 

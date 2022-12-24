@@ -3,9 +3,11 @@ package com.epam.tc.hw3.testcases;
 import com.epam.tc.hw3.library.data.DataProviders;
 import com.epam.tc.hw3.library.pages.DifElementsPage;
 import com.epam.tc.hw3.library.pages.Header;
+import com.epam.tc.hw3.library.utils.GetProperties;
 import java.time.Duration;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -13,18 +15,18 @@ import org.testng.annotations.Test;
 
 public class Exercise2Parametrized extends BaseTest {
 
-
     @BeforeClass
     static void login() {
         //1. Open test site by URL - in parent class
         System.out.println("1. Open test site by URL - in parent class");
-        Header header = new Header(testDriver);
+        Header header = PageFactory.initElements(testDriver, Header.class);
 
         WebDriverWait wait = new WebDriverWait(testDriver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("uui-main-container")));
         //3. Perform login
         System.out.println("3. Perform login");
-        header.login();
+        GetProperties getProperties = new GetProperties();
+        header.login(getProperties.getUsernameProp(), getProperties.getPasswordProp());
 
         // 5. Open through the header menu Service -> Different Elements Page
 
@@ -69,7 +71,6 @@ public class Exercise2Parametrized extends BaseTest {
                 .as("Incorrect page opened")
                 .isEqualTo("https://jdi-testing.github.io/jdi-light/different-elements.html");
 
-
         //9. Assert that
         //• for each checkbox there is an individual log row and value is corresponded to the status of checkbox
         testDriver.navigate().refresh(); //clean all elements state
@@ -83,7 +84,6 @@ public class Exercise2Parametrized extends BaseTest {
         softly.assertAll();
 
         //10. Close Browser - in parent class
-
     }
 
     //9. Assert that
@@ -140,6 +140,5 @@ public class Exercise2Parametrized extends BaseTest {
         softly.assertAll();
 
         //10. Close Browser - in parent class
-
     }
 }

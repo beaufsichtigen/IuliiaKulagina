@@ -6,9 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 public class WaitActions {
-
     private final WebDriverWait webDriverWait;
 
     public WaitActions(WebDriver webDriver) {
@@ -19,5 +17,4 @@ public class WaitActions {
         return webDriverWait.ignoring(NoSuchElementException.class)
                 .until(p);
     }
-
 }

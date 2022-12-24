@@ -6,21 +6,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
 public class DifElementsPage {
 
     //Checkboxes
     @FindBy(css = "input[type='checkbox']")
     private List<WebElement> checkboxes;
 
-
     @FindBy(xpath = "//*[contains(text()[normalize-space(.)],'Water')]")
     private WebElement checkboxWater;
 
-
     @FindBy(xpath = "//*[contains(text()[normalize-space(.)],'Wind')]")
     private WebElement checkboxWind;
-
 
     //RadioButtons
     @FindBy(className = "label-radio")
@@ -29,11 +25,9 @@ public class DifElementsPage {
     @FindBy(xpath = "//*[contains(text()[normalize-space(.)],'Selen')]")
     private WebElement radioBtnSelen;
 
-
     //DropDowns
     @FindBy(css = ".colors>select>option")
     private List<WebElement> dropDown;
-
 
     @FindBy(className = "colors")
     private WebElement dropDownColors;
@@ -41,29 +35,19 @@ public class DifElementsPage {
     @FindBy(xpath = "//option[text()='Yellow']")
     private WebElement dropDownYellow;
 
-
     //Log
     @FindBy(css = ".logs :first-child")
     private WebElement lastLog;
 
-
     public DifElementsPage(WebDriver webDriver1) {
         PageFactory.initElements(webDriver1, this);
     }
-
 
     //Checkboxes
 
     public List<WebElement> getAllCheckboxes() {
         return checkboxes;
     }
-
-    public List<WebElement> clickAllCheckboxes() {
-
-
-        return checkboxes;
-    }
-
 
     public WebElement getCheckboxWind() {
         return checkboxWind;
@@ -72,7 +56,6 @@ public class DifElementsPage {
     public void clickWind() {
         checkboxWind.click();
     }
-
 
     public WebElement getCheckboxWater() {
         return checkboxWater;
@@ -116,7 +99,6 @@ public class DifElementsPage {
     public WebElement getLastLog() {
         return lastLog;
     }
-
 }
 
 

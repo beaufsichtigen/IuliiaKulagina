@@ -6,9 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
 public class HomePage {
-
 
     @FindBy(css = ".benefit-icon")
     private List<WebElement> benefitImages;
@@ -16,10 +14,8 @@ public class HomePage {
     @FindBy(css = ".benefit-txt")
     private List<WebElement> benefitImagesText;
 
-
     @FindBy(tagName = "iframe")
     private List<WebElement> iframes;
-
 
     @FindBy(css = "input#frame-button")
     private List<WebElement> frameButtons;
@@ -27,11 +23,9 @@ public class HomePage {
     @FindBy(css = "input#frame-button")
     private WebElement currentFrameButton;
 
-
     public HomePage(WebDriver webDriver1) {
         PageFactory.initElements(webDriver1, this);
     }
-
 
     public List<WebElement> getBenefitImages() {
         return benefitImages;
@@ -60,7 +54,5 @@ public class HomePage {
     public WebElement getCurrentFrameButton() {
         return currentFrameButton;
     }
-
-
 }
 

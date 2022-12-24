@@ -3,34 +3,29 @@ package com.epam.tc.hw3.testcases;
 import com.epam.tc.hw3.library.pages.Header;
 import com.epam.tc.hw3.library.pages.HomePage;
 import com.epam.tc.hw3.library.pages.SideBar;
+import com.epam.tc.hw3.library.utils.GetProperties;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class Exercise1 extends BaseTest {
 
-
     //1. Open test site by URL - in parent class
-
-    @Test(priority = 0)
-    public void assertTitle() {
+    @Test
+    public void exercise1() {
         //2. Assert Browser title
         SoftAssertions softly = new SoftAssertions();
-        String browserTitle = testDriver.getTitle();
-        softly.assertThat(browserTitle).as("Incorrect browser title").isEqualTo("Home Page");
-        softly.assertAll();
-    }
+        softly.assertThat(testDriver.getTitle()).as("Incorrect browser title").isEqualTo("Home Page");
 
-    @Test(priority = 1)
-    public void assertLogin() {
-        SoftAssertions softly = new SoftAssertions();
-        Header header = new Header(testDriver);
-
+        Header header = PageFactory.initElements(testDriver, Header.class);
         //3. Perform login
-        header.login();
+        GetProperties getProperties = new GetProperties();
+        header.login(getProperties.getUsernameProp(), getProperties.getPasswordProp());
         softly.assertThat(testDriver.getCurrentUrl())
                 .as("Incorrect page opened")
                 .isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
@@ -38,21 +33,13 @@ public class Exercise1 extends BaseTest {
         //4. Assert Username is loggined
         softly.assertThat(header.getUserNameText())
                 .as("Incorrect user name")
-                .isEqualTo("ROMAN IOVLEV");
-
-        softly.assertAll();
-    }
-
-    @Test(priority = 2)
-    public void assertHeader() {
-        SoftAssertions softly = new SoftAssertions();
-        Header header = new Header(testDriver);
+                .isEqualTo(getProperties.getUsernameTextProp());
 
         //5. Assert that there are 4 items on the header section are displayed and they have proper texts
-
         softly.assertThat(header.getHomeButtonText())
                 .as("Incorrect Home button name")
                 .isEqualTo("HOME");
+
         softly.assertThat(header.getContactFormButtonText())
                 .as("Incorrect Contacts button name")
                 .isEqualTo("CONTACT FORM");
@@ -63,28 +50,15 @@ public class Exercise1 extends BaseTest {
         softly.assertThat(header.getMetalsColorsButtonText())
                 .as("Incorrect METALS & COLORS button name").isEqualTo("METALS & COLORS");
 
-        softly.assertAll();
-    }
-
-    @Test(priority = 2)
-    public void assertIcons() {
-        SoftAssertions softly = new SoftAssertions();
+        HomePage homePage = PageFactory.initElements(testDriver, HomePage.class);
 
         //6. Assert that there are 4 images on the Index Page and they are displayed
-        HomePage homePage = new HomePage(testDriver);
         softly.assertThat(homePage.numberOfBenefitImages())
                 .as("Number of images are " + homePage.numberOfBenefitImages() + " not 4")
                 .isEqualTo(4);
         for (WebElement icon : homePage.getBenefitImages()) {
             softly.assertThat(icon.isDisplayed()).as("One or more image not displayed").isTrue();
         }
-        softly.assertAll();
-    }
-
-    @Test(priority = 2)
-    public void assertIconsText() {
-        SoftAssertions softly = new SoftAssertions();
-        HomePage homePage = new HomePage(testDriver);
 
         //7. Assert that there are 4 texts on the Index Page under icons and they have proper text
         softly.assertThat(homePage.numberOfBenefitImagesText())
@@ -103,13 +77,6 @@ public class Exercise1 extends BaseTest {
         List<String> textUnderImagesActual = homePage.getBenefitImagesText().stream().map(WebElement::getText)
                 .collect(Collectors.toList());
         softly.assertThat(textUnderImagesActual).as("Text under icon differs").isEqualTo(textUnderImagesExpected);
-        softly.assertAll();
-    }
-
-    @Test(priority = 2)
-    public void assertFrames() {
-        SoftAssertions softly = new SoftAssertions();
-        HomePage homePage = new HomePage(testDriver);
 
         //8. Assert that there is the iframe with “Frame Button” exist
         int size = homePage.getIframes().size();
@@ -136,15 +103,9 @@ public class Exercise1 extends BaseTest {
         }
         softly.assertThat(totalButtonsInFrames).as("Button not found").isNotZero();
 
-        softly.assertAll();
-    }
-
-    @Test(priority = 2)
-    public void assertLeftMenu() {
-        SoftAssertions softly = new SoftAssertions();
-
         //11. Assert that there are 5 items in the Left Section are displayed and they have proper text
-        SideBar sideBar = new SideBar(testDriver);
+        SideBar sideBar = PageFactory.initElements(testDriver, SideBar.class);
+        //SideBar sideBar = new SideBar(testDriver);
         softly.assertThat(sideBar.getSidebarItems().size())
                 .as("Number of menu items " + sideBar.getSidebarItems().size() + " not 5")
                 .isEqualTo(5);
@@ -163,8 +124,6 @@ public class Exercise1 extends BaseTest {
 
         softly.assertAll();
     }
-
     //12. Close Browser (in Parent class)
-
 }
 
