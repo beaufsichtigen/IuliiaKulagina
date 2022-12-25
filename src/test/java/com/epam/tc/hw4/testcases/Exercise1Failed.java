@@ -22,8 +22,6 @@ public class Exercise1Failed extends BaseTest {
     @Story("Sad story")
     public void exercise1() {
 
-
-
         //2. Assert Browser title
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(testDriver.getTitle()).as("Incorrect browser title").isEqualTo("Home Page");
@@ -45,7 +43,6 @@ public class Exercise1Failed extends BaseTest {
         softly.assertThat(header.getHomeButtonText())
                 .as("Incorrect Home button name")
                 .isEqualTo("HOMFAILE");
-
 
         softly.assertThat(header.getContactFormButtonText())
                 .as("Incorrect Contacts button name")

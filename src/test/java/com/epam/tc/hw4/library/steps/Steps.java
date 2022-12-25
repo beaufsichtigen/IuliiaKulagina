@@ -1,10 +1,11 @@
 package com.epam.tc.hw4.library.steps;
 
-import com.epam.tc.hw3.library.pages.DifElementsPage;
+import static com.epam.tc.hw4.pages.DifElementsPage.Color.Yellow;
+
 import com.epam.tc.hw3.library.pages.Header;
 import com.epam.tc.hw3.library.pages.HomePage;
 import com.epam.tc.hw3.library.pages.SideBar;
-import com.epam.tc.hw3.library.utils.GetProperties;
+import com.epam.tc.hw4.pages.DifElementsPage;
 import io.qameta.allure.Step;
 import java.time.Duration;
 import java.util.Arrays;
@@ -14,7 +15,6 @@ import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -34,17 +34,16 @@ public class Steps extends AbstractStep {
     }
 
     @Step("2. Assert Browser title")
-    public void accertBrowserTitle() {
+    public void accertBrowserTitle(String expectedTitle) {
         SoftAssertions softly = new SoftAssertions();
-        softly.assertThat(driver.getTitle()).as("Incorrect browser title").isEqualTo("Home Page");
+        softly.assertThat(driver.getTitle()).as("Incorrect browser title").isEqualTo(expectedTitle);
         softly.assertAll();
     }
 
     @Step("3. Perform login")
-    public void performLogin() {
+    public void performLogin(String username, String login) {
         SoftAssertions softly = new SoftAssertions();
-        GetProperties getProperties = new GetProperties();
-        header.login(getProperties.getUsernameProp(), getProperties.getPasswordProp());
+        header.login(username, login);
         softly.assertThat(driver.getCurrentUrl())
                 .as("Incorrect page opened")
                 .isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
@@ -52,12 +51,11 @@ public class Steps extends AbstractStep {
     }
 
     @Step("4. Assert Username is loggined")
-    public void assertUsernameLoggedIn() {
+    public void assertUsernameLoggedIn(String expectedUserName) {
         SoftAssertions softly = new SoftAssertions();
-        GetProperties getProperties = new GetProperties();
         softly.assertThat(header.getUserNameText())
                 .as("Incorrect user name")
-                .isEqualTo(getProperties.getUsernameTextProp());
+                .isEqualTo(expectedUserName);
         softly.assertAll();
     }
 
@@ -179,36 +177,35 @@ public class Steps extends AbstractStep {
         softly.assertThat(driver.getCurrentUrl())
                 .as("Incorrect page opened")
                 .isEqualTo("https://jdi-testing.github.io/jdi-light/different-elements.html");
+        softly.assertAll();
     }
 
-    @Step("6. Select checkboxes Water, Wind")
-    public void assertCheckboxesWaterWindSelected() {
+    @Step("6. Select checkboxes {element}")
+    public void assertCheckboxesSelected(DifElementsPage.CheckboxElement element) {
         SoftAssertions softly = new SoftAssertions();
-        DifElementsPage difElementsPage = PageFactory.initElements(driver, DifElementsPage.class);
-        difElementsPage.clickWebElement(difElementsPage.getCheckboxWater());
-        difElementsPage.clickWebElement(difElementsPage.getCheckboxWater());
-        softly.assertThat(difElementsPage.getCheckboxWater()
-                        .isEnabled()).as("Check box 'Water' was not enabled")
+        difElementsPage.clickCheckbox(element);
+        softly.assertThat(difElementsPage.getCheckbox(element)
+                        .isEnabled()).as("Check box " + element + " was not enabled")
                 .isTrue();
-        softly.assertThat(difElementsPage.getCheckboxWater()
-                        .isEnabled()).as("Check box 'Wind' was not enabled")
-                .isTrue();
+        softly.assertAll();
     }
 
-    @Step("7. Select radio Selen")
-    public void assertRadioSelenSelected() {
+    @Step("7. Select radio {metal}")
+    public void assertRadioSelected(DifElementsPage.Metal metal) {
         SoftAssertions softly = new SoftAssertions();
-        difElementsPage.clickWebElement(difElementsPage.getRadioBtnSelen());
-        softly.assertThat(difElementsPage.getRadioBtnSelen()
+        difElementsPage.clickWebElement(difElementsPage.getRadioBtn(metal));
+        softly.assertThat(difElementsPage.getRadioBtn(metal)
                 .isEnabled()).as("Incorrect radio button state").isTrue();
+        softly.assertAll();
     }
 
-    @Step("8. Select in dropdown Yellow")
-    public void assertDropdownYellowSelected() {
+    @Step("8. Select in dropdown {color}")
+    public void assertDropdownSelected(DifElementsPage.Color color) {
         SoftAssertions softly = new SoftAssertions();
-        difElementsPage.chooseFromClosedDropdown(difElementsPage.getDropDownYellow());
-        softly.assertThat(difElementsPage.getDropDownYellow()
+        difElementsPage.chooseFromClosedDropdown(color);
+        softly.assertThat(difElementsPage.getDropDown(color)
                 .isSelected()).as("Incorrect drop down state").isTrue();
+        softly.assertAll();
     }
 
     //9. Assert that
@@ -254,7 +251,7 @@ public class Steps extends AbstractStep {
         SoftAssertions softly = new SoftAssertions();
         driver.navigate().refresh(); //clean all elements state
 
-        difElementsPage.chooseFromClosedDropdown(difElementsPage.getDropDownYellow());
+        difElementsPage.chooseFromClosedDropdown(Yellow);
         for (WebElement dropDownElement : difElementsPage.getAlldropDown()) {
             dropDownElement.click();
             System.out.println(difElementsPage.getLastLogText());
