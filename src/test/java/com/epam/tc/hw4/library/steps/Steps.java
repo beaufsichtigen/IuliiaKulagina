@@ -88,7 +88,6 @@ public class Steps extends AbstractStep {
             softly.assertThat(icon.isDisplayed()).as("One or more image not displayed").isTrue();
         }
         softly.assertAll();
-
     }
 
     @Step("7. Assert that there are 4 texts on the Index Page under icons and they have proper text")
@@ -230,7 +229,6 @@ public class Steps extends AbstractStep {
         }
         softly.assertAll();
     }
-
 
     @Step("9.2. for radio button there is a log row and value is corresponded to the status of radio button")
     public void assertLogForEveryRadiobutton() {
