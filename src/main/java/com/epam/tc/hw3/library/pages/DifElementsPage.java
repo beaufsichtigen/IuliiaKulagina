@@ -6,21 +6,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
 public class DifElementsPage {
 
     //Checkboxes
     @FindBy(css = "input[type='checkbox']")
     private List<WebElement> checkboxes;
 
-
     @FindBy(xpath = "//*[contains(text()[normalize-space(.)],'Water')]")
     private WebElement checkboxWater;
 
-
     @FindBy(xpath = "//*[contains(text()[normalize-space(.)],'Wind')]")
     private WebElement checkboxWind;
-
 
     //RadioButtons
     @FindBy(className = "label-radio")
@@ -29,11 +25,9 @@ public class DifElementsPage {
     @FindBy(xpath = "//*[contains(text()[normalize-space(.)],'Selen')]")
     private WebElement radioBtnSelen;
 
-
     //DropDowns
     @FindBy(css = ".colors>select>option")
     private List<WebElement> dropDown;
-
 
     @FindBy(className = "colors")
     private WebElement dropDownColors;
@@ -41,16 +35,13 @@ public class DifElementsPage {
     @FindBy(xpath = "//option[text()='Yellow']")
     private WebElement dropDownYellow;
 
-
     //Log
     @FindBy(css = ".logs :first-child")
     private WebElement lastLog;
 
-
     public DifElementsPage(WebDriver webDriver1) {
         PageFactory.initElements(webDriver1, this);
     }
-
 
     //Checkboxes
 
@@ -58,28 +49,16 @@ public class DifElementsPage {
         return checkboxes;
     }
 
-    public List<WebElement> clickAllCheckboxes() {
-
-
-        return checkboxes;
-    }
-
-
     public WebElement getCheckboxWind() {
         return checkboxWind;
     }
-
-    public void clickWind() {
-        checkboxWind.click();
-    }
-
 
     public WebElement getCheckboxWater() {
         return checkboxWater;
     }
 
-    public void clickWater() {
-        checkboxWater.click();
+    public void clickWebElement(WebElement element) {
+        element.click();
     }
 
     //RadioButtons
@@ -91,14 +70,6 @@ public class DifElementsPage {
         return radioBtnSelen;
     }
 
-    public void clickSelen() {
-        radioBtnSelen.click();
-    }
-
-    public WebElement getDropDownColors() {
-        return dropDownColors;
-    }
-
     public WebElement getDropDownYellow() {
         return dropDownYellow;
     }
@@ -108,15 +79,16 @@ public class DifElementsPage {
         return dropDown;
     }
 
-    public void chooseYellow() {
+    public void chooseFromClosedDropdown(WebElement dropDownElement) {
         dropDownColors.click();
-        dropDownYellow.click();
+        dropDownElement.click();
     }
 
     public WebElement getLastLog() {
         return lastLog;
     }
 
+    public String getLastLogText() {
+        return lastLog.getText();
+    }
 }
-
-

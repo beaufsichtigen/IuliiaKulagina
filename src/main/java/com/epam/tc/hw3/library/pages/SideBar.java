@@ -6,22 +6,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
 public class SideBar {
-
 
     @FindBy(css = ".sidebar-menu > li")
     private List<WebElement> sidebarItems;
-
 
     public SideBar(WebDriver webDriver1) {
         PageFactory.initElements(webDriver1, this);
     }
 
-
     public List<WebElement> getSidebarItems() {
         return sidebarItems;
     }
-
 }
 
