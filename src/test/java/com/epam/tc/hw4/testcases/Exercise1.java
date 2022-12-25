@@ -1,11 +1,16 @@
 package com.epam.tc.hw4.testcases;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 
 public class Exercise1 extends BaseTest {
 
     //1. Open test site by URL - in parent class
     @Test
+    @Feature("Exercise1: checking Index page, Sidebar, Frames")
+    @Story("Story UE-5555555")
+
     public void exercise1() {
         //2. Assert Browser title
         step.accertBrowserTitle();

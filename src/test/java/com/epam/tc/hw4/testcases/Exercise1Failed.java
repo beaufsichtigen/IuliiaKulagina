@@ -7,6 +7,10 @@ import com.epam.tc.hw3.library.utils.GetProperties;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import io.qameta.allure.Allure;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -16,7 +20,12 @@ public class Exercise1Failed extends BaseTest {
 
     //1. Open test site by URL - in parent class
     @Test
+    @Feature("Failed test")
+    @Story("Sad story")
     public void exercise1() {
+
+
+
         //2. Assert Browser title
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(testDriver.getTitle()).as("Incorrect browser title").isEqualTo("Home Page");
@@ -38,6 +47,7 @@ public class Exercise1Failed extends BaseTest {
         softly.assertThat(header.getHomeButtonText())
                 .as("Incorrect Home button name")
                 .isEqualTo("HOMFAILE");
+
 
         softly.assertThat(header.getContactFormButtonText())
                 .as("Incorrect Contacts button name")

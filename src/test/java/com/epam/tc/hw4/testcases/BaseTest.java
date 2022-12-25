@@ -4,7 +4,9 @@ import com.epam.tc.hw4.library.steps.Steps;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
@@ -30,6 +32,11 @@ public class BaseTest {
         testDriver.manage().window().maximize();
         testDriver.get(baseURL);
         step = new Steps(testDriver);
+    }
+
+    @BeforeClass
+    public void screenshotSetup(ITestContext context){
+        context.setAttribute("driver", testDriver);
     }
 
     @AfterMethod
