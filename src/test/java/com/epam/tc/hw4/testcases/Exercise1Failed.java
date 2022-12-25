@@ -4,13 +4,11 @@ import com.epam.tc.hw3.library.pages.Header;
 import com.epam.tc.hw3.library.pages.HomePage;
 import com.epam.tc.hw3.library.pages.SideBar;
 import com.epam.tc.hw3.library.utils.GetProperties;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import io.qameta.allure.Allure;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;

@@ -35,7 +35,7 @@ public class BaseTest {
     }
 
     @BeforeClass
-    public void screenshotSetup(ITestContext context){
+    public void screenshotSetup(ITestContext context) {
         context.setAttribute("driver", testDriver);
     }
 
