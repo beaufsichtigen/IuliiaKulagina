@@ -27,16 +27,12 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    void setupAll() {
+    void setupAll(ITestContext context) {
         testDriver = new ChromeDriver();
         testDriver.manage().window().maximize();
+        context.setAttribute("driver", testDriver);
         testDriver.get(baseURL);
         step = new Steps(testDriver);
-    }
-
-    @BeforeClass
-    public void screenshotSetup(ITestContext context) {
-        context.setAttribute("driver", testDriver);
     }
 
     @AfterMethod
