@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class Exercise1 extends BaseTest {
