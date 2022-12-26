@@ -17,7 +17,7 @@ public class DriverFabric {
 
     @SneakyThrows
     public WebDriver getWebDriver(final boolean isLocal, final String hub, @NonNull final String browser) {
-
+        System.out.println("isLocal: " + isLocal + ". hub: " + hub + ". browser:" + browser);
         if (isLocal) {
             return WebDriverManager.getInstance(browser).create();
         } else {

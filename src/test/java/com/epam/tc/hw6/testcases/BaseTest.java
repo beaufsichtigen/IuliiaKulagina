@@ -29,11 +29,6 @@ public class BaseTest {
                                 final String hub, final String browser) {
         testDriver = DriverFabric.getWebDriver(isLocal, hub, browser);
     }
-    //    @Parameters({"browser"})
-    //    public void setupGridDriver(final String browser) {
-    //        System.out.println("Driver Fabric" + browser);
-    //        testDriver = DriverFabric.getWebDriver(browser);
-    //    }
 
     @BeforeMethod
     void setupAll(ITestContext context) {
