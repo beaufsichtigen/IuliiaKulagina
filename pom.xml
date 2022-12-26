@@ -27,7 +27,6 @@
             </properties>
         </profile>
 
-
         <profile>
             <id>MultDiv</id>
             <properties>
@@ -65,11 +64,18 @@
 
         <profile>
             <id>Homework4Jenkins</id>
+            <properties>
+                <suite.xml.file>Homework4Jenkins.xml</suite.xml.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>Homework6</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.xml.file>Homework4Jenkins.xml</suite.xml.file>
+                <suite.xml.file>Homework6.xml</suite.xml.file>
             </properties>
         </profile>
     </profiles>
