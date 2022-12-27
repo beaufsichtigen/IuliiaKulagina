@@ -39,7 +39,7 @@ public class Exercise2 extends BaseTest {
         header.getServiceButton().click();
         header.getDifElements().click();
 
-        WebDriverWait wait = new WebDriverWait(testDriver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(testDriver, 10);
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("uui-main-container")));
         softly.assertThat(testDriver.getCurrentUrl())
                 .as("Incorrect page opened")

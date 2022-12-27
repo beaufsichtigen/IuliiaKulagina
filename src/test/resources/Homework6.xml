@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="HW6">
+<suite name="HW6" parallel="tests">
 
-<!--<parameter name="hub" value="http://192.168.1.67:4444/wd/hub"/>-->
     <parameter name="hub" value="http://192.168.1.67:4444/wd/hub"/>
 
 <test name="chrome tests" group-by-instances="true">
