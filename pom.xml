@@ -16,9 +16,9 @@
     <profiles>
         <profile>
             <id>AddSubs</id>
-                <properties>
-                    <suite.xml.file>addSubs.xml</suite.xml.file>
-                </properties>
+            <properties>
+                <suite.xml.file>addSubs.xml</suite.xml.file>
+            </properties>
         </profile>
 
         <profile>
@@ -37,22 +37,26 @@
 
         <profile>
             <id>Homework2</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <properties>
                 <suite.xml.file>Homework2All.xml</suite.xml.file>
             </properties>
         </profile>
+        <profile>
+            <id>Homework3</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.xml.file>Homework3All.xml</suite.xml.file>
+            </properties>
+        </profile>
     </profiles>
-
     <dependencies>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -64,7 +68,7 @@
             <version>2.0.5</version>
             <scope>test</scope>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>com.epam.tat.module4</groupId>
             <artifactId>calculator</artifactId>
@@ -72,7 +76,6 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/calculator-1.0.jar</systemPath>
         </dependency>
-
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -86,7 +89,6 @@
             <version>3.23.1</version>
             <scope>test</scope>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -99,9 +101,7 @@
             <artifactId>webdrivermanager</artifactId>
             <version>5.3.0</version>
         </dependency>
-
     </dependencies>
-
 
     <build>
         <plugins>
