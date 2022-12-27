@@ -7,7 +7,6 @@ import java.time.Duration;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
@@ -23,7 +22,7 @@ public class Exercise2 extends BaseTest {
         softly.assertThat(browserTitle).as("Incorrect browser title").isEqualTo("Home Page");
 
         //3. Perform login
-        Header header = PageFactory.initElements(testDriver, Header.class);
+        Header header = new Header(testDriver);
         GetProperties getProperties = new GetProperties();
         header.login(getProperties.getUsernameProp(), getProperties.getPasswordProp());
         softly.assertThat(testDriver.getCurrentUrl())
@@ -46,11 +45,11 @@ public class Exercise2 extends BaseTest {
                 .isEqualTo("https://jdi-testing.github.io/jdi-light/different-elements.html");
 
         //6. Select checkboxes Water, Wind
-        DifElementsPage difElementsPage = PageFactory.initElements(testDriver, DifElementsPage.class);
+        DifElementsPage difElementsPage = new DifElementsPage(testDriver);
         difElementsPage.clickWebElement(difElementsPage.getCheckboxWater());
         difElementsPage.clickWebElement(difElementsPage.getCheckboxWater());
-        softly.assertThat(difElementsPage.getCheckboxWater()
-                        .isEnabled()).as("Check box 'Water' was not enabled")
+        softly.assertThat(difElementsPage.getCheckboxWater().isEnabled())
+                .as("Check box 'Water' was not enabled")
                 .isTrue();
         softly.assertThat(difElementsPage.getCheckboxWater()
                         .isEnabled()).as("Check box 'Wind' was not enabled")

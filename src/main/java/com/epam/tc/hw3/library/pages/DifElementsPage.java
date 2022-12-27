@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 
 public class DifElementsPage {
 
+    private WebDriver driver;
+
     //Checkboxes
     @FindBy(css = "input[type='checkbox']")
     private List<WebElement> checkboxes;
@@ -39,8 +41,9 @@ public class DifElementsPage {
     @FindBy(css = ".logs :first-child")
     private WebElement lastLog;
 
-    public DifElementsPage(WebDriver webDriver1) {
-        PageFactory.initElements(webDriver1, this);
+    public DifElementsPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     //Checkboxes

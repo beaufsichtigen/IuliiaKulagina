@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
 
+    private WebDriver driver;
+
     @FindBy(css = ".benefit-icon")
     private List<WebElement> benefitImages;
 
@@ -23,8 +25,9 @@ public class HomePage {
     @FindBy(css = "input#frame-button")
     private WebElement currentFrameButton;
 
-    public HomePage(WebDriver webDriver1) {
-        PageFactory.initElements(webDriver1, this);
+    public HomePage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public List<WebElement> getBenefitImages() {

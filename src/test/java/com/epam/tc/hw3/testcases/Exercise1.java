@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 public class Exercise1 extends BaseTest {
@@ -21,7 +20,7 @@ public class Exercise1 extends BaseTest {
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(testDriver.getTitle()).as("Incorrect browser title").isEqualTo("Home Page");
 
-        Header header = PageFactory.initElements(testDriver, Header.class);
+        Header header = new Header(testDriver);
         //3. Perform login
         GetProperties getProperties = new GetProperties();
         header.login(getProperties.getUsernameProp(), getProperties.getPasswordProp());
@@ -49,7 +48,7 @@ public class Exercise1 extends BaseTest {
         softly.assertThat(header.getMetalsColorsButtonText())
                 .as("Incorrect METALS & COLORS button name").isEqualTo("METALS & COLORS");
 
-        HomePage homePage = PageFactory.initElements(testDriver, HomePage.class);
+        HomePage homePage = new HomePage(testDriver);
 
         //6. Assert that there are 4 images on the Index Page and they are displayed
         softly.assertThat(homePage.numberOfBenefitImages())
@@ -103,7 +102,7 @@ public class Exercise1 extends BaseTest {
         softly.assertThat(totalButtonsInFrames).as("Button not found").isNotZero();
 
         //11. Assert that there are 5 items in the Left Section are displayed and they have proper text
-        SideBar sideBar = PageFactory.initElements(testDriver, SideBar.class);
+        SideBar sideBar = new SideBar(testDriver);
         //SideBar sideBar = new SideBar(testDriver);
         softly.assertThat(sideBar.getSidebarItems().size())
                 .as("Number of menu items " + sideBar.getSidebarItems().size() + " not 5")

@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 
 public class Header {
 
+    private WebDriver driver;
+
     @FindBy(id = "user-icon")
     private WebElement userIcon;
 
@@ -40,8 +42,9 @@ public class Header {
     @FindBy(css = "a[href='different-elements.html']")
     private WebElement difElements;
 
-    public Header(WebDriver webDriver1) {
-        PageFactory.initElements(webDriver1, this);
+    public Header(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public void login(String username, String password) {
