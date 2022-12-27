@@ -170,7 +170,7 @@ public class Steps extends AbstractStep {
     public void assertDifferentElementsPageOpens() {
         header.getServiceButton().click();
         header.getDifElements().click();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("uui-main-container")));
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(driver.getCurrentUrl())
