@@ -1,15 +1,12 @@
 package com.epam.tc.hw3.testcases;
 
-import com.epam.tc.hw3.library.pages.Header;
 import com.epam.tc.hw3.library.pages.HomePage;
-import com.epam.tc.hw3.library.pages.SideBar;
 import com.epam.tc.hw3.library.utils.GetProperties;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 public class Exercise1 extends BaseTest {
@@ -20,36 +17,34 @@ public class Exercise1 extends BaseTest {
         //2. Assert Browser title
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(testDriver.getTitle()).as("Incorrect browser title").isEqualTo("Home Page");
+        HomePage homePage = new HomePage(testDriver);
 
-        Header header = PageFactory.initElements(testDriver, Header.class);
         //3. Perform login
         GetProperties getProperties = new GetProperties();
-        header.login(getProperties.getUsernameProp(), getProperties.getPasswordProp());
+        homePage.getHeader().login(getProperties.getUsernameProp(), getProperties.getPasswordProp());
         softly.assertThat(testDriver.getCurrentUrl())
                 .as("Incorrect page opened")
                 .isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
 
         //4. Assert Username is loggined
-        softly.assertThat(header.getUserNameText())
+        softly.assertThat(homePage.getHeader().getUserNameText())
                 .as("Incorrect user name")
                 .isEqualTo(getProperties.getUsernameTextProp());
 
         //5. Assert that there are 4 items on the header section are displayed and they have proper texts
-        softly.assertThat(header.getHomeButtonText())
+        softly.assertThat(homePage.getHeader().getHomeButtonText())
                 .as("Incorrect Home button name")
                 .isEqualTo("HOME");
 
-        softly.assertThat(header.getContactFormButtonText())
+        softly.assertThat(homePage.getHeader().getContactFormButtonText())
                 .as("Incorrect Contacts button name")
                 .isEqualTo("CONTACT FORM");
 
-        softly.assertThat(header.getServiceButtonText())
+        softly.assertThat(homePage.getHeader().getServiceButtonText())
                 .as("Incorrect Service button name").isEqualTo("SERVICE");
 
-        softly.assertThat(header.getMetalsColorsButtonText())
+        softly.assertThat(homePage.getHeader().getMetalsColorsButtonText())
                 .as("Incorrect METALS & COLORS button name").isEqualTo("METALS & COLORS");
-
-        HomePage homePage = PageFactory.initElements(testDriver, HomePage.class);
 
         //6. Assert that there are 4 images on the Index Page and they are displayed
         softly.assertThat(homePage.numberOfBenefitImages())
@@ -103,10 +98,8 @@ public class Exercise1 extends BaseTest {
         softly.assertThat(totalButtonsInFrames).as("Button not found").isNotZero();
 
         //11. Assert that there are 5 items in the Left Section are displayed and they have proper text
-        SideBar sideBar = PageFactory.initElements(testDriver, SideBar.class);
-        //SideBar sideBar = new SideBar(testDriver);
-        softly.assertThat(sideBar.getSidebarItems().size())
-                .as("Number of menu items " + sideBar.getSidebarItems().size() + " not 5")
+        softly.assertThat(homePage.getSideBar().getSidebarItems().size())
+                .as("Number of menu items " + homePage.getSideBar().getSidebarItems().size() + " not 5")
                 .isEqualTo(5);
 
         List<String> sidebarItemsTextExpected = Arrays.asList(
@@ -117,7 +110,7 @@ public class Exercise1 extends BaseTest {
                 "Elements packs"
         );
 
-        List<String> sidebarItemsTextActual = sideBar.getSidebarItems().stream().map(WebElement::getText)
+        List<String> sidebarItemsTextActual = homePage.getSideBar().getSidebarItems().stream().map(WebElement::getText)
                 .collect(Collectors.toList());
         softly.assertThat(sidebarItemsTextActual).as("Sidebar items text differs").isEqualTo(sidebarItemsTextExpected);
 
