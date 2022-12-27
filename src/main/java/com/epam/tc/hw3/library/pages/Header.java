@@ -1,7 +1,5 @@
 package com.epam.tc.hw3.library.pages;
 
-import com.beust.jcommander.Parameter;
-import com.epam.tc.hw3.library.utils.GetProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

@@ -6,9 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class DifElementsPage {
-
-    private WebDriver driver;
+public class DifElementsPage extends AbstractPage {
 
     //Checkboxes
     @FindBy(css = "input[type='checkbox']")
@@ -42,12 +40,10 @@ public class DifElementsPage {
     private WebElement lastLog;
 
     public DifElementsPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     //Checkboxes
-
     public List<WebElement> getAllCheckboxes() {
         return checkboxes;
     }

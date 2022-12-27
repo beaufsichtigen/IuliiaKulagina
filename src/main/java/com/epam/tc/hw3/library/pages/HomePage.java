@@ -6,9 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePage {
-
-    private WebDriver driver;
+public class HomePage extends AbstractPage {
 
     @FindBy(css = ".benefit-icon")
     private List<WebElement> benefitImages;
@@ -26,8 +24,7 @@ public class HomePage {
     private WebElement currentFrameButton;
 
     public HomePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public List<WebElement> getBenefitImages() {
