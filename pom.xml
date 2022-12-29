@@ -18,6 +18,9 @@
         <maven-compiler-plugin>3.10.1</maven-compiler-plugin>
         <maven-surefire-plugin>3.0.0-M7</maven-surefire-plugin>
         <aspectj.version>1.9.5</aspectj.version>
+        <cucumber-java>7.8.1</cucumber-java>
+        <cucumber-java8>1.2.5</cucumber-java8>
+        <cucumber-core>7.8.1</cucumber-core>
     </properties>
     <profiles>
         <profile>
@@ -68,8 +71,15 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+        </profile>
+
+        <profile>
+            <id>Homework5</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
-                <suite.xml.file>Homework4Jenkins.xml</suite.xml.file>
+                <suite.xml.file>Homework5.xml</suite.xml.file>
             </properties>
         </profile>
     </profiles>
@@ -99,13 +109,11 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/calculator-1.0.jar</systemPath>
         </dependency>
-
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng}</version>
         </dependency>
-
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
@@ -128,11 +136,32 @@
             <artifactId>selenium-java</artifactId>
             <version>4.6.0</version>
         </dependency>
-
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>5.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber-java}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java8</artifactId>
+            <version>${cucumber-java8}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>${cucumber-core}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>7.9.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

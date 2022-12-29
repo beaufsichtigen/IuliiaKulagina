@@ -116,11 +116,53 @@ public class DifElementsPage extends BasePage {
         return checkbox;
     }
 
+    public WebElement getCheckbox(@NonNull String elementString) {
+        CheckboxElement element = CheckboxElement.valueOf(elementString);
+        WebElement checkbox = null;
+        switch (element) {
+            case Water:
+                checkbox = checkboxWater;
+                break;
+            case Wind:
+                checkbox = checkboxWind;
+                break;
+            case Earth:
+                checkbox = checkboxEarth;
+                break;
+            case Fire:
+                checkbox = checkboxFire;
+                break;
+            default:
+                System.out.println("incorrect element choosen");
+        }
+        return checkbox;
+    }
+
     public void clickWebElement(WebElement element) {
         element.click();
     }
 
     public void clickCheckbox(CheckboxElement element) {
+        switch (element) {
+            case Water:
+                checkboxWater.click();
+                break;
+            case Wind:
+                checkboxWind.click();
+                break;
+            case Earth:
+                checkboxEarth.click();
+                break;
+            case Fire:
+                checkboxFire.click();
+                break;
+            default:
+                System.out.println("incorrect element choosen");
+        }
+    }
+
+    public void clickCheckbox(@NonNull String elementString) {
+        CheckboxElement element = CheckboxElement.valueOf(elementString);
         switch (element) {
             case Water:
                 checkboxWater.click();
@@ -165,7 +207,49 @@ public class DifElementsPage extends BasePage {
         return radioBtn;
     }
 
+    public WebElement getRadioBtn(@NonNull String metalString) {
+        Metal metal = Metal.valueOf(metalString);
+        WebElement radioBtn = null;
+        switch (metal) {
+            case Gold:
+                radioBtn = radioBtnGold;
+                break;
+            case Silver:
+                radioBtn = radioBtnSilver;
+                break;
+            case Bronze:
+                radioBtn = radioBtnBronze;
+                break;
+            case Selen:
+                radioBtn = radioBtnSelen;
+                break;
+            default:
+                System.out.println("incorrect metal choosen");
+        }
+        return radioBtn;
+    }
+
     public void clickMetal(Metal metal) {
+        switch (metal) {
+            case Gold:
+                radioBtnGold.click();
+                break;
+            case Silver:
+                radioBtnSilver.click();
+                break;
+            case Bronze:
+                radioBtnBronze.click();
+                break;
+            case Selen:
+                radioBtnSelen.click();
+                break;
+            default:
+                System.out.println("incorrect metal choosen");
+        }
+    }
+
+    public void clickMetal(@NonNull String metalString) {
+        Metal metal = Metal.valueOf(metalString);
         switch (metal) {
             case Gold:
                 radioBtnGold.click();
@@ -189,6 +273,7 @@ public class DifElementsPage extends BasePage {
         return dropDown;
     }
 
+
     public WebElement getDropDown(@NonNull Color color) {
         WebElement dropDown = null;
         switch (color) {
@@ -210,7 +295,50 @@ public class DifElementsPage extends BasePage {
         return dropDown;
     }
 
+    public WebElement getDropDown(@NonNull String colorString) {
+        Color color = Color.valueOf(colorString);
+        WebElement dropDown = null;
+        switch (color) {
+            case Red:
+                dropDown = dropDownRed;
+                break;
+            case Green:
+                dropDown = dropDownGreen;
+                break;
+            case Blue:
+                dropDown = dropDownBlue;
+                break;
+            case Yellow:
+                dropDown = dropDownYellow;
+                break;
+            default:
+                System.out.println("incorrect color choosen");
+        }
+        return dropDown;
+    }
+
     public void chooseFromClosedDropdown(Color color) {
+        dropDownColors.click();
+        switch (color) {
+            case Red:
+                dropDownRed.click();
+                break;
+            case Green:
+                dropDownGreen.click();
+                break;
+            case Blue:
+                dropDownBlue.click();
+                break;
+            case Yellow:
+                dropDownYellow.click();
+                break;
+            default:
+                System.out.println("incorrect color choosen");
+        }
+    }
+
+    public void chooseFromClosedDropdown(@NonNull String colorString) {
+        Color color = Color.valueOf(colorString);
         dropDownColors.click();
         switch (color) {
             case Red:
