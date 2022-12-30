@@ -1,9 +1,7 @@
 package com.epam.tc.hw5.steps;
 
 import com.epam.tc.hw5.utils.DriverManagerUtil;
-import io.cucumber.java.After;
 import io.cucumber.java.AfterAll;
-import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
 
 public class Hook {

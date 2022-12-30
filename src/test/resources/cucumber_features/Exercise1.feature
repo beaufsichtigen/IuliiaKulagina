@@ -24,8 +24,7 @@ Feature: User can open anauthenticated Home Page
     When Select in dropdown "Yellow"
     Then I see "Yellow" color is selected
 
-    When I clear elements status
-    Then I see an individual log row and value is corresponded to the status of checkbox
+    And I see an individual log row and value is corresponded to the status of checkbox
     And I see an individual log row and value is corresponded to the status of radio button
     And I see an individual log row and value is corresponded to the selected value for dropdown
 

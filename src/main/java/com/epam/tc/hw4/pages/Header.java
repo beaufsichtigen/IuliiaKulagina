@@ -1,16 +1,14 @@
 package com.epam.tc.hw4.pages;
 
+import java.util.List;
+import java.util.Locale;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
-import java.util.Locale;
-
 public class Header {
-
     private WebDriver driver;
 
     @FindBy(id = "user-icon")
@@ -48,8 +46,6 @@ public class Header {
 
     @FindBy(css = "a[href='user-table.html']")
     private WebElement userTable;
-
-
 
     public Header(WebDriver driver) {
         this.driver = driver;
@@ -126,18 +122,9 @@ public class Header {
         }
     }
 
-//    public void clickServiceDropDownByName(String buttonName) {
-//        for (WebElement dropDownItem : allDropDownElements) {
-//            if (dropDownItem.getText().equalsIgnoreCase(buttonName))
-//                System.out.println(dropDownItem.getText());
-//                dropDownItem.click();
-//        }
-//    }
-
     public void clickServiceDropDownUserTable(String buttonName) {
-        WebElement element = driver.findElement(By.xpath("//*[contains(text()[normalize-space(.)],'" + buttonName + "')]"));
+        WebElement element = driver
+                .findElement(By.xpath("//*[contains(text()[normalize-space(.)],'" + buttonName + "')]"));
         element.click();
     }
-
 }
-

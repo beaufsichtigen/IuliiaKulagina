@@ -3,32 +3,30 @@ package com.epam.tc.hw5.steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.WebElement;
 
 public class GeneralSteps extends AbstractStep {
 
     @Given("I open JDI GitHub site")
-    public void i_open_JDI_GitHub_site() {
+    public void openJdiGitHubSite() {
         homePage.openHomePage(driver);
     }
 
     @Then("I see {string} Browser title")
-    public void i_see_browser_title(String expectedTitle) {
+    public void browserTitleIsCorrect(String expectedTitle) {
         softly.assertThat(driver.getTitle()).as("Incorrect browser title").isEqualTo(expectedTitle);
         softly.assertAll();
     }
 
     @Then("I see page URL {string}")
-    public void i_see_page_url(String URL) {
+    public void pageUrlIsCorrect(String url) {
         softly.assertThat(driver.getCurrentUrl())
                 .as("Incorrect page opened")
-                .isEqualTo(URL);
+                .isEqualTo(url);
         softly.assertAll();
     }
 
     @Then("I see {string} name is displayed in the left-top side of screen")
-    public void i_see_user_name_is_displayed_in_the_left_top_side_of_screen(String expectedUserName) {
+    public void usernameIsDisplayed(String expectedUserName) {
         softly.assertThat(anyPage.getHeader().getUserNameText())
                 .as("Incorrect user name")
                 .isEqualTo(expectedUserName);
@@ -36,18 +34,17 @@ public class GeneralSteps extends AbstractStep {
     }
 
     @When("I clear elements status")
-    public void refresh_page(){
+    public void refreshPage() {
         driver.navigate().refresh();
     }
 
-    @When ("I click on {string} button in Header")
-    public void iClickOnButtonInHeader(String headerButton) {
+    @When("I click on {string} button in Header")
+    public void clickOnButtonInHeader(String headerButton) {
         anyPage.getHeader().clickHeaderButton(headerButton);
     }
 
-    @When ("I click on {string} button in Service dropdown")
-    public void iClickOnServiceDropdown(String serviceDropdown) {
+    @When("I click on {string} button in Service dropdown")
+    public void clickOnServiceDropdown(String serviceDropdown) {
         anyPage.getHeader().clickServiceDropDownUserTable(serviceDropdown);
     }
-
 }

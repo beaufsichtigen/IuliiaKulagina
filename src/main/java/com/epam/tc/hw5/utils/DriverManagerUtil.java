@@ -1,8 +1,7 @@
 package com.epam.tc.hw5.utils;
 
-import org.openqa.selenium.WebDriver;
-
 import java.util.Objects;
+import org.openqa.selenium.WebDriver;
 
 public class DriverManagerUtil {
 

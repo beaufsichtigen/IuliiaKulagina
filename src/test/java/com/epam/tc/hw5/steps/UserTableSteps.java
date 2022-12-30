@@ -1,15 +1,13 @@
 package com.epam.tc.hw5.steps;
 
 import io.cucumber.java.en.Then;
-import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
+import io.cucumber.java.en.When;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class UserTableSteps extends AbstractStep {
 
@@ -65,24 +63,47 @@ public class UserTableSteps extends AbstractStep {
             number.add(element.get(0));
             user.add(element.get(1));
             description.add(element.get(2));
-
         }
-        ;
-        softly.assertThat(userTablePage.getNumberFromTable()).isEqualTo(number);
-        softly.assertThat(userTablePage.getUserFromTable()).isEqualTo(user);
-        softly.assertThat(userTablePage.getDescriptionFromTable()).isEqualTo(description);
+        softly.assertThat(userTablePage.getNumberFromTable())
+                .as("Incorrect numbers")
+                .isEqualTo(number);
+        softly.assertThat(userTablePage.getUserFromTable())
+                .as("Incorrect users")
+                .isEqualTo(user);
+        softly.assertThat(userTablePage.getDescriptionFromTable())
+                .as("Incorrect description")
+                .isEqualTo(description);
         softly.assertAll();
     }
 
-    @Then("droplist should contain values in column Type for user Roman")
-    public void droplistContainValuesInColumnTypeForUserRoman(io.cucumber.datatable.DataTable dataTable) {
-        List<List<String>> valuesTable = dataTable.cells().subList(1, 3);
+    @Then("droplist should contain values in column Type for user {string}")
+    public void droplistContainValuesInColumn(String userName, io.cucumber.datatable.DataTable dataTable) {
+        List<List<String>> valuesTable = dataTable.cells().subList(1, 4);
         List<String> values = new ArrayList<>();
         for (List<String> element : valuesTable) {
             values.add(element.get(0));
         }
-        softly.assertThat(userTablePage.getDroplistValues()).isEqualTo(values);
+        softly.assertThat(userTablePage.getDroplistValues(userName))
+                .as("Incorrect values in dropdown")
+                .isEqualTo(values);
         softly.assertAll();
+    }
 
+    @When("I select 'vip' checkbox for {string}")
+    public void selectVipCheckbox(String userName) {
+        userTablePage.clickVipCheckbox(userName);
+    }
+
+    @When("1 log row has {string} text in log section")
+    public void logRowHasExpectedText(String log) {
+        softly.assertThat(userTablePage.getAllLogsText().size())
+                .as("More than 1 or Null log text")
+                .isEqualTo(1);
+
+        softly.assertThat(userTablePage.getAllLogsText().get(0))
+                .as("Incorrect log text")
+                .endsWith(log);
+
+        softly.assertAll();
     }
 }
