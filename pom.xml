@@ -18,8 +18,8 @@
         <maven-compiler-plugin>3.10.1</maven-compiler-plugin>
         <maven-surefire-plugin>3.0.0-M7</maven-surefire-plugin>
         <aspectj.version>1.9.5</aspectj.version>
-        <cucumber-java>7.8.1</cucumber-java>
-        <cucumber-java8>1.2.5</cucumber-java8>
+        <cucumber-java>7.5.0</cucumber-java>
+<!--        <cucumber-java8>1.2.5</cucumber-java8>-->
         <cucumber-core>7.8.1</cucumber-core>
     </properties>
     <profiles>
@@ -146,11 +146,11 @@
             <artifactId>cucumber-java</artifactId>
             <version>${cucumber-java}</version>
         </dependency>
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-java8</artifactId>
-            <version>${cucumber-java8}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>info.cukes</groupId>-->
+<!--            <artifactId>cucumber-java8</artifactId>-->
+<!--            <version>${cucumber-java8}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-core</artifactId>

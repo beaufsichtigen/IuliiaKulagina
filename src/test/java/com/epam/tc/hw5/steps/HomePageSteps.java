@@ -3,7 +3,7 @@ package com.epam.tc.hw5.steps;
 
 import com.epam.tc.hw4.utils.GetProperties;
 import com.epam.tc.hw5.steps.AbstractStep;
-import cucumber.api.java.en.And;
+//import cucumber.api.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.assertj.core.api.SoftAssertions;
@@ -16,14 +16,15 @@ public class HomePageSteps extends AbstractStep {
         homePage.openHomePage(driver);
     }
 
-    @When("I login with login and password")
-    public void i_login_as_user() {
+    @When("I login as user {string}")
+    public void i_login_as_user(String userName) {
         homePage.openHomePage(driver);
         GetProperties getProperties = new GetProperties();
         String username = getProperties.getUsernameProp();
         String password = getProperties.getPasswordProp();
         anyPage.getHeader().login(username, password);
     }
+
 }
 
 

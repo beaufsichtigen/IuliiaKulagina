@@ -1,9 +1,13 @@
 package com.epam.tc.hw4.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
+import java.util.Locale;
 
 public class Header {
 
@@ -37,8 +41,15 @@ public class Header {
     private WebElement metalsColorsButton;
 
     //Items in Service drop down:
+    @FindBy(css = "a[href='.dropdown.open>ul>li>a']")
+    public List<WebElement> allDropDownElements;
     @FindBy(css = "a[href='different-elements.html']")
     private WebElement difElements;
+
+    @FindBy(css = "a[href='user-table.html']")
+    private WebElement userTable;
+
+
 
     public Header(WebDriver driver) {
         this.driver = driver;
@@ -95,5 +106,38 @@ public class Header {
     public WebElement getDifElements() {
         return difElements;
     }
+
+    public void clickHeaderButton(String buttonName) {
+        switch (buttonName.toUpperCase(Locale.ROOT)) {
+            case "HOME":
+                homeButton.click();
+                break;
+            case "CONTACT FORM":
+                contactFormButton.click();
+                break;
+            case "SERVICE":
+                serviceButton.click();
+                break;
+            case "METALS&COLORS":
+                metalsColorsButton.click();
+                break;
+            default:
+                System.out.println("No such button choosen");
+        }
+    }
+
+//    public void clickServiceDropDownByName(String buttonName) {
+//        for (WebElement dropDownItem : allDropDownElements) {
+//            if (dropDownItem.getText().equalsIgnoreCase(buttonName))
+//                System.out.println(dropDownItem.getText());
+//                dropDownItem.click();
+//        }
+//    }
+
+    public void clickServiceDropDownUserTable(String buttonName) {
+        WebElement element = driver.findElement(By.xpath("//*[contains(text()[normalize-space(.)],'" + buttonName + "')]"));
+        element.click();
+    }
+
 }
 

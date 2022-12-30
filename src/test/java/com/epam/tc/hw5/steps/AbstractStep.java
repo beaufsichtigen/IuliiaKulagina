@@ -4,6 +4,7 @@ package com.epam.tc.hw5.steps;
 import com.epam.tc.hw4.pages.BasePage;
 import com.epam.tc.hw4.pages.DifElementsPage;
 import com.epam.tc.hw4.pages.HomePage;
+import com.epam.tc.hw5.pages.UserTablePage;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
 import com.epam.tc.hw5.utils.DriverManagerUtil;
@@ -15,6 +16,8 @@ public abstract class AbstractStep {
     protected BasePage anyPage;
     protected DifElementsPage difElementsPage;
 
+    protected UserTablePage userTablePage;
+
     protected WebDriver driver;
 
     protected SoftAssertions softly;
@@ -25,6 +28,7 @@ public abstract class AbstractStep {
         homePage = new HomePage(driver);
         anyPage = new BasePage(driver);
         difElementsPage = new DifElementsPage(driver);
+        userTablePage = new UserTablePage(driver);
 
     }
 
