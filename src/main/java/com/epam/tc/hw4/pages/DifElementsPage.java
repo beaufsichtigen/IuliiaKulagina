@@ -273,7 +273,6 @@ public class DifElementsPage extends BasePage {
         return dropDown;
     }
 
-
     public WebElement getDropDown(@NonNull Color color) {
         WebElement dropDown = null;
         switch (color) {
