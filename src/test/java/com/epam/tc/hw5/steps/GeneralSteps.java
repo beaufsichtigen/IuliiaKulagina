@@ -1,15 +1,9 @@
 package com.epam.tc.hw5.steps;
 
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class GeneralSteps extends AbstractStep {
-
-    @Given("I open JDI GitHub site")
-    public void openJdiGitHubSite() {
-        homePage.openHomePage(driver);
-    }
 
     @Then("I see {string} Browser title")
     public void browserTitleIsCorrect(String expectedTitle) {

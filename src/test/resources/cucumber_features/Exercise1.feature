@@ -27,24 +27,3 @@ Feature: User can open anauthenticated Home Page
     And I see an individual log row and value is corresponded to the status of checkbox
     And I see an individual log row and value is corresponded to the status of radio button
     And I see an individual log row and value is corresponded to the selected value for dropdown
-
-
-#And Click on each checkbox, radio button, dropdown value
-
-
-#And There is individual log row and value is corresponded to the status of checkbox, radio button, dropdown value.
-
-
-
-
-
-
-#Feature: User can open anauthenticated Home Page
-#
-#  Scenario: User Anauthenticated Page test
-#  Given: I open JDI GitHub site
-#    When I see Anauthenticated Home page opens
-#    Then I see "Home Page" Browser title
-#    And I see page URL "https://jdi-testing.github.io/jdi-light/index.html"
-
-

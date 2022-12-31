@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 
 public abstract class AbstractStep {
 
-    //protected PageObjectDifferentElements pageObjectDifferentElements;
     protected HomePage homePage;
     protected BasePage anyPage;
     protected DifElementsPage difElementsPage;

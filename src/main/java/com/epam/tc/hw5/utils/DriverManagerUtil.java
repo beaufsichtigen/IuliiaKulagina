@@ -17,6 +17,7 @@ public class DriverManagerUtil {
     public static void tearDownDriver() {
         if (driver != null) {
             driver.quit();
+            driver = null;
         }
     }
 

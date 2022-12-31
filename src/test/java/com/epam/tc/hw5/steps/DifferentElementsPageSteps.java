@@ -57,10 +57,7 @@ public class DifferentElementsPageSteps extends AbstractStep {
     }
 
     @Then("I see log line of checkbox {string} with {string}")
-    public void logLineCheck(String checkboxName, String value) throws InterruptedException {
-        Thread.sleep(3000);
-        //WebElement checkbox = difElementsPage.getCheckbox(checkboxName);
-        //String log = difElementsPage.getLastLogText();
+    public void logLineCheck(String checkboxName, String value) {
         softly.assertThat(difElementsPage.getLastLogText())
                 .as("Incorrect log text")
                 .endsWith(checkboxName + ": condition changed to " + value);

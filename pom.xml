@@ -76,7 +76,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.xml.file>Homework5.xml</suite.xml.file>
+                <suite.xml.file>Homework5All.xml</suite.xml.file>
             </properties>
         </profile>
     </profiles>
