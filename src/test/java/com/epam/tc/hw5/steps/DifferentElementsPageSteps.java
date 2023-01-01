@@ -1,6 +1,7 @@
 package com.epam.tc.hw5.steps;
 
 import static com.epam.tc.hw4.pages.DifElementsPage.Color.Yellow;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -36,32 +37,28 @@ public class DifferentElementsPageSteps extends AbstractStep {
 
     @Then("I see {string} element is checked")
     public void elementIsChecked(String element) {
-        softly.assertThat(difElementsPage.getCheckbox(element).isEnabled())
+        assertThat(difElementsPage.getCheckbox(element).isEnabled())
                 .as("Check box " + element + " was not enabled")
                 .isTrue();
-        softly.assertAll();
     }
 
     @Then("I see {string} metal is checked")
     public void metalIsChecked(String metal) {
-        softly.assertThat(difElementsPage.getRadioBtn(metal)
+        assertThat(difElementsPage.getRadioBtn(metal)
                 .isEnabled()).as("Incorrect radio button state").isTrue();
-        softly.assertAll();
     }
 
     @Then("I see {string} color is selected")
     public void colorIsSelected(String color) {
-        softly.assertThat(difElementsPage.getDropDown(color)
+        assertThat(difElementsPage.getDropDown(color)
                 .isSelected()).as("Incorrect drop down state").isTrue();
-        softly.assertAll();
     }
 
     @Then("I see log line of checkbox {string} with {string}")
     public void logLineCheck(String checkboxName, String value) {
-        softly.assertThat(difElementsPage.getLastLogText())
+        assertThat(difElementsPage.getLastLogText())
                 .as("Incorrect log text")
                 .endsWith(checkboxName + ": condition changed to " + value);
-        softly.assertAll();
     }
 
     @Then("I see an individual log row and value is corresponded to the status of checkbox")

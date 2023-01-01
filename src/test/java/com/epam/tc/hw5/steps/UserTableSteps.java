@@ -1,5 +1,7 @@
 package com.epam.tc.hw5.steps;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import java.time.Duration;
@@ -15,47 +17,42 @@ public class UserTableSteps extends AbstractStep {
     public void userTableIsOpened() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("uui-main-container")));
-        softly.assertThat(driver.getCurrentUrl())
+        assertThat(driver.getCurrentUrl())
                 .as("Incorrect page opened")
                 .isEqualTo(userTablePage.getUserTablePageURL());
-        softly.assertAll();
     }
 
-    @Then("{string} Number Type Dropdowns should be displayed on Users Table on User Table Page")
-    public void numberOfTypeDropdownsIsDisplayed(String number) {
-        softly.assertThat(userTablePage.getNumberTypeDropdownsSize())
+    @Then("{int} Number Type Dropdowns should be displayed on Users Table on User Table Page")
+    public void numberOfTypeDropdownsIsDisplayed(int number) {
+        assertThat(userTablePage.getNumberTypeDropdownsSize())
                 .as("Incorrect number of Type Dropdowns")
-                .isEqualTo(Integer.parseInt(number));
-        softly.assertAll();
+                .isEqualTo(number);
     }
 
-    @Then("{string} Usernames should be displayed on Users Table on User Table Page")
-    public void numberOfUsernamesIsDisplayed(String number) {
-        softly.assertThat(userTablePage.getUserNamesNumber())
+    @Then("{int} Usernames should be displayed on Users Table on User Table Page")
+    public void numberOfUsernamesIsDisplayed(int number) {
+        assertThat(userTablePage.getUserNamesNumber())
                 .as("Incorrect number of Type Dropdowns")
-                .isEqualTo(Integer.parseInt(number));
-        softly.assertAll();
+                .isEqualTo(number);
     }
 
-    @Then("{string} Description texts under images should be displayed on Users Table on User Table Page")
-    public void numberOfDescriptionTextsIsDisplayed(String number) {
-        softly.assertThat(userTablePage.getDescriptionTextsNumber())
+    @Then("{int} Description texts under images should be displayed on Users Table on User Table Page")
+    public void numberOfDescriptionTextsIsDisplayed(int number) {
+        assertThat(userTablePage.getDescriptionTextsNumber())
                 .as("Incorrect number of Type Dropdowns")
-                .isEqualTo(Integer.parseInt(number));
-        softly.assertAll();
+                .isEqualTo(number);
     }
 
-    @Then("{string} checkboxes should be displayed on Users Table on User Table Page")
-    public void numberOfCheckboxesIsDisplayed(String number) {
-        softly.assertThat(userTablePage.getNumberOfCheckboxes())
+    @Then("{int} checkboxes should be displayed on Users Table on User Table Page")
+    public void numberOfCheckboxesIsDisplayed(int number) {
+        assertThat(userTablePage.getNumberOfCheckboxes())
                 .as("Incorrect number of Type Dropdowns")
-                .isEqualTo(Integer.parseInt(number));
-        softly.assertAll();
+                .isEqualTo(number);
     }
 
     @Then("User table should contain following values:")
-    public void user_table_should_contain_following_values(io.cucumber.datatable.DataTable dataTable) {
-        List<List<String>> userTable = dataTable.cells().subList(1, 7);
+    public void userTableContainValues(io.cucumber.datatable.DataTable dataTable) {
+        List<List<String>> userTable = dataTable.rows(1).cells();
         List<String> number = new ArrayList<>();
         List<String> user = new ArrayList<>();
         List<String> description = new ArrayList<>();
@@ -78,7 +75,7 @@ public class UserTableSteps extends AbstractStep {
 
     @Then("droplist should contain values in column Type for user {string}")
     public void droplistContainValuesInColumn(String userName, io.cucumber.datatable.DataTable dataTable) {
-        List<List<String>> valuesTable = dataTable.cells().subList(1, 4);
+        List<List<String>> valuesTable = dataTable.rows(1).cells();
         List<String> values = new ArrayList<>();
         for (List<String> element : valuesTable) {
             values.add(element.get(0));
