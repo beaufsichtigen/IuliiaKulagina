@@ -26,6 +26,11 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
+    public void openHomePage(WebDriver driver) {
+        driver.manage().window().maximize();
+        driver.get("https://jdi-testing.github.io/jdi-light/index.html");
+    }
+
     public List<WebElement> getBenefitImages() {
         return benefitImages;
     }
@@ -54,4 +59,3 @@ public class HomePage extends BasePage {
         return currentFrameButton;
     }
 }
-
