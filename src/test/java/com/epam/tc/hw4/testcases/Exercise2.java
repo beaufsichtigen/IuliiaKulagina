@@ -5,7 +5,7 @@ import static com.epam.tc.hw4.pages.DifElementsPage.CheckboxElement.Wind;
 import static com.epam.tc.hw4.pages.DifElementsPage.Color.Yellow;
 import static com.epam.tc.hw4.pages.DifElementsPage.Metal.Selen;
 
-import com.epam.tc.hw3.library.utils.GetProperties;
+import com.epam.tc.hw4.utils.GetProperties;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;

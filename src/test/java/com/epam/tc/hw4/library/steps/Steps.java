@@ -2,10 +2,8 @@ package com.epam.tc.hw4.library.steps;
 
 import static com.epam.tc.hw4.pages.DifElementsPage.Color.Yellow;
 
-import com.epam.tc.hw3.library.pages.Header;
-import com.epam.tc.hw3.library.pages.HomePage;
-import com.epam.tc.hw3.library.pages.SideBar;
 import com.epam.tc.hw4.pages.DifElementsPage;
+import com.epam.tc.hw4.pages.HomePage;
 import io.qameta.allure.Step;
 import java.time.Duration;
 import java.util.Arrays;
@@ -20,16 +18,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Steps extends AbstractStep {
 
-    private Header header;
-    private SideBar sideBar;
     private HomePage homePage;
     private DifElementsPage difElementsPage;
 
     public Steps(WebDriver driver) {
         super(driver);
-        header = new Header(driver);
         homePage = new HomePage(driver);
-        sideBar = new SideBar(driver);
         difElementsPage = new DifElementsPage(driver);
     }
 
@@ -43,7 +37,7 @@ public class Steps extends AbstractStep {
     @Step("3. Perform login")
     public void performLogin(String username, String login) {
         SoftAssertions softly = new SoftAssertions();
-        header.login(username, login);
+        anyPage.getHeader().login(username, login);
         softly.assertThat(driver.getCurrentUrl())
                 .as("Incorrect page opened")
                 .isEqualTo("https://jdi-testing.github.io/jdi-light/index.html");
@@ -53,7 +47,7 @@ public class Steps extends AbstractStep {
     @Step("4. Assert Username is loggined")
     public void assertUsernameLoggedIn(String expectedUserName) {
         SoftAssertions softly = new SoftAssertions();
-        softly.assertThat(header.getUserNameText())
+        softly.assertThat(anyPage.getHeader().getUserNameText())
                 .as("Incorrect user name")
                 .isEqualTo(expectedUserName);
         softly.assertAll();
@@ -62,18 +56,18 @@ public class Steps extends AbstractStep {
     @Step("5. Assert that there are 4 items on the header section are displayed and they have proper texts")
     public void assertHeaderItems() {
         SoftAssertions softly = new SoftAssertions();
-        softly.assertThat(header.getHomeButtonText())
+        softly.assertThat(anyPage.getHeader().getHomeButtonText())
                 .as("Incorrect Home button name")
                 .isEqualTo("HOME");
 
-        softly.assertThat(header.getContactFormButtonText())
+        softly.assertThat(anyPage.getHeader().getContactFormButtonText())
                 .as("Incorrect Contacts button name")
                 .isEqualTo("CONTACT FORM");
 
-        softly.assertThat(header.getServiceButtonText())
+        softly.assertThat(anyPage.getHeader().getServiceButtonText())
                 .as("Incorrect Service button name").isEqualTo("SERVICE");
 
-        softly.assertThat(header.getMetalsColorsButtonText())
+        softly.assertThat(anyPage.getHeader().getMetalsColorsButtonText())
                 .as("Incorrect METALS & COLORS button name").isEqualTo("METALS & COLORS");
         softly.assertAll();
     }
@@ -147,8 +141,8 @@ public class Steps extends AbstractStep {
     @Step("11. Assert that there are 5 items in the Left Section are displayed and they have proper text")
     public void assertItemsInSidebar() {
         SoftAssertions softly = new SoftAssertions();
-        softly.assertThat(sideBar.getSidebarItems().size())
-                .as("Number of menu items " + sideBar.getSidebarItems().size() + " not 5")
+        softly.assertThat(anyPage.getSideBar().getSidebarItems().size())
+                .as("Number of menu items " + anyPage.getSideBar().getSidebarItems().size() + " not 5")
                 .isEqualTo(5);
 
         List<String> sidebarItemsTextExpected = Arrays.asList(
@@ -159,7 +153,7 @@ public class Steps extends AbstractStep {
                 "Elements packs"
         );
 
-        List<String> sidebarItemsTextActual = sideBar.getSidebarItems().stream().map(WebElement::getText)
+        List<String> sidebarItemsTextActual = anyPage.getSideBar().getSidebarItems().stream().map(WebElement::getText)
                 .collect(Collectors.toList());
         softly.assertThat(sidebarItemsTextActual).as("Sidebar items text differs").isEqualTo(sidebarItemsTextExpected);
 
@@ -168,9 +162,9 @@ public class Steps extends AbstractStep {
 
     @Step("5. Open through the header menu Service -> Different Elements Page")
     public void assertDifferentElementsPageOpens() {
-        header.getServiceButton().click();
-        header.getDifElements().click();
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        anyPage.getHeader().getServiceButton().click();
+        anyPage.getHeader().getDifElements().click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("uui-main-container")));
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(driver.getCurrentUrl())
@@ -180,11 +174,11 @@ public class Steps extends AbstractStep {
     }
 
     @Step("6. Select checkboxes {element}")
-    public void assertCheckboxesSelected(DifElementsPage.CheckboxElement element) {
+    public void assertCheckboxesSelected(com.epam.tc.hw4.pages.DifElementsPage.CheckboxElement element) {
         SoftAssertions softly = new SoftAssertions();
         difElementsPage.clickCheckbox(element);
-        softly.assertThat(difElementsPage.getCheckbox(element)
-                        .isEnabled()).as("Check box " + element + " was not enabled")
+        softly.assertThat(difElementsPage.getCheckbox(element).isEnabled())
+                .as("Check box " + element + " was not enabled")
                 .isTrue();
         softly.assertAll();
     }

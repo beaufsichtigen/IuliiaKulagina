@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="HW4" verbose="2" parallel="none">
+    <test name="HW4">
+        <classes>
+            <class name="com.epam.tc.hw5.RunCucumberTest"/>
+        </classes>
+    </test>
+</suite>

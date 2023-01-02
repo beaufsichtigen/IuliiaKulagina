@@ -1,12 +1,11 @@
-package com.epam.tc.hw3.library.pages;
+package com.epam.tc.hw4.pages;
 
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class HomePage extends AbstractPage {
+public class HomePage extends BasePage {
 
     @FindBy(css = ".benefit-icon")
     private List<WebElement> benefitImages;
@@ -25,6 +24,11 @@ public class HomePage extends AbstractPage {
 
     public HomePage(WebDriver driver) {
         super(driver);
+    }
+
+    public void openHomePage(WebDriver driver) {
+        driver.manage().window().maximize();
+        driver.get("https://jdi-testing.github.io/jdi-light/index.html");
     }
 
     public List<WebElement> getBenefitImages() {
@@ -55,4 +59,3 @@ public class HomePage extends AbstractPage {
         return currentFrameButton;
     }
 }
-
