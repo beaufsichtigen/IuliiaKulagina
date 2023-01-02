@@ -32,7 +32,6 @@ public class BaseTest {
 
     @BeforeMethod
     void setupAll(ITestContext context) {
-        //testDriver = new ChromeDriver();
         testDriver.manage().window().maximize();
         context.setAttribute("driver", testDriver);
         testDriver.get(baseURL);
