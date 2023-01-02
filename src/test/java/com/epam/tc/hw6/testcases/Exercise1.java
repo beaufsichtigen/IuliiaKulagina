@@ -1,6 +1,6 @@
 package com.epam.tc.hw6.testcases;
 
-import com.epam.tc.hw3.library.utils.GetProperties;
+import com.epam.tc.hw4.utils.GetProperties;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
@@ -46,4 +46,3 @@ public class Exercise1 extends BaseTest {
         //12. Close Browser (in Parent class)
     }
 }
-
