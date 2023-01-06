@@ -1,13 +1,15 @@
 package com.epam.tc.hw7;
 
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
-import static com.epam.tc.hw7.JdiSite.jdiHomePage;
-import static com.epam.tc.hw7.entities.User.ROMAN;
+
+import com.epam.tc.hw7.entities.User;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.tc.hw7.JdiSite.jdiHomePage;
+import static com.epam.tc.hw7.entities.User.ROMAN;
 
 public class HwTest {
     @BeforeSuite(alwaysRun = true)
@@ -26,8 +28,9 @@ public class HwTest {
     @Test
     public void loginTest() {
         JdiSite.open();
-        JdiSite.login(ROMAN);
+ //       JdiSite.login(ROMAN);
+        String actualName = jdiHomePage.getUserName();
         //jdiHomePage.checkUserLoggedIn(ROMAN);
-        jdiHomePage.username.is().text(ROMAN.getFullName());
+        jdiHomePage.userName.is().text(ROMAN.getFullName());
     }
 }
