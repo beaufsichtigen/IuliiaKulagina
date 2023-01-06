@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="HW7" verbose="2" parallel="none">
+    <test name="HW7">
+        <classes>
+            <class name="com.epam.tc.hw7.HwTest"/>
+        </classes>
+    </test>
+</suite>

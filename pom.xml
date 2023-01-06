@@ -9,6 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <driver>chrome</driver>
+        <driver.remote.url/>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -75,11 +77,18 @@
 
         <profile>
             <id>Homework5</id>
+            <properties>
+                <suite.xml.file>Homework5All.xml</suite.xml.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>Homework7</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.xml.file>Homework5All.xml</suite.xml.file>
+                <suite.xml.file>Homework7All.xml</suite.xml.file>
             </properties>
         </profile>
     </profiles>
@@ -158,6 +167,12 @@
             <version>7.9.0</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>1.3.11</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -217,5 +232,6 @@
                 <version>2.12.0</version>
             </plugin>
         </plugins>
+
     </build>
 </project>
