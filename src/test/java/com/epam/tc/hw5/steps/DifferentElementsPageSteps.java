@@ -16,7 +16,8 @@ public class DifferentElementsPageSteps extends AbstractStep {
     public void openDifferentElementsPage() {
         anyPage.getHeader().getServiceButton().click();
         anyPage.getHeader().getDifElements().click();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("uui-main-container")));
     }
 
