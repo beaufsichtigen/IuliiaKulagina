@@ -9,8 +9,6 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <driver>chrome</driver>
-        <driver.remote.url/>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,8 +19,11 @@
         <maven-surefire-plugin>3.0.0-M7</maven-surefire-plugin>
         <aspectj.version>1.9.5</aspectj.version>
         <cucumber-java>7.5.0</cucumber-java>
-<!--        <cucumber-java8>1.2.5</cucumber-java8>-->
         <cucumber-core>7.8.1</cucumber-core>
+        <jetty.version>9.4.12.RC2</jetty.version>
+        <jdi.version>LATEST</jdi.version>
+        <domain>https://jdi-testing.github.io/jdi-light/</domain>
+        <driver.remote.url/>
     </properties>
     <profiles>
         <profile>
@@ -31,7 +32,6 @@
                 <suite.xml.file>addSubs.xml</suite.xml.file>
             </properties>
         </profile>
-
 
         <profile>
             <id>MultDiv</id>
@@ -71,8 +71,8 @@
         <profile>
             <id>Homework4Jenkins</id>
             <properties>
-            <suite.xml.file>Homework4Jenkins.xml</suite.xml.file>
-        </properties>
+                <suite.xml.file>Homework4Jenkins.xml</suite.xml.file>
+            </properties>
         </profile>
 
         <profile>
@@ -101,6 +101,12 @@
     </profiles>
 
     <dependencies>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>${jdi.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -150,8 +156,8 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-<!--            <version>4.6.0</version>-->
-            <version>3.141.59</version>
+            <version>4.6.0</version>
+<!--            <version>3.141.59</version>-->
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
@@ -175,11 +181,11 @@
             <version>7.9.0</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light-html</artifactId>
-            <version>1.3.11</version>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.6.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -200,6 +206,7 @@
                         <suiteXmlFile>${project.basedir}/src/test/resources/${suite.xml.file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
+                        ${aspectj.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                 </configuration>
