@@ -19,7 +19,6 @@
         <maven-surefire-plugin>3.0.0-M7</maven-surefire-plugin>
         <aspectj.version>1.9.5</aspectj.version>
         <cucumber-java>7.5.0</cucumber-java>
-<!--        <cucumber-java8>1.2.5</cucumber-java8>-->
         <cucumber-core>7.8.1</cucumber-core>
     </properties>
     <profiles>
@@ -29,7 +28,6 @@
                 <suite.xml.file>addSubs.xml</suite.xml.file>
             </properties>
         </profile>
-
 
         <profile>
             <id>MultDiv</id>
@@ -75,11 +73,18 @@
 
         <profile>
             <id>Homework5</id>
+            <properties>
+                <suite.xml.file>Homework5All.xml</suite.xml.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>Homework6</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.xml.file>Homework5All.xml</suite.xml.file>
+                <suite.xml.file>Homework6.xml</suite.xml.file>
             </properties>
         </profile>
     </profiles>
@@ -134,7 +139,8 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.6.0</version>
+<!--            <version>4.6.0</version>-->
+            <version>3.141.59</version>
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>

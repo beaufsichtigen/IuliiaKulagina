@@ -27,7 +27,8 @@ public class HomePageSteps extends AbstractStep {
         String username = getProperties.getUsernameProp();
         String password = getProperties.getPasswordProp();
         homePage.getHeader().login(username, password);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("uui-main-container")));
     }
 }
