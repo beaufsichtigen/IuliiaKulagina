@@ -26,10 +26,10 @@ public class HwTest {
 
     @Test(priority = 0)
     public void loginTest() {
-        jdiHomePage.open();
-        jdiHomePage.login(ROMAN);
-        jdiHomePage.checkUserLoggedIn(ROMAN);
-        jdiHomePage.clickHeaderLink("METALS&COLORS");
+        JdiSite.open();
+        JdiSite.login(ROMAN);
+        JdiSite.checkUserLoggedIn(ROMAN);
+        JdiSite.clickHeaderLink("METALS&COLORS");
         jdiMetalsPage.checkOpened();
     }
 
