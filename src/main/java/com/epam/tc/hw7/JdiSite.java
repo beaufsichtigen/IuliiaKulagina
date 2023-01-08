@@ -22,4 +22,12 @@ public class JdiSite {
     public static void login(User user) {
         jdiHomePage.login(user);
     }
+
+    public static void checkUserLoggedIn(User user) {
+        jdiHomePage.checkUserLoggedIn(user);
+    }
+
+    public static void clickHeaderLink(String headerMenu) {
+        jdiHomePage.clickHeaderLink(headerMenu);
+    }
 }

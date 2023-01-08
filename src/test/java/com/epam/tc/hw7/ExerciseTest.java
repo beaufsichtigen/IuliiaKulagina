@@ -1,6 +1,5 @@
 package com.epam.tc.hw7;
 
-import static com.epam.tc.hw7.JdiSite.jdiHomePage;
 import static com.epam.tc.hw7.JdiSite.jdiMetalsPage;
 import static com.epam.tc.hw7.entities.User.ROMAN;
 
@@ -13,7 +12,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-public class HwTest {
+public class ExerciseTest {
     @BeforeSuite(alwaysRun = true)
     public void setUp() {
         PageFactory.initSite(JdiSite.class);
