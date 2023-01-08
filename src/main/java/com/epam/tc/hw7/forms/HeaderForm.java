@@ -2,17 +2,11 @@ package com.epam.tc.hw7.forms;
 
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.composite.Section;
-
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Link;
 import com.epam.tc.hw7.entities.User;
-import org.openqa.selenium.WebElement;
-
 import java.util.Locale;
-
-import static com.epam.tc.hw7.JdiSite.jdiHomePage;
 
 public class HeaderForm extends Section {
 
@@ -46,8 +40,6 @@ public class HeaderForm extends Section {
         return userName.getText();
     }
 
-
-
     public void checkUserLoggedIn(User user) {
         userName.is().text(user.getFullName());
     }
@@ -70,5 +62,4 @@ public class HeaderForm extends Section {
                 System.out.println("No such button choosen");
         }
     }
-
 }

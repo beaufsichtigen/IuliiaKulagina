@@ -4,19 +4,20 @@ import com.epam.tc.hw7.entities.MetalsInfo;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.testng.annotations.DataProvider;
-import java.io.IOException;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import org.testng.annotations.DataProvider;
 
 public class DataProviderJson {
 
     @DataProvider(name = "JsonProvider")
-    public Object[][] getData() throws IOException, JsonMappingException{
+    public Object[][] getData() throws IOException, JsonMappingException {
         HashMap<String, MetalsInfo> map1 = new ObjectMapper()
-                .readValue(new File(System.getProperty("user.dir") + "/src/test/resources/json/JDI_ex8_metalsColorsDataSet.json"),
-                        new TypeReference<HashMap<String,MetalsInfo>>() {});
+                .readValue(new File(System.getProperty("user.dir")
+                                + "/src/test/resources/json/JDI_ex8_metalsColorsDataSet.json"),
+                        new TypeReference<HashMap<String, MetalsInfo>>() {});
 
         int i = 0;
         Object[][] object = new Object[map1.size()][1];

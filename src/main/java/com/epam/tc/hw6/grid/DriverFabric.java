@@ -41,12 +41,12 @@ public class DriverFabric {
 
     private MutableCapabilities getCapabilities(String browserName) {
         switch (browserName.toLowerCase(Locale.ROOT)) {
-//            case BrowserType.FIREFOX:
-//                return new FirefoxOptions();
-//            case BrowserType.OPERA_BLINK:
-//                return new OperaOptions();
-//            case BrowserType.CHROME:
-//                return new ChromeOptions();
+            //case BrowserType.FIREFOX:
+            //    return new FirefoxOptions();
+            //case BrowserType.OPERA_BLINK:
+            //    return new OperaOptions();
+            //case BrowserType.CHROME:
+            //    return new ChromeOptions();
             default:
                 String errorMessage = String.format(
                         "The browser name '%s' is not recognized", browserName);
