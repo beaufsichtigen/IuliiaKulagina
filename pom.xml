@@ -24,8 +24,7 @@
         <jdi.version>LATEST</jdi.version>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <driver.remote.url/>
-<!--        Uncommiting next line brokes tests-->
-<!--        <aspectj.args></aspectj.args>-->
+        <aspectj.args>--add-opens java.base/java.lang=ALL-UNNAMED</aspectj.args>
     </properties>
     <profiles>
         <profile>
@@ -219,7 +218,6 @@
                         <suiteXmlFile>${project.basedir}/src/test/resources/${suite.xml.file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
-                        <!--        Commiting next line brokes tests-->
                         ${aspectj.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
