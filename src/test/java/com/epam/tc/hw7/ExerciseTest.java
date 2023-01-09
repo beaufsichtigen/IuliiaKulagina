@@ -1,5 +1,6 @@
 package com.epam.tc.hw7;
 
+import static com.epam.tc.hw7.JdiSite.jdiHomePage;
 import static com.epam.tc.hw7.JdiSite.jdiMetalsPage;
 import static com.epam.tc.hw7.entities.User.ROMAN;
 
@@ -25,18 +26,17 @@ public class ExerciseTest {
 
     @Test(priority = 0)
     public void loginTest() {
-        JdiSite.open();
-        JdiSite.login(ROMAN);
-        JdiSite.checkUserLoggedIn(ROMAN);
-        JdiSite.clickHeaderLink("METALS&COLORS");
+        jdiHomePage.open();
+        jdiHomePage.jdiHeader.login(ROMAN);
+        jdiHomePage.jdiHeader.checkUserLoggedIn(ROMAN);
+        jdiHomePage.jdiHeader.clickHeaderLink("METALS&COLORS");
         jdiMetalsPage.checkOpened();
     }
 
     @Test(priority = 1, dataProvider = "JsonProvider", dataProviderClass = DataProviderJson.class)
-    public void testTest(MetalsInfo object) {
-        jdiMetalsPage.fillMetalColorForm(object);
-        Assertions.assertThat(object.getActualResultLog())
+    public void testTest(MetalsInfo metalsFormData) {
+        jdiMetalsPage.fillMetalColorForm(metalsFormData);
+        Assertions.assertThat(metalsFormData.getActualResultLog())
                 .hasSameElementsAs(jdiMetalsPage.getExpectedLog());
     }
 }
-
