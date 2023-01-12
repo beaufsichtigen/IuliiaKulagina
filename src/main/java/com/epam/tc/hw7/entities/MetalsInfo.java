@@ -53,7 +53,7 @@ public class MetalsInfo {
         this.vegetables = vegetables;
     }
 
-    public List<String> getActualResultLog() {
+    public List<String> getExpectedLogFromJson() {
         int sum = Integer.parseInt(getSummary().get(0)) + Integer.parseInt(getSummary().get(1));
         List<String> actualResult = new ArrayList<>();
         String elements = getElements().toString().replaceAll("\\[", "").replaceAll("[\\[\\]]", "");

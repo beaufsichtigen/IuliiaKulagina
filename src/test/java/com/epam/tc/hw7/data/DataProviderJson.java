@@ -13,7 +13,7 @@ public class DataProviderJson {
 
     @DataProvider(name = "JsonProvider")
     public Object[][] getData() {
-        Object[][] object = new Object[0][];
+        Object[][] object;
         try {
             HashMap<String, MetalsInfo> map1 = new ObjectMapper()
                     .readValue(new File(System.getProperty("user.dir")
@@ -27,7 +27,7 @@ public class DataProviderJson {
                 i++;
             }
         } catch (IOException e) {
-            System.out.println("Error while reading .json data file: " + e);
+            throw new RuntimeException(e);
         }
         return object;
     }

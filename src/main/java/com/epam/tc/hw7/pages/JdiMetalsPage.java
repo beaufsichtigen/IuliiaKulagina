@@ -26,11 +26,11 @@ public class JdiMetalsPage extends WebPage {
         metalColorsForm.fill(metalInfo);
     }
 
-    public List<String> getExpectedLog() {
-        List<String> expectedResult = new ArrayList<>();
+    public List<String> getActualLogFromPage() {
+        List<String> actualResult = new ArrayList<>();
         for (WebElement logElement : log) {
-            expectedResult.add(logElement.getText());
+            actualResult.add(logElement.getText());
         }
-        return expectedResult;
+        return actualResult;
     }
 }

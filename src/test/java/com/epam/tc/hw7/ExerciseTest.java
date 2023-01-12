@@ -24,7 +24,7 @@ public class ExerciseTest {
         WebDriverUtils.killAllSeleniumDrivers();
     }
 
-    @Test(priority = 0)
+    @Test
     public void loginTest() {
         jdiHomePage.open();
         jdiHomePage.jdiHeader.login(ROMAN);
@@ -33,10 +33,10 @@ public class ExerciseTest {
         jdiMetalsPage.checkOpened();
     }
 
-    @Test(priority = 1, dataProvider = "JsonProvider", dataProviderClass = DataProviderJson.class)
+    @Test(dataProvider = "JsonProvider", dataProviderClass = DataProviderJson.class)
     public void testTest(MetalsInfo metalsFormData) {
         jdiMetalsPage.fillMetalColorForm(metalsFormData);
-        Assertions.assertThat(metalsFormData.getActualResultLog())
-                .hasSameElementsAs(jdiMetalsPage.getExpectedLog());
+        Assertions.assertThat(jdiMetalsPage.getActualLogFromPage())
+                .hasSameElementsAs(metalsFormData.getExpectedLogFromJson());
     }
 }
