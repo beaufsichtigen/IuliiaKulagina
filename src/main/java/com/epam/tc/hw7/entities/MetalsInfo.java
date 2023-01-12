@@ -56,8 +56,8 @@ public class MetalsInfo {
     public List<String> getExpectedLogFromJson() {
         int sum = Integer.parseInt(getSummary().get(0)) + Integer.parseInt(getSummary().get(1));
         List<String> actualResult = new ArrayList<>();
-        String elements = getElements().toString().replaceAll("\\[", "").replaceAll("[\\[\\]]", "");
-        String vegetables = getVegetables().toString().replaceAll("\\[", "").replaceAll("[\\[\\]]", "");
+        String elements = getElements().toString().replaceAll("[\\[\\]]", "");
+        String vegetables = getVegetables().toString().replaceAll("[\\[\\]]", "");
         actualResult.add("Color: " + getColor());
         actualResult.add("Metal: " + getMetals());
         actualResult.add("Summary: " + sum);
