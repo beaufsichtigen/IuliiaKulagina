@@ -55,14 +55,14 @@ public class MetalsInfo {
 
     public List<String> getExpectedLogFromJson() {
         int sum = Integer.parseInt(getSummary().get(0)) + Integer.parseInt(getSummary().get(1));
-        List<String> actualResult = new ArrayList<>();
+        List<String> jsonLog = new ArrayList<>();
         String elements = getElements().toString().replaceAll("[\\[\\]]", "");
         String vegetables = getVegetables().toString().replaceAll("[\\[\\]]", "");
-        actualResult.add("Color: " + getColor());
-        actualResult.add("Metal: " + getMetals());
-        actualResult.add("Summary: " + sum);
-        actualResult.add("Elements: " + elements);
-        actualResult.add("Vegetables: " + vegetables);
-        return actualResult;
+        jsonLog.add("Color: " + getColor());
+        jsonLog.add("Metal: " + getMetals());
+        jsonLog.add("Summary: " + sum);
+        jsonLog.add("Elements: " + elements);
+        jsonLog.add("Vegetables: " + vegetables);
+        return jsonLog;
     }
 }
