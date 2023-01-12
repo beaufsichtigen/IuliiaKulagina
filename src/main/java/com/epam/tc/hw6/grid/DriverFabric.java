@@ -12,8 +12,8 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.opera.OperaOptions;
-import org.openqa.selenium.remote.BrowserType;
+//import org.openqa.selenium.opera.OperaOptions;
+//import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 
@@ -41,12 +41,12 @@ public class DriverFabric {
 
     private MutableCapabilities getCapabilities(String browserName) {
         switch (browserName.toLowerCase(Locale.ROOT)) {
-            case BrowserType.FIREFOX:
-                return new FirefoxOptions();
-            case BrowserType.OPERA_BLINK:
-                return new OperaOptions();
-            case BrowserType.CHROME:
-                return new ChromeOptions();
+            //case BrowserType.FIREFOX:
+            //    return new FirefoxOptions();
+            //case BrowserType.OPERA_BLINK:
+            //    return new OperaOptions();
+            //case BrowserType.CHROME:
+            //    return new ChromeOptions();
             default:
                 String errorMessage = String.format(
                         "The browser name '%s' is not recognized", browserName);

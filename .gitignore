@@ -17,5 +17,4 @@ src/test/java/MaPack/
 *.iml
 iuliia_kulagina.iml
 .allure/
-
-
+/src/test/resources/code_style.xml

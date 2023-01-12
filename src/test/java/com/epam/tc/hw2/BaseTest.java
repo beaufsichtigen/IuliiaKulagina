@@ -31,7 +31,7 @@ public class BaseTest {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(baseURL);
-        new WebDriverWait(driver, 10)
+        new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("jdi-frame-site")));
 
     }

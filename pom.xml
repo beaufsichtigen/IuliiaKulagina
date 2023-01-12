@@ -20,6 +20,11 @@
         <aspectj.version>1.9.5</aspectj.version>
         <cucumber-java>7.5.0</cucumber-java>
         <cucumber-core>7.8.1</cucumber-core>
+        <jetty.version>9.4.12.RC2</jetty.version>
+        <jdi.version>LATEST</jdi.version>
+        <domain>https://jdi-testing.github.io/jdi-light/</domain>
+        <driver.remote.url/>
+        <aspectj.args>--add-opens java.base/java.lang=ALL-UNNAMED</aspectj.args>
     </properties>
     <profiles>
         <profile>
@@ -67,8 +72,8 @@
         <profile>
             <id>Homework4Jenkins</id>
             <properties>
-            <suite.xml.file>Homework4Jenkins.xml</suite.xml.file>
-        </properties>
+                <suite.xml.file>Homework4Jenkins.xml</suite.xml.file>
+            </properties>
         </profile>
 
         <profile>
@@ -80,16 +85,29 @@
 
         <profile>
             <id>Homework6</id>
+            <properties>
+                <suite.xml.file>Homework6.xml</suite.xml.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>Homework7</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.xml.file>Homework6.xml</suite.xml.file>
+                <suite.xml.file>Homework7All.xml</suite.xml.file>
             </properties>
         </profile>
     </profiles>
 
     <dependencies>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>${jdi.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -139,8 +157,8 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-<!--            <version>4.6.0</version>-->
-            <version>3.141.59</version>
+            <version>4.6.0</version>
+<!--            <version>3.141.59</version>-->
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
@@ -164,6 +182,23 @@
             <version>7.9.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.6.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.14.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.14.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -183,6 +218,7 @@
                         <suiteXmlFile>${project.basedir}/src/test/resources/${suite.xml.file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
+                        ${aspectj.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                 </configuration>

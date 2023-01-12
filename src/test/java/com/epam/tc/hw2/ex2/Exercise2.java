@@ -50,7 +50,7 @@ public class Exercise2 extends BaseTest {
         WebElement difElements = driver.findElement(By.cssSelector("a[href='different-elements.html']"));
         difElements.click();
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("uui-main-container")));
 
         softly.assertThat(driver.getCurrentUrl()).as("Incorrect page opened").isEqualTo("https://jdi-testing.github.io/jdi-light/different-elements.html");
