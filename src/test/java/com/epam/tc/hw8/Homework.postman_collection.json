@@ -1,0 +1,676 @@
+{
+	"info": {
+		"_postman_id": "41666b53-7f9d-40d2-8882-c254140075ad",
+		"name": "Homework",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18561048"
+	},
+	"item": [
+		{
+			"name": "Actions(test target)",
+			"item": [
+				{
+					"name": "Get boards",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"boardId\", pm.response.json()[0].id);\r",
+									"\r",
+									"pm.test(\"Status is ok, response is json\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/1/members/me/boards?key={{APIkey}}&token={{APItoken}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"1",
+								"members",
+								"me",
+								"boards"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIkey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APItoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Lists on a Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"listId\", pm.response.json()[0].id);\r",
+									"\r",
+									"pm.test(\"Status is ok, response is json\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/1/boards/{{boardId}}/lists?key={{APIkey}}&token={{APItoken}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardId}}",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIkey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APItoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new Card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"cardId\", pm.response.json().id);\r",
+									"\r",
+									"pm.test(\"Status is ok, response is json\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"карточка для тестов\",\r\n\t\"closed\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/1/cards?key={{APIkey}}&token={{APItoken}}&idList={{listId}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"1",
+								"cards"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIkey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APItoken}}"
+								},
+								{
+									"key": "idList",
+									"value": "{{listId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a new comment to a Card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"actionId\", pm.response.json().id);\r",
+									"\r",
+									"pm.test(\"Status is ok, response is json\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/1/cards/{{cardId}}/actions/comments?text={{text}}&key={{APIkey}}&token={{APItoken}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"1",
+								"cards",
+								"{{cardId}}",
+								"actions",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "{{text}}"
+								},
+								{
+									"key": "key",
+									"value": "{{APIkey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APItoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an Action",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is ok, response is json\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"var scheme = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\"id\", \"idMemberCreator\"],\r",
+									"    \"properties\": {\r",
+									"        \"id\": {\"type\": \"string\"},\r",
+									"        \"idMemberCreator\": {\"type\": \"string\"},\r",
+									"        \"data\": {\"type\": \"string\"},\r",
+									"        \"appCreator\": {\"type\": \"object\"},\r",
+									"        \"type\": {\"type\": \"string\"},\r",
+									"        \"data\": {\"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"                \"text\": {\"type\": \"string\"},\r",
+									"                \"card\": {\"type\": \"object\"},\r",
+									"                \"board\": {\"type\": \"object\"},\r",
+									"                \"list\": {\"type\": \"object\"}\r",
+									"        }\r",
+									"        },\r",
+									"        \"limits\": {\"type\": \"object\"},\r",
+									"        \"display\": {\"type\": \"object\"},\r",
+									"        \"MemberCreator\": {\"type\": \"object\"}\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									" pm.test(\"Check scheme\", () => { pm.response.to.have.jsonSchema(scheme); });\r",
+									"\r",
+									" pm.test(\"Check header Content-Type\", () => { pm.response.to.have.header(\"Content-Type\"); });\r",
+									" pm.test(\"Check header Content-Length\", () => { pm.response.to.have.header(\"Content-Length\"); });\r",
+									" pm.test(\"Check header Set-Cookie\", () => { pm.response.to.have.header(\"Set-Cookie\"); });\r",
+									" pm.test(\"Check header Server\", () => { pm.response.to.have.header(\"Server\", \"AtlassianEdge\"); });\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/1/actions/{{actionId}}?key={{APIkey}}&token={{APItoken}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"1",
+								"actions",
+								"{{actionId}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIkey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APItoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an Action without ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"\tpm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/1/actions/?key={{APIkey}}&token={{APItoken}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"1",
+								"actions",
+								""
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIkey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APItoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an Action without APIkey",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"\tpm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/1/actions/{{actionId}}?key=&token={{APItoken}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"1",
+								"actions",
+								"{{actionId}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": ""
+								},
+								{
+									"key": "token",
+									"value": "{{APItoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an Action without APIToken",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"\tpm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/1/actions/{{actionId}}?key={{APIkey}}&token=",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"1",
+								"actions",
+								"{{actionId}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIkey}}"
+								},
+								{
+									"key": "token",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Reaction for Action",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is ok, response is json\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									" pm.test(\"Check header Content-Type\", () => { pm.response.to.have.header(\"Content-Type\"); });\r",
+									" pm.test(\"Check header Content-Length\", () => { pm.response.to.have.header(\"Content-Length\"); });\r",
+									" pm.test(\"Check header Set-Cookie\", () => { pm.response.to.have.header(\"Set-Cookie\"); });\r",
+									" pm.test(\"Check header Server\", () => { pm.response.to.have.header(\"Server\", \"AtlassianEdge\"); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shortName\": \"grinning\",\r\n    \"skinVariation\": \"\",\r\n    \"native\": \"😀\",\r\n    \"unified\": \"1F600\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/1/actions/{{actionId}}/reactions?key={{APIkey}}&token={{APItoken}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"1",
+								"actions",
+								"{{actionId}}",
+								"reactions"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIkey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APItoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an Action",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is ok, response is json\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									" pm.test(\"Check header Content-Type\", () => { pm.response.to.have.header(\"Content-Type\"); });\r",
+									" pm.test(\"Check header Content-Length\", () => { pm.response.to.have.header(\"Content-Length\"); });\r",
+									" pm.test(\"Check header Set-Cookie\", () => { pm.response.to.have.header(\"Set-Cookie\"); });\r",
+									" pm.test(\"Check header Server\", () => { pm.response.to.have.header(\"Server\", \"AtlassianEdge\"); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/1/actions/{{actionId}}?text=Изменить комментарий&key={{APIkey}}&token={{APItoken}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"1",
+								"actions",
+								"{{actionId}}"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "Изменить комментарий"
+								},
+								{
+									"key": "key",
+									"value": "{{APIkey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APItoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an Action",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is ok, response is json\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									" pm.test(\"Check header Content-Type\", () => { pm.response.to.have.header(\"Content-Type\"); });\r",
+									" pm.test(\"Check header Content-Length\", () => { pm.response.to.have.header(\"Content-Length\"); });\r",
+									" pm.test(\"Check header Set-Cookie\", () => { pm.response.to.have.header(\"Set-Cookie\"); });\r",
+									" pm.test(\"Check header Server\", () => { pm.response.to.have.header(\"Server\", \"AtlassianEdge\"); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/1/actions/{{actionId}}?key={{APIkey}}&token={{APItoken}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"1",
+								"actions",
+								"{{actionId}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIkey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APItoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": ""
+		},
+		{
+			"key": "APIkey",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "APItoken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "boardId",
+			"value": ""
+		},
+		{
+			"key": "listId",
+			"value": ""
+		},
+		{
+			"key": "ListId",
+			"value": ""
+		},
+		{
+			"key": "cardId",
+			"value": ""
+		},
+		{
+			"key": "actionId",
+			"value": ""
+		}
+	]
+}
