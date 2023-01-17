@@ -640,37 +640,37 @@
 	"variable": [
 		{
 			"key": "URL",
-			"value": ""
+			"value": "https://api.trello.com"
 		},
 		{
 			"key": "APIkey",
-			"value": "",
+			"value": "99d8851d0e8998a15b10c0c2ec6fb453",
 			"type": "string"
 		},
 		{
 			"key": "APItoken",
-			"value": "",
+			"value": "ATTAf98f4c059b6b8ca400da51c652e26da1ae784acbc9b3bed3ad0f1dd0c3ebb3ba610BE899",
 			"type": "string"
 		},
 		{
 			"key": "boardId",
-			"value": ""
+			"value": "63c4383aa76fae02ce286a9b"
 		},
 		{
 			"key": "listId",
-			"value": ""
+			"value": "63c4383aa76fae02ce286aa2"
 		},
 		{
 			"key": "ListId",
-			"value": ""
+			"value": "63c4383aa76fae02ce286aa2"
 		},
 		{
 			"key": "cardId",
-			"value": ""
+			"value": "63c54e42e7801e015860f17d"
 		},
 		{
 			"key": "actionId",
-			"value": ""
+			"value": "63c54e4216690301719f6aa0"
 		}
 	]
 }
